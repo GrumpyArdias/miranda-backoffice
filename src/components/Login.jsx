@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Container, MiniContainer } from "./styles/Containers.style";
+import { LoginForm } from "./styles/Form.style";
 function Login() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(localStorage.getItem("logged") || false);
 
   useEffect(() => {
     console.log(`username changed to: ${mail}`);
@@ -11,6 +13,10 @@ function Login() {
   useEffect(() => {
     console.log(`password changed to: ${password}`);
   }, [password]);
+
+  useEffect(() => {
+    localStorage.setItem("logged", logged);
+  }, [logged]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -38,15 +44,30 @@ function Login() {
   return (
     <>
       {logged ? (
-        <div>You are allready logged in</div>
+        <MiniContainer style={{ backgroundColor: "54edbe" }}>
+          You are allready logged in
+        </MiniContainer>
       ) : (
-        <form onSubmit={handleLogin}>
-          <label>Mail:</label>
-          <input type="email" value={mail} onChange={habdleMail} />
-          <label> Password: </label>
-          <input type="password" value={password} onChange={handlePassword} />
-          <button type="submit"> Login</button>
-        </form>
+        <Container>
+          <MiniContainer>
+            {" "}
+            <LoginForm onSubmit={handleLogin}>
+              <label>Mail:</label>
+              <br />
+              <input type="email" value={mail} onChange={habdleMail} />
+              <br />
+              <label> Password: </label>
+              <br />
+              <input
+                type="password"
+                value={password}
+                onChange={handlePassword}
+              />
+              <br />
+              <button type="submit"> Login</button>
+            </LoginForm>
+          </MiniContainer>
+        </Container>
       )}
     </>
   );
