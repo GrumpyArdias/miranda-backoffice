@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, MiniContainer } from "./styles/Containers.style";
 import { LoginForm } from "./styles/Form.style";
+import { Navigate } from "react-router-dom";
+
 function Login() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,9 +46,7 @@ function Login() {
   return (
     <>
       {logged ? (
-        <MiniContainer style={{ backgroundColor: "54edbe" }}>
-          You are allready logged in
-        </MiniContainer>
+        <Navigate to={"/"} />
       ) : (
         <Container>
           <MiniContainer>
