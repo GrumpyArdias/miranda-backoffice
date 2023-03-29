@@ -2,7 +2,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
-import { MainHeader } from "./styles/Containers.style";
+import { MainHeader } from "./styles/Header.style";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

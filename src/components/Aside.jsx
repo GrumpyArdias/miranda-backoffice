@@ -4,7 +4,7 @@ import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GroupIcon from "@mui/icons-material/Group";
 import Logo from "../images/hotel-miranda-logo.png";
-import { LeftMainContainer } from "./styles/Containers.style";
+import { LeftMainContainer } from "./styles/Aside.styles";
 
 function Aside(props) {
   const asideStyle = {

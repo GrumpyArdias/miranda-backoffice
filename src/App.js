@@ -3,11 +3,12 @@ import React from "react";
 import Login from "./components/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
-import Main from "./components/Main";
+import Dashboard from "./components/Dashboard";
 import { useState } from "react";
 import Aside from "./components/Aside";
 import Header from "./components/Header";
 import { useEffect } from "react";
+import Bookings from "./components/Bookings";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -36,7 +37,8 @@ function App() {
           <Header toggleAside={toggleAside} />
           <Routes>
             <Route element={<PrivateRoutes />}>
-              <Route element={<Main />} path="/" />
+              <Route element={<Dashboard />} path="/" />
+              <Route element={<Bookings />} path="/bookings" />
             </Route>
             <Route element={<Login />} path="/login" />
           </Routes>

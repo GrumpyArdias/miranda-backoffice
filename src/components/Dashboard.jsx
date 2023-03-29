@@ -1,11 +1,11 @@
-import { MainBody, Kpis, Reviews } from "./styles/Containers.style";
+import { MainBody, Kpis, Reviews } from "./styles/Dashboard.style";
 import BedIcon from "@mui/icons-material/Bed";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-function Main() {
+function Dashboard() {
   return (
     <>
       <MainBody>
@@ -132,4 +132,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Dashboard;
