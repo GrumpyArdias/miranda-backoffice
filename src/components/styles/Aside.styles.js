@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Cat from "../../images/cat3.jpg";
+import { Link } from "react-router-dom";
 
 export const LeftMainContainer = styled.div`
   display: flex;
@@ -8,6 +9,7 @@ export const LeftMainContainer = styled.div`
   align-items: flex-start;
   flex-direction: column;
   background-color: white;
+
   .cell {
     margin-left: 25px;
     display: flex;
@@ -42,5 +44,13 @@ export const LeftMainContainer = styled.div`
       background-color: #ad9d82;
       margin: 10px auto;
     }
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  &:active {
+    color: #ad9d82;
   }
 `;

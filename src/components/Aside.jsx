@@ -4,7 +4,7 @@ import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GroupIcon from "@mui/icons-material/Group";
 import Logo from "../images/hotel-miranda-logo.png";
-import { LeftMainContainer } from "./styles/Aside.styles";
+import { LeftMainContainer, StyledLink } from "./styles/Aside.styles";
 
 function Aside(props) {
   const asideStyle = {
@@ -15,14 +15,21 @@ function Aside(props) {
       <div className="cell">
         <img src={Logo} alt="Hotel miranda Logo" />
       </div>
-      <div className="cell">
-        <DashboardIcon />
-        <h3>Dashboard</h3>
-      </div>
-      <div className="cell">
-        <EventAvailableIcon />
-        <h3>Bookings</h3>
-      </div>
+      <StyledLink to="/">
+        <div className="cell">
+          <DashboardIcon />
+          <h3>Dashboard</h3>
+        </div>
+      </StyledLink>
+      <StyledLink
+        style={{ textDecoration: "none", color: "inherit" }}
+        to="/bookings"
+      >
+        <div className="cell">
+          <EventAvailableIcon />
+          <h3>Bookings</h3>
+        </div>
+      </StyledLink>
       <div className="cell">
         <VpnKeyIcon />
         <h3>Rooms</h3>
