@@ -153,7 +153,60 @@ export const Kpis = styled.div`
   }
 `;
 export const Reviews = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-top: 40px;
+  min-width: 80%;
+  margin-left: 20px;
+  h3 {
+    text-align: left;
+    margin-left: 30px;
+  }
+  .Reviews-wrapper {
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10%;
+    margin-right: 30px;
+
+    .Reviews-Cards {
+      border: 1px solid lightgray;
+      .Reviews-text {
+        margin-left: 30px;
+        p {
+          font-size: 16px;
+          color: #4e4e4e;
+          text-align: left;
+        }
+      }
+      .Reviews-user {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 10px;
+        .Reviews-user-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          min-width: 40%;
+          .Reviews-user-photo {
+            margin-left: 30px;
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            background-image: url(${Cat});
+            background-size: cover;
+            border-radius: 5%;
+          }
+          .Reviews-user-text {
+          }
+        }
+        .Reviews-user-feedback {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+        }
+      }
+    }
+  }
 `;

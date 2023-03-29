@@ -3,7 +3,8 @@ import BedIcon from "@mui/icons-material/Bed";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 function Main() {
   return (
     <>
@@ -47,7 +48,84 @@ function Main() {
           </div>
         </Kpis>
         <Reviews>
-          <div className="Reviews-Cards"></div>
+          <h3>Latest Review by Customers</h3>
+          <div className="Reviews-wrapper">
+            <div className="Reviews-Cards">
+              <div className="Reviews-text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam
+                </p>
+              </div>
+              <div className="Reviews-user">
+                <div className="Reviews-user-info">
+                  <div className="Reviews-user-photo"></div>
+                  <div className="Reviews-user-text">
+                    <h4>Michi Paco</h4>
+                    <p>4min Ago</p>
+                  </div>
+                </div>
+                <div className="Reviews-user-feedback">
+                  <CheckCircleOutlineIcon
+                    fontSize="large"
+                    style={{ color: "green" }}
+                  />
+                  <HighlightOffIcon fontSize="large" style={{ color: "red" }} />
+                </div>
+              </div>
+            </div>
+            <div className="Reviews-Cards">
+              <div className="Reviews-text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam
+                </p>
+              </div>
+              <div className="Reviews-user">
+                <div className="Reviews-user-info">
+                  <div className="Reviews-user-photo"></div>
+                  <div className="Reviews-user-text">
+                    <h4>Michi Paco</h4>
+                    <p>4min Ago</p>
+                  </div>
+                </div>
+                <div className="Reviews-user-feedback">
+                  <CheckCircleOutlineIcon
+                    fontSize="large"
+                    style={{ color: "green" }}
+                  />
+                  <HighlightOffIcon fontSize="large" style={{ color: "red" }} />
+                </div>
+              </div>
+            </div>
+            <div className="Reviews-Cards">
+              <div className="Reviews-text">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam
+                </p>
+              </div>
+              <div className="Reviews-user">
+                <div className="Reviews-user-info">
+                  <div className="Reviews-user-photo"></div>
+                  <div className="Reviews-user-text">
+                    <h4>Michi Paco</h4>
+                    <p>4min Ago</p>
+                  </div>
+                </div>
+                <div className="Reviews-user-feedback">
+                  <CheckCircleOutlineIcon
+                    fontSize="large"
+                    style={{ color: "green" }}
+                  />
+                  <HighlightOffIcon fontSize="large" style={{ color: "red" }} />
+                </div>
+              </div>
+            </div>
+          </div>
         </Reviews>
       </MainBody>
     </>
