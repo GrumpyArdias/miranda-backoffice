@@ -1,95 +1,56 @@
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import LogoutIcon from "@mui/icons-material/Logout";
-import MenuIcon from "@mui/icons-material/Menu";
-import { MainHeader, LeftMainContainer } from "./styles/Containers.style";
-import { MainWrapper } from "./styles/Containers.style";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import { MainBody, Kpis, Reviews } from "./styles/Containers.style";
+import BedIcon from "@mui/icons-material/Bed";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-import GroupIcon from "@mui/icons-material/Group";
-import Logo from "../images/hotel-miranda-logo.png";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Main() {
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [isLogged, setIsLogged] = useState(
-    localStorage.getItem("logged") === "true"
-  );
-  const [headerWidth, setHeaderWidth] = useState("90%");
-
-  const handleOpen = () => {
-    setOpen(!open);
-    if (!open) {
-      setHeaderWidth("90%");
-    } else {
-      setHeaderWidth("100%");
-    }
-  };
-  const handleLogOut = () => {
-    localStorage.removeItem("logged");
-    setIsLogged(false);
-    navigate("/login");
-  };
-
   return (
-    <MainWrapper>
-      <LeftMainContainer style={{ display: open ? "flex" : "none" }}>
-        <div className="cell">
-          <img src={Logo} alt="Hotel miranda Logo" />
-        </div>
-        <div className="cell">
-          <DashboardIcon />
-          <h3>Dashboard</h3>
-        </div>
-        <div className="cell">
-          <EventAvailableIcon />
-          <h3>Bookings</h3>
-        </div>
-        <div className="cell">
-          <VpnKeyIcon />
-          <h3>Rooms</h3>
-        </div>
-        <div className="cell">
-          <PermContactCalendarIcon />
-          <h3>Contact</h3>
-        </div>
-        <div className="cell">
-          <GroupIcon />
-          <h3>Users</h3>
-        </div>
-      </LeftMainContainer>
-      <MainHeader style={{ width: headerWidth }}>
-        <div
-          style={{
-            minWidth: "10%",
-            marginLeft: "2%",
-            padding: "10px ",
-            display: "flex",
-          }}
-        >
-          <MenuIcon onClick={handleOpen} />
-          <h3 style={{ margin: "0px 20px" }}>Dashboard</h3>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "10px 20px",
-            minWidth: "10%",
-          }}
-        >
-          <MailOutlineIcon />
-          <NotificationsNoneIcon />
-          <LogoutIcon
-            onClick={isLogged ? handleLogOut : () => navigate("/login")}
-          />
-        </div>
-      </MainHeader>
-    </MainWrapper>
+    <>
+      <MainBody>
+        <Kpis>
+          <div className="KpiCard">
+            <div className="KpiCardLogo">
+              <BedIcon className="icon" fontSize=" 2.188rem" />
+            </div>
+            <div className="KpiCardText">
+              <h3>8.461</h3>
+              <p>New Booking</p>
+            </div>
+          </div>
+          <div className="KpiCard">
+            <div className="KpiCardLogo">
+              <EventAvailableIcon className="icon" fontSize=" 2.188rem" />
+            </div>
+            <div className="KpiCardText">
+              <h3>963</h3>
+              <p>Scheduled Room</p>
+            </div>
+          </div>
+          <div className="KpiCard">
+            <div className="KpiCardLogo">
+              <LoginIcon className="icon" fontSize=" 2.188rem" />
+            </div>
+            <div className="KpiCardText">
+              <h3>753</h3>
+              <p>Check In</p>
+            </div>
+          </div>
+          <div className="KpiCard">
+            <div className="KpiCardLogo">
+              <LogoutIcon className="icon" fontSize=" 2.188rem" />
+            </div>
+            <div className="KpiCardText">
+              <h3>516</h3>
+              <p>Check Out</p>
+            </div>
+          </div>
+        </Kpis>
+        <Reviews>
+          <div className="Reviews-Cards"></div>
+        </Reviews>
+      </MainBody>
+    </>
   );
 }
 

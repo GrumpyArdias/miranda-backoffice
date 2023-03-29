@@ -50,7 +50,6 @@ function Login() {
       ) : (
         <Container>
           <MiniContainer>
-            {" "}
             <LoginForm onSubmit={handleLogin}>
               <label>Mail:</label>
               <br />
