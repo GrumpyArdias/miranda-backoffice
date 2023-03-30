@@ -5,6 +5,8 @@ import {
   UserEditButton,
 } from "./styles/Bookings.styles";
 import Dropdown from "./Dropdown";
+import GridTable from "./GridTable";
+import Data from "../data.json";
 
 function Bookings() {
   const options = ["Option 1", "Option 2", "Option 3"];
@@ -13,6 +15,17 @@ function Bookings() {
     console.log(`Selected option: ${option}`);
   };
 
+  const headerArray = [
+    "Check",
+    "Nombre",
+    "Date",
+    "Check-In",
+    "Check-Out",
+    "Special Request",
+    "Room Type",
+    "Status",
+  ];
+  const rowDataArray = Data;
   return (
     <div style={{ backgroundColor: "lightgray" }}>
       <BookingsTopWrap>
@@ -34,6 +47,7 @@ function Bookings() {
           <Dropdown options={options} onSelect={handleSelect} />
         </BookingsTopRightWrap>
       </BookingsTopWrap>
+      <GridTable headerArray={headerArray} rowDataArray={rowDataArray} />
     </div>
   );
 }

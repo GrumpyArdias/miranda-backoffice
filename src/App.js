@@ -9,6 +9,7 @@ import Aside from "./components/Aside";
 import Header from "./components/Header";
 import { useEffect } from "react";
 import Bookings from "./components/Bookings";
+import Rooms from "./components/Rooms";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,7 @@ function App() {
             <Route element={<PrivateRoutes />}>
               <Route element={<Dashboard />} path="/" />
               <Route element={<Bookings />} path="/bookings" />
+              <Route element={<Rooms />} path="/rooms" />
             </Route>
             <Route element={<Login />} path="/login" />
           </Routes>
