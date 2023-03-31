@@ -1,8 +1,8 @@
 function Rooms() {
   return (
     <div>
-      <div></div>
-      <div></div>
+      <div>New Room</div>
+      <div>Room's details</div>
       <div></div>
     </div>
   );
