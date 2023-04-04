@@ -1,14 +1,14 @@
-import { MainBody, Kpis, Reviews } from "./styles/Dashboard.style";
+import { MainBody, Kpis, Reviews } from "../styles/Dashboard.style";
 import BedIcon from "@mui/icons-material/Bed";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-function Dashboard() {
+function Dashboard(props) {
   return (
     <>
-      <MainBody>
+      <MainBody style={{ display: props.display }}>
         <Kpis>
           <div className="KpiCard">
             <div className="KpiCardLogo">

@@ -3,10 +3,10 @@ import {
   BookingsTopLeftWrap,
   BookingsTopRightWrap,
   UserEditButton,
-} from "./styles/Bookings.styles";
-import Dropdown from "./Dropdown";
-import GridTable from "./GridTable";
-import Data from "../data.json";
+} from "../styles/Bookings.styles";
+import Dropdown from "../Dropdown";
+import GridTable from "../GridTable";
+import Data from "../../data.json";
 
 function Bookings() {
   const options = ["Option 1", "Option 2", "Option 3"];
