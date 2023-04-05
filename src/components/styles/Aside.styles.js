@@ -9,6 +9,8 @@ export const LeftMainContainer = styled.div`
   align-items: flex-start;
   flex-direction: column;
   background-color: white;
+  border-left: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
 
   .cell {
     margin-left: 25px;
@@ -27,6 +29,10 @@ export const LeftMainContainer = styled.div`
     min-width: 90%;
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
+    padding: -10px;
+    text-align: center;
+    border-radius: 18px;
 
     #UserPhoto {
       margin: 10px auto;
@@ -43,6 +49,13 @@ export const LeftMainContainer = styled.div`
     #UserEditButton {
       background-color: #ad9d82;
       margin: 10px auto;
+      border: medium none;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 30px;
+      border-radius: 8px;
+      cursor: pointer;
     }
   }
 `;

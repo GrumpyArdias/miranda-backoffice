@@ -16,7 +16,6 @@ function Bookings() {
   };
 
   const headerArray = [
-    "Check",
     "Nombre",
     "Date",
     "Check-In",

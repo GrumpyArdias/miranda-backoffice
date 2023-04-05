@@ -87,15 +87,8 @@ function GridTable(props) {
         <tbody>
           {rowDataArray.map((data) => {
             return (
-              <tr key={data.client_id}>
-                <td colSpan={2}>
-                  <input
-                    type="checkbox"
-                    name="row-checked"
-                    id="row-checked"
-                    className="check-box"
-                  />
-                </td>
+              // This must be shorted using a proper ID
+              <tr key={uuid()}>
                 <td colSpan={2}>
                   <DataRowWrapper className="wrapper">
                     <PhotoRowWrapper className="image">
@@ -116,6 +109,7 @@ function GridTable(props) {
                       <Navigate to={`/bookings/${clickedId}`} />
                     ) : (
                       <NotesAvalaible
+                        //this id must be change for a proper booking id
                         onClick={() => handleNoteClick(data.room_id)}
                       >
                         <p>View Notes</p>
@@ -127,9 +121,7 @@ function GridTable(props) {
                     </NotNotesAvalible>
                   )}
                 </td>
-                <td colSpan={2}>
-                  {handelRoomSwitch(data.room_type)} {data.room_id}
-                </td>
+                <td colSpan={2}>{handelRoomSwitch(data.room_type)}</td>
                 <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
               </tr>
             );
