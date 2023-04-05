@@ -1,61 +1,141 @@
+import {
+  BookingTable,
+  DataRowWrapper,
+  PhotoRowWrapper,
+  TextRowWrapper,
+  NotesAvalaible,
+  NotNotesAvalible,
+  RefoundStatus,
+  BookedStatus,
+  PendingStatus,
+  CanceledStatus,
+} from "./styles/GridTable.styles";
+import Cat from "../images/cat3.jpg";
+import { v4 as uuid } from "uuid";
+import { Navigate } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 function GridTable(props) {
-  const { headerArray, rowDataArray } = props;
-  const navigate = useNavigate();
+  const [clickedId, setClickedId] = useState(null);
+  const headerArray = props.headerArray;
+  const rowDataArray = props.rowDataArray;
 
-  const [rowDataArrayWithId, setRowDataArrayWithId] = useState(() =>
-    rowDataArray.map((rowData) => ({ ...rowData, id: uuidv4() }))
-  );
-
-  const headerItems = headerArray.map((header, index) => (
-    <th key={`header-${index}`}>{header}</th>
-  ));
-
-  const handleRowClick = (rowId) => {
-    const url = `/details?id=${rowId}`;
-    navigate(url);
+  const handleNoteClick = (dataId) => {
+    setClickedId(dataId);
   };
 
-  const dataRows = rowDataArrayWithId.map((rowData, index) => {
-    const rowKey = rowData.id;
-    return (
-      <tr key={rowKey} onClick={() => handleRowClick(rowKey)}>
-        <td>
-          <input
-            type="checkbox"
-            value={rowKey}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          />
-        </td>
-        {Object.values(rowData).map((value, index) => (
-          <td key={`row-${index}-value`}>
-            <h5>{value}</h5>
-          </td>
-        ))}
-        <td>
-          <div
-            style={{ backgroundColor: "green", color: "white", padding: "5px" }}
-          >
-            Booked!
-          </div>
-        </td>
-      </tr>
-    );
-  });
+  const handelRoomSwitch = (option) => {
+    switch (option) {
+      case "1":
+        return "Single Bed";
+      case "2":
+        return "Double Bed";
+      case "3":
+        return "Double Superior";
+      case "4":
+        return "Suite";
+      default:
+        return "error in the room type";
+    }
+  };
+
+  const handleStatusSwitch = (status) => {
+    switch (status) {
+      case "1":
+        return (
+          <RefoundStatus>
+            <p>Refound</p>
+          </RefoundStatus>
+        );
+      case "2":
+        return (
+          <BookedStatus>
+            <p>Booked</p>
+          </BookedStatus>
+        );
+      case "3":
+        return (
+          <PendingStatus>
+            <p>In progress</p>
+          </PendingStatus>
+        );
+      case "4":
+        return (
+          <CanceledStatus>
+            <p>In progress</p>
+          </CanceledStatus>
+        );
+      default:
+        return "error in the room type";
+    }
+  };
 
   return (
-    <div style={{ width: "90%", margin: "0 auto" }}>
-      <table style={{ width: "100%" }}>
+    <div>
+      <BookingTable>
         <thead>
-          <tr>{headerItems}</tr>
+          <tr>
+            {headerArray.map((header) => {
+              return (
+                <th colSpan={2} key={uuid()}>
+                  {header}
+                </th>
+              );
+            })}
+          </tr>
         </thead>
-        <tbody>{dataRows}</tbody>
-      </table>
+        <tbody>
+          {rowDataArray.map((data) => {
+            return (
+              <tr key={data.client_id}>
+                <td colSpan={2}>
+                  <input
+                    type="checkbox"
+                    name="row-checked"
+                    id="row-checked"
+                    className="check-box"
+                  />
+                </td>
+                <td colSpan={2}>
+                  <DataRowWrapper className="wrapper">
+                    <PhotoRowWrapper className="image">
+                      <img src={Cat} alt="it's user face" />
+                    </PhotoRowWrapper>
+                    <TextRowWrapper className="text">
+                      <h4>{data.full_name}</h4>
+                      <h5>{data.client_id}</h5>
+                    </TextRowWrapper>
+                  </DataRowWrapper>
+                </td>
+                <td colSpan={2}>{data.order_date}</td>
+                <td colSpan={2}>{data.check_in}</td>
+                <td colSpan={2}>{data.check_out}</td>
+                <td colSpan={2}>
+                  {data.notes ? (
+                    clickedId ? (
+                      <Navigate to={`/bookings/${clickedId}`} />
+                    ) : (
+                      <NotesAvalaible
+                        onClick={() => handleNoteClick(data.room_id)}
+                      >
+                        <p>View Notes</p>
+                      </NotesAvalaible>
+                    )
+                  ) : (
+                    <NotNotesAvalible>
+                      <p>No Notes</p>
+                    </NotNotesAvalible>
+                  )}
+                </td>
+                <td colSpan={2}>
+                  {handelRoomSwitch(data.room_type)} {data.room_id}
+                </td>
+                <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </BookingTable>
     </div>
   );
 }

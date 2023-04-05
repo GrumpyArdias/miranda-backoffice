@@ -12,7 +12,7 @@ export const BookingsTopLeftWrap = styled.div`
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
-  max-width: 20%;
+  max-width: 22%;
   padding-left: 10px;
   padding-right: 10px;
   border-bottom: 1px solid lightgray;

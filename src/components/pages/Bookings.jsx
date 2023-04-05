@@ -27,17 +27,20 @@ function Bookings() {
   ];
   const rowDataArray = Data;
   return (
-    <div style={{ backgroundColor: "lightgray" }}>
+    <div>
       <BookingsTopWrap>
         <BookingsTopLeftWrap>
           <div className="Bookings-menu-cell">
-            <h3>All Rooms</h3>
+            <h3>All Bookings</h3>
           </div>
           <div className="Bookings-menu-cell">
-            <h3>Active Employee</h3>
+            <h3>Checking In</h3>
           </div>
           <div className="Bookings-menu-cell">
-            <h3>Inactive Employee</h3>
+            <h3>Checking Out</h3>
+          </div>
+          <div className="Bookings-menu-cell">
+            <h3>In Progress</h3>
           </div>
         </BookingsTopLeftWrap>
         <BookingsTopRightWrap>
