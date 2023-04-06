@@ -11,7 +11,8 @@
     "description": "non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum",
     "notes": null,
     "price": 221,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 2,
@@ -25,7 +26,8 @@
     "description": "aliquam non mauris morbi non lectus aliquam sit amet diam",
     "notes": null,
     "price": 290,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 3,
@@ -39,7 +41,8 @@
     "description": "nibh ligula nec sem duis aliquam convallis nunc proin at turpis",
     "notes": "feugiat non pretium quis lectus suspendisse potenti in eleifend quam",
     "price": 4,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 4,
@@ -53,7 +56,8 @@
     "description": "cras pellentesque volutpat dui maecenas tristique est et tempus semper est quam pharetra magna",
     "notes": "sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus",
     "price": 341,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 5,
@@ -67,7 +71,8 @@
     "description": "vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia",
     "notes": "pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus",
     "price": 346,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 6,
@@ -81,7 +86,8 @@
     "description": "odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit",
     "notes": "sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante vivamus tortor",
     "price": 162,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 7,
@@ -95,7 +101,8 @@
     "description": "dapibus dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum",
     "notes": "posuere cubilia curae nulla dapibus dolor vel est donec odio",
     "price": 219,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 8,
@@ -109,7 +116,8 @@
     "description": "convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci",
     "notes": "luctus ultricies eu nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante",
     "price": 100,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 9,
@@ -123,7 +131,8 @@
     "description": "mi in porttitor pede justo eu massa donec dapibus duis at",
     "notes": "consequat varius integer ac leo pellentesque ultrices mattis odio donec",
     "price": 358,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 10,
@@ -137,7 +146,8 @@
     "description": "lectus in est risus auctor sed tristique in tempus sit amet sem fusce consequat nulla",
     "notes": "nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper",
     "price": 238,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 11,
@@ -151,7 +161,8 @@
     "description": "in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis",
     "notes": "eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio",
     "price": 171,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 12,
@@ -165,7 +176,8 @@
     "description": "orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis",
     "notes": "pretium quis lectus suspendisse potenti in eleifend quam a odio in",
     "price": 379,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 13,
@@ -179,7 +191,8 @@
     "description": "amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in",
     "notes": "at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit",
     "price": 93,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": true
   },
   {
     "client_id": 14,
@@ -193,7 +206,8 @@
     "description": "at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae",
     "notes": "bibendum morbi non quam nec dui luctus rutrum nulla tellus in sagittis",
     "price": 169,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 15,
@@ -207,7 +221,8 @@
     "description": "lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula",
     "notes": "sapien non mi integer ac neque duis bibendum morbi non quam",
     "price": 403,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 16,
@@ -221,7 +236,8 @@
     "description": "pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget semper rutrum",
     "notes": "integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id",
     "price": 417,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 17,
@@ -235,7 +251,8 @@
     "description": "quisque arcu libero rutrum ac lobortis vel dapibus at diam nam tristique tortor eu",
     "notes": "eros elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget",
     "price": 103,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 18,
@@ -249,7 +266,8 @@
     "description": "quam pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum",
     "notes": "vestibulum proin eu mi nulla ac enim in tempor turpis nec euismod scelerisque quam turpis",
     "price": 337,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 19,
@@ -263,7 +281,8 @@
     "description": "morbi ut odio cras mi pede malesuada in imperdiet et",
     "notes": "et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor sit amet consectetuer adipiscing",
     "price": 440,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   },
   {
     "client_id": 20,
@@ -277,6 +296,7 @@
     "description": "duis bibendum felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo",
     "notes": "aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam",
     "price": 324,
-    "amenities": "tv"
+    "amenities": "tv",
+    "coment_status": false
   }
 ]

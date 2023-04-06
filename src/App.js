@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import Bookings from "./components/pages/Bookings";
 import Rooms from "./components/pages/Rooms";
 import Users from "./components/pages/Users";
+import Contact from "./components/pages/Contact";
 import { BodyWrap } from "./components/styles/App.styles";
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
               />
               <Route element={<Rooms display={display} />} path="/rooms" />
               <Route element={<Users display={display} />} path="/users" />
+              <Route element={<Contact display={display} />} path="/contact" />
             </Route>
             <Route element={<Login />} path="/login" />
           </Routes>

@@ -1,4 +1,4 @@
-import { MainBody, Kpis, Reviews } from "../styles/Dashboard.style";
+import { MainBody, Kpis, Reviews } from "../styles/Dashboard.styles";
 import BedIcon from "@mui/icons-material/Bed";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import LoginIcon from "@mui/icons-material/Login";

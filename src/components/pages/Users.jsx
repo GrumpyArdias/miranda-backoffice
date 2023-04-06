@@ -3,7 +3,7 @@ import {
   UsersTopLeftWrap,
   UsersTopRightWrap,
   UserEditButton,
-} from "../styles/Users.style";
+} from "../styles/Users.styles";
 import Dropdown from "../Dropdown";
 import UserData from "../../Users.json";
 import UserTable from "../UsersTable";

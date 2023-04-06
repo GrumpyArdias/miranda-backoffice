@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const UsersTableStyle = styled.table`
+export const ContactTableStyle = styled.table`
   border-collapse: collapse;
   width: 80%;
   margin: 20px auto;
@@ -45,11 +45,10 @@ export const TextRowWrapper = styled.div`
   }
 `;
 
-export const ActiveStatus = styled.div`
+export const ArchiveStatus = styled.div`
   max-width: 54%;
   margin: 0 auto;
   border-radius: 10px;
-  background-color: #e8ffee;
   color: #5ad07a;
 
   p {
@@ -57,11 +56,10 @@ export const ActiveStatus = styled.div`
   }
 `;
 
-export const InactiveStatus = styled.div`
+export const NotArchiveStatus = styled.div`
   max-width: 54%;
   margin: 0 auto;
   border-radius: 10px;
-  background-color: #ffedec;
   color: #e23428;
 
   p {

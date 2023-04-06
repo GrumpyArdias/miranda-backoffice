@@ -36,10 +36,12 @@ function Aside(props) {
           <h3>Rooms</h3>
         </div>
       </StyledLink>
-      <div className="cell">
-        <PermContactCalendarIcon />
-        <h3>Contact</h3>
-      </div>
+      <StyledLink to="/contact">
+        <div className="cell">
+          <PermContactCalendarIcon />
+          <h3>Contact</h3>
+        </div>
+      </StyledLink>
       <StyledLink to="/users">
         <div className="cell">
           <GroupIcon />
