@@ -18,13 +18,13 @@ function ContactTable(props) {
       case true:
         return (
           <ArchiveStatus>
-            <p>Active</p>
+            <p>Inactive</p>
           </ArchiveStatus>
         );
       case false:
         return (
           <NotArchiveStatus>
-            <p>Inactive</p>
+            <p>Acttive</p>
           </NotArchiveStatus>
         );
 
