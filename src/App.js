@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import { useEffect } from "react";
 import Bookings from "./components/pages/Bookings";
 import Rooms from "./components/pages/Rooms";
+import Users from "./components/pages/Users";
 import { BodyWrap } from "./components/styles/App.styles";
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
                 path="/bookings"
               />
               <Route element={<Rooms display={display} />} path="/rooms" />
+              <Route element={<Users display={display} />} path="/users" />
             </Route>
             <Route element={<Login />} path="/login" />
           </Routes>

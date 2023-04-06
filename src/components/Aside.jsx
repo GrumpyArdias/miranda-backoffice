@@ -40,10 +40,12 @@ function Aside(props) {
         <PermContactCalendarIcon />
         <h3>Contact</h3>
       </div>
-      <div className="cell">
-        <GroupIcon />
-        <h3>Users</h3>
-      </div>
+      <StyledLink to="/users">
+        <div className="cell">
+          <GroupIcon />
+          <h3>Users</h3>
+        </div>
+      </StyledLink>
       <div className="lateralUser">
         <div id="UserPhoto"></div>
         <div id="UserName">

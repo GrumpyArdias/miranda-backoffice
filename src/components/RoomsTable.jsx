@@ -4,7 +4,6 @@ import {
   PhotoRowWrapper,
   TextRowWrapper,
   AvailableStatus,
-  RefoundStatus,
   BookedStatus,
 } from "./styles/RoomsTable.styles";
 import { v4 as uuid } from "uuid";
