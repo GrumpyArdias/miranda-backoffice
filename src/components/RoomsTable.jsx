@@ -3,12 +3,9 @@ import {
   DataRowWrapper,
   PhotoRowWrapper,
   TextRowWrapper,
-  NotesAvalaible,
-  NotNotesAvalible,
+  AvailableStatus,
   RefoundStatus,
   BookedStatus,
-  PendingStatus,
-  CanceledStatus,
 } from "./styles/RoomsTable.styles";
 import { v4 as uuid } from "uuid";
 import Cat from "../images/cat3.jpg";
@@ -32,6 +29,26 @@ function RoomsTable(props) {
     }
   };
 
+  // Fix the status, take care of the number of inputs
+  const handleStatusSwitch = (status) => {
+    switch (status) {
+      case "1":
+        return (
+          <AvailableStatus>
+            <p>Available</p>
+          </AvailableStatus>
+        );
+      case "2":
+        return (
+          <BookedStatus>
+            <p>Booked</p>
+          </BookedStatus>
+        );
+
+      default:
+        return "error in the room type";
+    }
+  };
   const handleDiscount = (cost) => {
     const fixedDiscount = 10;
     const discountPrice = (cost * fixedDiscount) / 100;
@@ -75,6 +92,7 @@ function RoomsTable(props) {
               <td colSpan={2}>
                 {handleDiscount(data.price)} € <br /> (-10% off)
               </td>
+              <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
             </tr>
           );
         })}

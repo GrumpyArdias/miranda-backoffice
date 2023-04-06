@@ -33,7 +33,7 @@ export const DataRowWrapper = styled.div`
 `;
 export const PhotoRowWrapper = styled.div`
   img {
-    width: 40px;
+    width: 80px;
     height: auto;
     border-radius: 5px;
   }
@@ -41,7 +41,33 @@ export const PhotoRowWrapper = styled.div`
 
 export const TextRowWrapper = styled.div`
   margin-top: -25px;
+  text-align: center;
 
   h5 {
+    text-align: center;
+  }
+`;
+
+export const AvailableStatus = styled.div`
+  max-width: 54%;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #e8ffee;
+  color: #5ad07a;
+
+  p {
+    padding: 10px;
+  }
+`;
+
+export const BookedStatus = styled.div`
+  max-width: 54%;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #ffedec;
+  color: #e23428;
+
+  p {
+    padding: 10px;
   }
 `;

@@ -39,6 +39,7 @@ function GridTable(props) {
     }
   };
 
+  // Fix the status, take care of the number of inputs
   const handleStatusSwitch = (status) => {
     switch (status) {
       case "1":
