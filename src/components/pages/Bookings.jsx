@@ -5,7 +5,7 @@ import {
   UserEditButton,
 } from "../styles/Bookings.styles";
 import Dropdown from "../Dropdown";
-import GridTable from "../GridTable";
+import BookingsTable from "../BookingTable";
 import Data from "../../data.json";
 
 function Bookings() {
@@ -49,7 +49,7 @@ function Bookings() {
           <Dropdown options={options} onSelect={handleSelect} />
         </BookingsTopRightWrap>
       </BookingsTopWrap>
-      <GridTable headerArray={headerArray} rowDataArray={rowDataArray} />
+      <BookingsTable headerArray={headerArray} rowDataArray={rowDataArray} />
     </div>
   );
 }

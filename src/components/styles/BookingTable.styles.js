@@ -1,19 +1,22 @@
 import styled from "@emotion/styled";
 
-export const BookingTable = styled.table`
+export const BookingTableStyle = styled.table`
   border-collapse: collapse;
   width: 80%;
   margin: 20px auto;
 
   tbody {
-    th {
+    tr {
       padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+      text-align: center;
+
       td {
         padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+        text-align: center;
+      }
+      &:hover {
+        scale: 1.05;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
       }
     }
     .check-box {

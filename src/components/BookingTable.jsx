@@ -1,5 +1,5 @@
 import {
-  BookingTable,
+  BookingTableStyle,
   DataRowWrapper,
   PhotoRowWrapper,
   TextRowWrapper,
@@ -9,13 +9,13 @@ import {
   BookedStatus,
   PendingStatus,
   CanceledStatus,
-} from "./styles/GridTable.styles";
+} from "./styles/BookingTable.styles";
 import Cat from "../images/cat3.jpg";
 import { v4 as uuid } from "uuid";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 
-function GridTable(props) {
+function BookingTable(props) {
   const [clickedId, setClickedId] = useState(null);
   const headerArray = props.headerArray;
   const rowDataArray = props.rowDataArray;
@@ -73,7 +73,7 @@ function GridTable(props) {
 
   return (
     <div>
-      <BookingTable>
+      <BookingTableStyle>
         <thead>
           <tr>
             {headerArray.map((header) => {
@@ -128,9 +128,9 @@ function GridTable(props) {
             );
           })}
         </tbody>
-      </BookingTable>
+      </BookingTableStyle>
     </div>
   );
 }
 
-export default GridTable;
+export default BookingTable;
