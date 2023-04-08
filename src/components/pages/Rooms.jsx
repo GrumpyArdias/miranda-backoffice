@@ -6,7 +6,7 @@ import {
 } from "../styles/Rooms.styles";
 import Dropdown from "../Dropdown";
 import RoomsTable from "../RoomsTable";
-import Data from "../../data.json";
+import Data from "../../data/data.json";
 
 function Rooms() {
   const options = ["Option 1", "Option 2", "Option 3"];

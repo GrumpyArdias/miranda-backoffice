@@ -14,6 +14,7 @@ import Cat from "../images/cat3.jpg";
 import { v4 as uuid } from "uuid";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import Rooms from "../data/rooms.json";
 
 function BookingTable(props) {
   const [clickedId, setClickedId] = useState(null);
@@ -24,48 +25,44 @@ function BookingTable(props) {
     setClickedId(dataId);
   };
 
-  const handelRoomSwitch = (option) => {
-    switch (option) {
-      case "1":
-        return "Single Bed";
-      case "2":
-        return "Double Bed";
-      case "3":
-        return "Double Superior";
-      case "4":
-        return "Suite";
-      default:
-        return "error in the room type";
-    }
+  const handelRoomSwitch = (id) => {
+    let roomType = "Error assigning Room"; // Default room type
+
+    Rooms.forEach((room) => {
+      if (room.status === "booked" || room.status === "inProgress") {
+        if (room.id === id) {
+          roomType = room.bed_type;
+          console.log(`estoo es el Room Type ${roomType}`);
+        }
+      } else {
+        roomType = "Status not eligible for a Room"; // Update room type for ineligible status
+      }
+    });
+
+    return roomType; // Return the final room type
   };
 
-  // Fix the status, take care of the number of inputs
   const handleStatusSwitch = (status) => {
     switch (status) {
-      case "1":
+      case "refound":
         return (
           <RefoundStatus>
             <p>Refound</p>
           </RefoundStatus>
         );
-      case "2":
+      case "booked":
         return (
           <BookedStatus>
             <p>Booked</p>
           </BookedStatus>
         );
-      case "3":
+      case "inProgress":
         return (
           <PendingStatus>
             <p>In progress</p>
           </PendingStatus>
         );
-      case "4":
-        return (
-          <CanceledStatus>
-            <p>In progress</p>
-          </CanceledStatus>
-        );
+
       default:
         return "error in the room type";
     }
@@ -101,11 +98,11 @@ function BookingTable(props) {
                     </TextRowWrapper>
                   </DataRowWrapper>
                 </td>
-                <td colSpan={2}>{data.order_date}</td>
+                <td colSpan={2}>{data.date}</td>
                 <td colSpan={2}>{data.check_in}</td>
                 <td colSpan={2}>{data.check_out}</td>
                 <td colSpan={2}>
-                  {data.notes ? (
+                  {data.special_request ? (
                     clickedId ? (
                       <Navigate to={`/bookings/${clickedId}`} />
                     ) : (
@@ -122,7 +119,7 @@ function BookingTable(props) {
                     </NotNotesAvalible>
                   )}
                 </td>
-                <td colSpan={2}>{handelRoomSwitch(data.room_type)}</td>
+                <td colSpan={2}>{handelRoomSwitch(data.room_id)}</td>
                 <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
               </tr>
             );

@@ -5,7 +5,7 @@ import {
   UserEditButton,
 } from "../styles/Users.styles";
 import Dropdown from "../Dropdown";
-import UserData from "../../Users.json";
+import UserData from "../../data/Users.json";
 import UserTable from "../UsersTable";
 
 function Users() {

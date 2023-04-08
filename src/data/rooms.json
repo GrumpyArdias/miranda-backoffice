@@ -1,0 +1,122 @@
+[
+  {
+    "id": "9c14c478-026c-4d19-98c2-cdba1e844059",
+    "bed_type": "double",
+    "status": true,
+    "facilites": "bathub"
+  },
+  {
+    "id": "0bafec81-5258-44a8-910d-9c93f9fca1e3",
+    "bed_type": "single",
+    "status": false,
+    "facilites": "tv"
+  },
+  {
+    "id": "fa0870d1-9faf-4d95-9da7-1f8485d05193",
+    "bed_type": "double",
+    "status": true,
+    "facilites": "bathub"
+  },
+  {
+    "id": "2048e651-d522-4746-a8b4-9385e073e32d",
+    "bed_type": "single",
+    "status": true,
+    "facilites": "ac"
+  },
+  {
+    "id": "e19382c4-62c6-4ae7-a76d-4366588d9dee",
+    "bed_type": "doubleSuperior",
+    "status": true,
+    "facilites": "coffeSet"
+  },
+  {
+    "id": "2a465d3a-3423-4859-91bd-9fd62327a30e",
+    "bed_type": "doubleSuperior",
+    "status": false,
+    "facilites": "ac"
+  },
+  {
+    "id": "8ed5f1de-9aef-4ddf-ac52-180f8d704ddb",
+    "bed_type": "doubleSuperior",
+    "status": false,
+    "facilites": "coffeSet"
+  },
+  {
+    "id": "6a483394-728e-454e-b703-d33f36e6081b",
+    "bed_type": "single",
+    "status": false,
+    "facilites": "minibar"
+  },
+  {
+    "id": "60b12725-7b61-4021-a657-20cfc6aff7d8",
+    "bed_type": "double",
+    "status": true,
+    "facilites": "wifi"
+  },
+  {
+    "id": "9936564b-0d6c-4c18-a704-c89913c6abcb",
+    "bed_type": "single",
+    "status": false,
+    "facilites": "wifi"
+  },
+  {
+    "id": "513392be-808b-4f52-8c3b-3263477da822",
+    "bed_type": "suite",
+    "status": false,
+    "facilites": "ac"
+  },
+  {
+    "id": "d7f8ca22-9c6d-4d09-bcad-9c411e508fa7",
+    "bed_type": "single",
+    "status": true,
+    "facilites": "minibar"
+  },
+  {
+    "id": "518a507d-8c45-4fb1-938d-11daa0088045",
+    "bed_type": "doubleSuperior",
+    "status": true,
+    "facilites": "bathub"
+  },
+  {
+    "id": "22f733a1-ae6a-45dc-aef7-aee3bf7660a9",
+    "bed_type": "suite",
+    "status": true,
+    "facilites": "tv"
+  },
+  {
+    "id": "e83b8271-e1dc-406e-9faf-507c5a597a80",
+    "bed_type": "double",
+    "status": true,
+    "facilites": "coffeSet"
+  },
+  {
+    "id": "83ad9187-2727-49ff-a804-26195ae768b6",
+    "bed_type": "double",
+    "status": false,
+    "facilites": "minibar"
+  },
+  {
+    "id": "80d6124b-b7e6-4d64-bedb-b33ca8edb1e5",
+    "bed_type": "single",
+    "status": true,
+    "facilites": "ac"
+  },
+  {
+    "id": "cb05ada4-1d10-4ef5-8b9d-0ba7edcfb94c",
+    "bed_type": "double",
+    "status": true,
+    "facilites": "bathub"
+  },
+  {
+    "id": "d4bd6308-0961-4bf5-8fb5-6ac8bde33ce0",
+    "bed_type": "doubleSuperior",
+    "status": true,
+    "facilites": "bathub"
+  },
+  {
+    "id": "3226f2b8-c03f-472f-ae48-9767add688ab",
+    "bed_type": "suite",
+    "status": false,
+    "facilites": "minibar"
+  }
+]

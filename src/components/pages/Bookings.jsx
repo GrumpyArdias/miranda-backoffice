@@ -6,7 +6,7 @@ import {
 } from "../styles/Bookings.styles";
 import Dropdown from "../Dropdown";
 import BookingsTable from "../BookingTable";
-import Data from "../../data.json";
+import BookingsData from "../../data/bookings.json";
 
 function Bookings() {
   const options = ["Option 1", "Option 2", "Option 3"];
@@ -24,7 +24,8 @@ function Bookings() {
     "Room Type",
     "Status",
   ];
-  const rowDataArray = Data;
+  const rowDataArray = BookingsData;
+
   return (
     <div>
       <BookingsTopWrap>

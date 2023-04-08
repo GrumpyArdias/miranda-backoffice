@@ -12,6 +12,7 @@ import Bookings from "./components/pages/Bookings";
 import Rooms from "./components/pages/Rooms";
 import Users from "./components/pages/Users";
 import Contact from "./components/pages/Contact";
+import Book from "./components/pages/Book";
 import { BodyWrap } from "./components/styles/App.styles";
 
 function App() {
@@ -52,6 +53,10 @@ function App() {
               <Route
                 element={<Bookings display={display} />}
                 path="/bookings"
+              />
+              <Route
+                element={<Book display={display} />}
+                path="/bookings/:id"
               />
               <Route element={<Rooms display={display} />} path="/rooms" />
               <Route element={<Users display={display} />} path="/users" />

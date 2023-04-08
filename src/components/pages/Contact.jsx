@@ -8,7 +8,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ContactTable from "../ContactTable";
 import Dropdown from "../Dropdown";
-import Data from "../../data.json";
+import Data from "../../data/data.json";
 
 function Contact() {
   const options = ["Option 1", "Option 2", "Option 3"];
