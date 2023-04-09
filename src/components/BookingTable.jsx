@@ -8,7 +8,6 @@ import {
   RefoundStatus,
   BookedStatus,
   PendingStatus,
-  CanceledStatus,
 } from "./styles/BookingTable.styles";
 import Cat from "../images/cat3.jpg";
 import { v4 as uuid } from "uuid";

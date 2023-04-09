@@ -1,10 +1,12 @@
+// Importa los módulos necesarios
+import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function PrivateRoutes() {
-  let auth = localStorage.getItem("logged") || false;
-  console.log(`Esto es el valor de auth: ${auth}`);
+  const isAuthenticated = useSelector((state) => state.auth.authenticated);
 
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default PrivateRoutes;

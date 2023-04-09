@@ -5,20 +5,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { MainHeader } from "./styles/Header.styles";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "./slices/authSlice";
 
 function Header(props) {
   const navigate = useNavigate();
-  const [isLogged, setIsLogged] = useState(
-    localStorage.getItem("logged") === "true"
-  );
+  const dispatch = useDispatch();
+
   const [display, setDisplay] = useState("flex");
   const [path, setPath] = useState("");
   const location = useLocation();
-
-  const handleLogOut = (props) => {
-    localStorage.removeItem("logged");
-    setIsLogged(false);
-    navigate("/login");
+  const isAuthenticated = useSelector((state) => state.auth.authenticated);
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   useEffect(() => {
@@ -53,13 +52,13 @@ function Header(props) {
   }, [location]);
 
   useEffect(() => {
-    setDisplay(isLogged ? "flex" : "none");
+    setDisplay(isAuthenticated ? "flex" : "none");
   }, [setDisplay]);
 
   console.log(`esto es el width ${props.width}`);
   return (
     <MainHeader display={{ display: display }}>
-      {isLogged && (
+      {isAuthenticated && (
         <>
           <div
             className="mainHeaderLeft"
@@ -90,7 +89,7 @@ function Header(props) {
               <NotificationsNoneIcon />
             </div>
             <div className="iconCell">
-              <LogoutIcon onClick={handleLogOut} />
+              <LogoutIcon onClick={handleLogout} />
             </div>
           </div>
         </>

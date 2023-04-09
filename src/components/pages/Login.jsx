@@ -1,65 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Container, MiniContainer } from "../styles/Login.styles";
 import { LoginForm } from "../styles/Form.styles";
 import { Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout, updateUser } from "../slices/authSlice";
+import { debounce } from "lodash"; //
 
 function Login() {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [logged, setLogged] = useState(localStorage.getItem("logged") || false);
+  const authenticated = useSelector((state) => state.auth.authenticated);
+  const email = useSelector((state) => state.auth.email);
+  const password = useSelector((state) => state.auth.password);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(`username changed to: ${mail}`);
-  }, [mail]);
-
-  useEffect(() => {
-    console.log(`password changed to: ${password}`);
-  }, [password]);
-
-  useEffect(() => {
-    localStorage.setItem("logged", logged);
-  }, [logged]);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (!mail || !password) {
-      alert("Please enter both a username and password");
-      return;
-    }
-    if (mail === "a@a.com" && password === "password") {
-      setLogged(true);
-    } else {
-      alert("Invalid username or password");
-    }
+  const handleLogin = () => {
+    dispatch(login({ email, password }));
   };
 
-  const habdleMail = (e) => {
-    setMail(e.target.value);
-    console.log(mail);
+  // const debouncedHandleLogin = debounce(handleLogin, 1000);
+
+  // console.log(`esto es el debounce ${debouncedHandleLogin}`);
+
+  // const handleLogout = () => {
+  //   dispatch(logout());
+  // };
+
+  const handleMail = (e) => {
+    console.log(`esto es el mail ${e.target.value}`);
+    dispatch(updateUser({ email: e.target.value, password }));
   };
 
   const handlePassword = (e) => {
-    setPassword(e.target.value);
-    console.log(password);
+    console.log(`esto es el passowrd ${e.target.value}`);
+    dispatch(updateUser({ email, password: e.target.value }));
   };
 
   return (
     <>
-      {logged ? (
+      {authenticated ? (
         <Navigate to={"/"} />
       ) : (
         <Container>
           <MiniContainer>
-            <LoginForm onSubmit={handleLogin}>
+            <LoginForm
+              onSubmit={() => {
+                handleLogin();
+              }}
+            >
               <label>Mail:</label>
               <br />
-              <input type="email" value={mail} onChange={habdleMail} />
+              <input
+                type="email"
+                placeholder="a@a.com"
+                value={email}
+                onChange={handleMail}
+              />
               <br />
               <label> Password: </label>
               <br />
               <input
                 type="password"
                 value={password}
+                placeholder="password"
                 onChange={handlePassword}
               />
               <br />
@@ -71,4 +72,5 @@ function Login() {
     </>
   );
 }
+
 export default Login;
