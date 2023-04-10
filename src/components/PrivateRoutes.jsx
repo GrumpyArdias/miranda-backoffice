@@ -1,10 +1,11 @@
 // Importa los módulos necesarios
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { LoginContext } from "../store/ContextStore";
 
 function PrivateRoutes() {
-  const isAuthenticated = useSelector((state) => state.auth.authenticated);
+  const { state } = useContext(LoginContext);
+  const isAuthenticated = state.authenticated;
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 }

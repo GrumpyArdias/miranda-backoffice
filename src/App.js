@@ -16,6 +16,7 @@ import Book from "./components/pages/Book";
 import { BodyWrap } from "./components/styles/App.styles";
 import store from "./store/Store";
 import { Provider } from "react-redux";
+import LoginContextProvider from "./store/ContextStore";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -40,40 +41,42 @@ function App() {
   }, []);
 
   return (
-    <Provider store={store}>
-      <Router>
-        <div className="App" style={{ display: "flex" }}>
-          <Aside visible={open} />
-          <BodyWrap
-            style={{
-              minWidth: `${width}%`,
-            }}
-          >
-            <Header toggleAside={toggleAside} />
-            <Routes>
-              <Route element={<PrivateRoutes />}>
-                <Route element={<Dashboard display={display} />} path="/" />
-                <Route
-                  element={<Bookings display={display} />}
-                  path="/bookings"
-                />
-                <Route
-                  element={<Book display={display} />}
-                  path="/bookings/:id"
-                />
-                <Route element={<Rooms display={display} />} path="/rooms" />
-                <Route element={<Users display={display} />} path="/users" />
-                <Route
-                  element={<Contact display={display} />}
-                  path="/contact"
-                />
-              </Route>
-              <Route element={<Login />} path="/login" />
-            </Routes>
-          </BodyWrap>
-        </div>
-      </Router>
-    </Provider>
+    <LoginContextProvider>
+      <Provider store={store}>
+        <Router>
+          <div className="App" style={{ display: "flex" }}>
+            <Aside visible={open} />
+            <BodyWrap
+              style={{
+                minWidth: `${width}%`,
+              }}
+            >
+              <Header toggleAside={toggleAside} />
+              <Routes>
+                <Route element={<PrivateRoutes />}>
+                  <Route element={<Dashboard display={display} />} path="/" />
+                  <Route
+                    element={<Bookings display={display} />}
+                    path="/bookings"
+                  />
+                  <Route
+                    element={<Book display={display} />}
+                    path="/bookings/:id"
+                  />
+                  <Route element={<Rooms display={display} />} path="/rooms" />
+                  <Route element={<Users display={display} />} path="/users" />
+                  <Route
+                    element={<Contact display={display} />}
+                    path="/contact"
+                  />
+                </Route>
+                <Route element={<Login />} path="/login" />
+              </Routes>
+            </BodyWrap>
+          </div>
+        </Router>
+      </Provider>
+    </LoginContextProvider>
   );
 }
 

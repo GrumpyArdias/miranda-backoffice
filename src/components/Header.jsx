@@ -4,21 +4,26 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import { MainHeader } from "./styles/Header.styles";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { logout } from "./slices/authSlice";
+import { LoginContext } from "../store/ContextStore";
+import { useContext } from "react";
 
 function Header(props) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const authContext = useContext(LoginContext);
+  console.log(`esto es el authContext del head  ${authContext}`);
 
   const [display, setDisplay] = useState("flex");
   const [path, setPath] = useState("");
   const location = useLocation();
-  const isAuthenticated = useSelector((state) => state.auth.authenticated);
+  const isAuthenticated = authContext.state.authenticated;
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  console.log(`esto es el auth en el header ${isAuthenticated}`);
 
   useEffect(() => {
     switch (true) {
