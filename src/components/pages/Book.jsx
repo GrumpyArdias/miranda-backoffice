@@ -19,9 +19,19 @@ import {
 import { useParams } from "react-router-dom";
 import Bookings from "../../data/bookings.json";
 import Rooms from "../../data/rooms.json";
+import { getOneBook } from "../slices/bookingsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function Book() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const OneBook = useSelector((state) => state.book);
+
+  useEffect(() => {
+    console.log(`esto es  el oneBook ${OneBook}`);
+    dispatch(getOneBook());
+  }, [dispatch]);
 
   const book = Bookings.find((obj) => obj.room_id === id);
   const room = Rooms.find((obj) => obj.id === id);

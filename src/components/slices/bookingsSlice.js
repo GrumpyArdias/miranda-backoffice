@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import Bookings from "../../data/bookings.json";
+import BookingArray from "../../data/bookings.json";
+
+const initialState = {
+  bookings: [],
+  book: {},
+};
 
 function delay(data) {
   return new Promise((resolve) => {
@@ -9,32 +14,27 @@ function delay(data) {
   });
 }
 
-export const fetchBookings = createAsyncThunk(
-  "post/fetchBookings",
+export const getAllBookings = createAsyncThunk(
+  "bookings/getAllBookings",
   async () => {
     try {
-      return await delay(Bookings);
+      return await delay(BookingArray);
     } catch (error) {
-      console.error("Error fetching bookings:", error);
-
-      throw new Error("Failed to fetch bookings.");
+      alert(`Can't get all the bookings right now, error: ${error}`);
     }
   }
 );
 
-export const fetchOneBooking = createAsyncThunk(
-  "post/fetchBookings",
-  async (id) => {
-    try {
-      return await delay(id);
-    } catch {
-      throw new Error("Failed to fetch the booking.");
-    }
+export const getOneBook = createAsyncThunk("post/getOneBook", async (id) => {
+  try {
+    return await delay(id);
+  } catch {
+    throw new Error("Failed to fetch the booking.");
   }
-);
+});
 
 export const createBookings = createAsyncThunk(
-  "post/fetchBookings",
+  "bookings/createBookings",
   async (newBooking) => {
     try {
       return await delay({
@@ -48,7 +48,7 @@ export const createBookings = createAsyncThunk(
 );
 
 export const deleteBooking = createAsyncThunk(
-  "post/fetchBookings",
+  "bookings/deleteBooking",
   async (id) => {
     try {
       return await delay(id);
@@ -59,7 +59,7 @@ export const deleteBooking = createAsyncThunk(
 );
 
 export const updateBooking = createAsyncThunk(
-  "post/fetchBookings",
+  "bookings/updateBooking",
   async (updateBooking) => {
     try {
       return await delay(...updateBooking);
@@ -69,26 +69,74 @@ export const updateBooking = createAsyncThunk(
   }
 );
 
-const initialState = {
-  bookings: [],
-};
-
 const bookingsSlice = createSlice({
   name: "bookings",
   initialState,
   reducers: {},
-  extraReducers(builder) {
-    builder
-      .addCase(fetchBookings.pending, (state) => {
-        console.log("pendiente");
-      })
-      .addCase(fetchBookings.fulfilled, (state, action) => {
-        console.log("Exito");
-        state.bookings = action.payload;
-      })
-      .addCase(fetchBookings.rejected, (state) => {
-        console.log("ha fallado");
+  extraReducers: {
+    // GET ALL BOOKS
+    [getAllBookings.fulfilled]: (state, action) => {
+      console.log("success");
+      state.bookings = action.payload;
+    },
+    [getAllBookings.pending]: (state) => {
+      console.log("Loading...");
+    },
+    [getAllBookings.rejected]: (state) => {
+      console.log("Error fetching Bookings...");
+    },
+    // GET ONE BOOK
+    [getOneBook.fulfilled]: (state, action) => {
+      console.log("success");
+      state.book = state.bookings.find(
+        (booking) => booking.id === action.payload
+      );
+    },
+    [getOneBook.pending]: (state) => {
+      console.log("Loading...");
+    },
+    [getOneBook.rejected]: (state) => {
+      console.log("Error Fetching the book...");
+    },
+
+    // CRREATE ONE BOOKING
+    [createBookings.fulfilled]: (state, action) => {
+      console.log("success");
+      state.bookings = [...state.bookings, action.payload];
+    },
+    [createBookings.pending]: (state) => {
+      console.log("Loading...");
+    },
+    [createBookings.rejected]: (state) => {
+      console.log("Error creating new Booking");
+    },
+
+    // DELETING ONE BOOKING
+    [deleteBooking.fulfilled]: (state, action) => {
+      console.log("success");
+      state.bookings = state.bookings.filter(
+        (booking) => booking.id !== action.payload
+      );
+    },
+    [deleteBooking.pending]: (state) => {
+      console.log("Loading...");
+    },
+    [deleteBooking.rejected]: (state) => {
+      console.log("Error Deleting the Booking");
+    },
+    // UPDATING ONE BOOKING
+    [updateBooking.fulfilled]: (state, action) => {
+      console.log("success");
+      state.bookings = state.bookings.map((booking) => {
+        return booking.id === action.payload.id ? action.payload : booking;
       });
+    },
+    [updateBooking.pending]: (state) => {
+      console.log("Loading...");
+    },
+    [updateBooking.rejected]: (state) => {
+      console.log("Error updating the Booking");
+    },
   },
 });
 

@@ -7,7 +7,7 @@ import {
 import Dropdown from "../Dropdown";
 import BookingsTable from "../BookingTable";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBookings } from "../slices/bookingsSlice";
+import { getAllBookings } from "../slices/bookingsSlice";
 import { useEffect } from "react";
 
 function Bookings() {
@@ -15,7 +15,7 @@ function Bookings() {
   const bookings = useSelector((state) => state.bookings.bookings);
 
   useEffect(() => {
-    dispatch(fetchBookings());
+    dispatch(getAllBookings());
   }, [dispatch]);
 
   const options = ["Option 1", "Option 2", "Option 3"];
