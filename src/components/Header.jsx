@@ -5,13 +5,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { MainHeader } from "./styles/Header.styles";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout } from "./slices/authSlice";
 import { LoginContext } from "../store/ContextStore";
 import { useContext } from "react";
 
 function Header(props) {
-  const dispatch = useDispatch();
+  const { dispatch } = useContext(LoginContext);
   const authContext = useContext(LoginContext);
   console.log(`esto es el authContext del head  ${authContext}`);
 
@@ -20,7 +18,9 @@ function Header(props) {
   const location = useLocation();
   const isAuthenticated = authContext.state.authenticated;
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch({
+      type: "LOGOUT",
+    });
   };
 
   console.log(`esto es el auth en el header ${isAuthenticated}`);

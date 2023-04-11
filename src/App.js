@@ -1,13 +1,11 @@
 import "./App.css";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Login from "./components/pages/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 import Dashboard from "./components/pages/Dashboard";
-import { useState } from "react";
 import Aside from "./components/Aside";
 import Header from "./components/Header";
-import { useEffect } from "react";
 import Bookings from "./components/pages/Bookings";
 import Rooms from "./components/pages/Rooms";
 import Users from "./components/pages/Users";
@@ -22,7 +20,8 @@ function App() {
   const [open, setOpen] = useState(false);
   const [width, setwidth] = useState(100);
   const [display, setDisplay] = useState("flex");
-  const loginStatus = localStorage.getItem("logged");
+
+  const isAuthenticated = localStorage.getItem("isAuthenticated") || false;
 
   const toggleAside = () => {
     setOpen(!open);
@@ -33,12 +32,12 @@ function App() {
   }, [open]);
 
   useEffect(() => {
-    if (loginStatus === "false" || loginStatus === false) {
+    if (isAuthenticated === "false" || isAuthenticated === false) {
       setDisplay("none");
     } else {
       setDisplay("flex");
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <LoginContextProvider>

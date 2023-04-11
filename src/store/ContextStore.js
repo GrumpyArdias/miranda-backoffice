@@ -5,16 +5,38 @@ export const LoginContext = createContext();
 
 const types = {
   LOGIN: "LOGIN",
+  LOGOUT: "LOGOUT",
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
     case types.LOGIN:
+      if (
+        action.value.mail === "a@a.com" &&
+        action.value.password === "password"
+      ) {
+        localStorage.setItem("mail", action.value.mail);
+        localStorage.setItem("password", action.value.password);
+        localStorage.setItem("isAuthenticated", action.value.authenticated);
+        return {
+          ...state,
+          mail: action.value.mail,
+          password: action.value.password,
+          authenticated: action.value.authenticated,
+        };
+      } else {
+        alert("Password or email are incorrect");
+        throw new Error("State error");
+      }
+
+    case types.LOGOUT:
+      localStorage.removeItem("mail");
+      localStorage.removeItem("password");
+
       return {
-        ...state,
-        mail: action.value.mail,
-        password: action.value.password,
-        authenticated: action.value.authenticated,
+        authenticated: false,
+        email: "",
+        password: "",
       };
     default:
       throw new Error("Unknown action type");
@@ -31,10 +53,6 @@ export const initialState = {
 const LoginContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    const AUTH_KEY = "Logged";
-    localStorage.setItem(AUTH_KEY, { state });
-  });
   return (
     <LoginContext.Provider value={{ state, dispatch }}>
       {children}
