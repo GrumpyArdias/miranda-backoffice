@@ -6,9 +6,18 @@ import {
 } from "../styles/Bookings.styles";
 import Dropdown from "../Dropdown";
 import BookingsTable from "../BookingTable";
-import BookingsData from "../../data/bookings.json";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBookings } from "../slices/bookingsSlice";
+import { useEffect } from "react";
 
 function Bookings() {
+  const dispatch = useDispatch();
+  const bookings = useSelector((state) => state.bookings.bookings);
+
+  useEffect(() => {
+    dispatch(fetchBookings());
+  }, [dispatch]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -24,7 +33,7 @@ function Bookings() {
     "Room Type",
     "Status",
   ];
-  const rowDataArray = BookingsData;
+  const rowDataArray = bookings;
 
   return (
     <div>
