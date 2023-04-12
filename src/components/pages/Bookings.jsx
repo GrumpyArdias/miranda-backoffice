@@ -7,7 +7,7 @@ import {
 import Dropdown from "../Dropdown";
 import BookingsTable from "../BookingTable";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBookings } from "../slices/bookingsSlice";
+import { getAllBookings } from "../../slices/bookingsSlice";
 import { useEffect } from "react";
 
 function Bookings() {

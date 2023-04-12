@@ -17,23 +17,21 @@ import {
   TextInfo,
 } from "../styles/Book.styles";
 import { useParams } from "react-router-dom";
-import Bookings from "../../data/bookings.json";
 import Rooms from "../../data/rooms.json";
-import { getOneBook } from "../slices/bookingsSlice";
+import { getOneBook } from "../../slices/bookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function Book() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const OneBook = useSelector((state) => state.book);
+  const OneBook = useSelector((state) => state.bookings);
 
   useEffect(() => {
+    dispatch(getOneBook(id));
     console.log(`esto es  el oneBook ${OneBook}`);
-    dispatch(getOneBook());
-  }, [dispatch]);
+  }, [dispatch, OneBook, id]);
 
-  const book = Bookings.find((obj) => obj.room_id === id);
   const room = Rooms.find((obj) => obj.id === id);
 
   return (
@@ -43,18 +41,18 @@ function Book() {
           <UserInfo className="userInfo">
             <UserPhoto className="UserPhoto"> </UserPhoto>
             <UserData className="UserData">
-              <h3>{book.full_name}</h3>
+              <h3>{OneBook.full_name}</h3>
               <p>ID {id}</p>
             </UserData>
           </UserInfo>
           <Checks className="Checks">
             <CheckIn className="CheckIn">
               <p>Check In</p>
-              <h3>{book.check_in}</h3>
+              <h3>{OneBook.check_in}</h3>
             </CheckIn>
             <CheckOut className="CheckOut">
               <p>Check Out</p>
-              <h3>{book.check_out}</h3>
+              <h3>{OneBook.check_out}</h3>
             </CheckOut>
           </Checks>
         </BookLeftFirstBlock>

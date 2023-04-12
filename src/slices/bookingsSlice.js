@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import BookingArray from "../../data/bookings.json";
+import BookingArray from "../data/bookings.json";
 
 const initialState = {
   bookings: [],
