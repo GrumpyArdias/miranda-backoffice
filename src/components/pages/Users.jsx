@@ -5,7 +5,7 @@ import {
   UserEditButton,
 } from "../styles/Users.styles";
 import Dropdown from "../Dropdown";
-import UserData from "../../data/users.json";
+
 import UserTable from "../UsersTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../slices/userSlice";
@@ -17,7 +17,7 @@ function Users() {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch]);
+  }, [dispatch, users]);
 
   const options = ["Option 1", "Option 2", "Option 3"];
 

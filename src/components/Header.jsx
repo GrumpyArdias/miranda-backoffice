@@ -56,7 +56,7 @@ function Header(props) {
 
   useEffect(() => {
     setDisplay(isAuthenticated ? "flex" : "none");
-  }, [setDisplay]);
+  }, [setDisplay, isAuthenticated]);
 
   return (
     <MainHeader display={{ display: display }}>
