@@ -80,6 +80,6 @@ export const UserEditButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #3e8e41;
+    background-color: #4c3102;
   }
 `;

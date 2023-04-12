@@ -54,7 +54,7 @@ function Bookings() {
         </BookingsTopLeftWrap>
         <BookingsTopRightWrap>
           <UserEditButton>
-            <p>+ New Room</p>
+            <p>+ New Booking</p>
           </UserEditButton>
           <Dropdown options={options} onSelect={handleSelect} />
         </BookingsTopRightWrap>

@@ -23,8 +23,6 @@ function Header(props) {
     });
   };
 
-  console.log(`esto es el auth en el header ${isAuthenticated}`);
-
   useEffect(() => {
     switch (true) {
       case location.pathname === "/":
@@ -60,7 +58,6 @@ function Header(props) {
     setDisplay(isAuthenticated ? "flex" : "none");
   }, [setDisplay]);
 
-  console.log(`esto es el width ${props.width}`);
   return (
     <MainHeader display={{ display: display }}>
       {isAuthenticated && (

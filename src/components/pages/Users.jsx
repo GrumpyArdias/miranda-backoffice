@@ -5,10 +5,20 @@ import {
   UserEditButton,
 } from "../styles/Users.styles";
 import Dropdown from "../Dropdown";
-import UserData from "../../data/Users.json";
+import UserData from "../../data/users.json";
 import UserTable from "../UsersTable";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../../slices/userSlice";
+import { useEffect } from "react";
 
 function Users() {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -16,7 +26,7 @@ function Users() {
   };
 
   const headerArray = ["Name", "Email", "Description", "Contact", "Status"];
-  const rowDataArray = UserData;
+  const rowDataArray = users;
   return (
     <>
       {" "}

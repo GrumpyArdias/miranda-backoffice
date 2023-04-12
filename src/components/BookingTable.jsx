@@ -31,7 +31,6 @@ function BookingTable(props) {
       if (room.status === "booked" || room.status === "inProgress") {
         if (room.id === id) {
           roomType = room.bed_type;
-          console.log(`estoo es el Room Type ${roomType}`);
         }
       } else {
         roomType = "Status not eligible for a Room"; // Update room type for ineligible status
