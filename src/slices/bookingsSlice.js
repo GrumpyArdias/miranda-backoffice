@@ -25,13 +25,16 @@ export const getAllBookings = createAsyncThunk(
   }
 );
 
-export const getOneBook = createAsyncThunk("post/getOneBook", async (id) => {
-  try {
-    return await delay(id);
-  } catch {
-    throw new Error("Failed to fetch the booking.");
+export const getOneBook = createAsyncThunk(
+  "bookings/getOneBook",
+  async (id) => {
+    try {
+      return await delay(id);
+    } catch {
+      throw new Error("Failed to fetch the booking.");
+    }
   }
-});
+);
 
 export const createBookings = createAsyncThunk(
   "bookings/createBookings",

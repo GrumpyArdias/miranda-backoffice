@@ -7,8 +7,18 @@ import {
 import Dropdown from "../Dropdown";
 import RoomsTable from "../RoomsTable";
 import Data from "../../data/data.json";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllRooms } from "../../slices/roomsSlice";
+import { useEffect } from "react";
 
 function Rooms() {
+  const dispatch = useDispatch();
+  const rooms = useSelector((state) => state.rooms.rooms);
+
+  useEffect(() => {
+    dispatch(getAllRooms());
+  }, [dispatch]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -23,7 +33,7 @@ function Rooms() {
     "Offer Price",
     "Status",
   ];
-  const rowDataArray = Data;
+  const rowDataArray = rooms;
 
   return (
     <>
