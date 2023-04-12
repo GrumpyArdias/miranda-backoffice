@@ -9,8 +9,18 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ContactTable from "../ContactTable";
 import Dropdown from "../Dropdown";
 import Data from "../../data/data.json";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllContacts } from "../../slices/contactSlice";
+import { useEffect } from "react";
 
 function Contact() {
+  const dispatch = useDispatch();
+  const contact = useSelector((state) => state.contacts.contacts);
+
+  useEffect(() => {
+    dispatch(getAllContacts());
+  }, [dispatch, contact]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -27,7 +37,7 @@ function Contact() {
     "Coment",
     "Action",
   ];
-  const rowDataArray = Data;
+  const rowDataArray = contact;
   return (
     <>
       <Reviews>

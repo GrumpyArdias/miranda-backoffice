@@ -33,6 +33,25 @@ function ContactTable(props) {
     }
   };
 
+  const handleComentSwitch = (coment) => {
+    switch (coment) {
+      case true:
+        return (
+          <ArchiveStatus>
+            <p>Good</p>
+          </ArchiveStatus>
+        );
+      case false:
+        return (
+          <NotArchiveStatus>
+            <p>Bad</p>
+          </NotArchiveStatus>
+        );
+
+      default:
+        return "error in the Coment Status";
+    }
+  };
   return (
     <ContactTableStyle>
       <thead>
@@ -50,14 +69,14 @@ function ContactTable(props) {
         {rowDataArray.map((data, index) => {
           return (
             <tr key={uuid()}>
-              <td colSpan={2}>{data.client_id}</td>
-              <td colSpan={2}>{data.check_out}</td>
+              <td colSpan={2}>{data.id}</td>
+              <td colSpan={2}>{data.date}</td>
               <td colSpan={2}>{data.full_name}</td>
-              <td colSpan={2}>Mail@mail.com</td>
-              <td colSpan={2}>+34 123 456</td>
-              <td colSpan={2}>PlaceHolder</td>
-              <td colSpan={2}>Good</td>
-              <td colSpan={2}>{handleStatusSwitch(data.coment_status)}</td>
+              <td colSpan={2}>{data.email}</td>
+              <td colSpan={2}>{data.phone}</td>
+              <td colSpan={2}>{data.subjet}</td>
+              <td colSpan={2}>{handleComentSwitch(data.coment)}</td>
+              <td colSpan={2}>{handleStatusSwitch(data.action)}</td>
             </tr>
           );
         })}
