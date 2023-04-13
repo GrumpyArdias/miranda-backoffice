@@ -25,8 +25,13 @@ export const reducer = (state, action) => {
           authenticated: action.value.authenticated,
         };
       } else {
-        alert("Password or email are incorrect");
-        throw new Error("State error");
+        alert("Mail o contraseña invalidos");
+        return {
+          ...state,
+          mail: null,
+          password: null,
+          authenticated: false,
+        };
       }
 
     case types.LOGOUT:

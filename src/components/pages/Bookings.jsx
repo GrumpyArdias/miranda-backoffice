@@ -9,10 +9,12 @@ import BookingsTable from "../BookingTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBookings } from "../../slices/bookingsSlice";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Bookings() {
   const dispatch = useDispatch();
   const bookings = useSelector((state) => state.bookings.bookings);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllBookings());
@@ -53,7 +55,7 @@ function Bookings() {
           </div>
         </BookingsTopLeftWrap>
         <BookingsTopRightWrap>
-          <UserEditButton>
+          <UserEditButton onClick={() => navigate("/newbooking")}>
             <p>+ New Booking</p>
           </UserEditButton>
           <Dropdown options={options} onSelect={handleSelect} />

@@ -25,7 +25,9 @@ import { useEffect } from "react";
 function Book() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const OneBook = useSelector((state) => state.bookings);
+  const OneBook = useSelector((state) => state.bookings.book);
+
+  console.table(OneBook);
 
   useEffect(() => {
     dispatch(getOneBook(id));

@@ -15,6 +15,7 @@ import { BodyWrap } from "./components/styles/App.styles";
 import store from "./store/Store";
 import { Provider } from "react-redux";
 import LoginContextProvider from "./store/ContextStore";
+import NewBooking from "./components/pages/NewBookings";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -61,6 +62,10 @@ function App() {
                   <Route
                     element={<Book display={display} />}
                     path="/bookings/:id"
+                  />
+                  <Route
+                    element={<NewBooking display={display} />}
+                    path="/newbooking"
                   />
                   <Route element={<Rooms display={display} />} path="/rooms" />
                   <Route element={<Users display={display} />} path="/users" />

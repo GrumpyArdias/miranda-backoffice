@@ -10,6 +10,7 @@ function Aside(props) {
   const asideStyle = {
     display: props.visible ? "flex" : "none",
   };
+
   return (
     <LeftMainContainer style={asideStyle}>
       <div className="cell">

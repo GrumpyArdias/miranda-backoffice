@@ -11,7 +11,6 @@ import { useContext } from "react";
 function Header(props) {
   const { dispatch } = useContext(LoginContext);
   const authContext = useContext(LoginContext);
-  console.log(`esto es el authContext del head  ${authContext}`);
 
   const [display, setDisplay] = useState("flex");
   const [path, setPath] = useState("");
