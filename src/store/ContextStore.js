@@ -37,6 +37,7 @@ export const reducer = (state, action) => {
     case types.LOGOUT:
       localStorage.removeItem("mail");
       localStorage.removeItem("password");
+      localStorage.setItem("isAuthenticated", false);
 
       return {
         authenticated: false,
@@ -52,7 +53,7 @@ export const initialState = {
   mail: localStorage.getItem("mail") || null,
   password: localStorage.getItem("password") || null,
   authenticated:
-    localStorage.getItem("authenticated") === "true" ? true : false,
+    localStorage.getItem("isAuthenticated") === "true" ? true : false,
 };
 
 const LoginContextProvider = ({ children }) => {
