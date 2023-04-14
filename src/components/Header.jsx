@@ -39,9 +39,9 @@ function Header(props) {
       case location.pathname === "/rooms":
         setPath("Rooms");
         break;
-      // case location.pathname==="/rooms/newRoom":
-      //   setPath("New Room");
-      //   break;
+      case location.pathname === "/rooms/newRoom":
+        setPath("New Room");
+        break;
       case location.pathname === "/users":
         setPath("Users");
         break;

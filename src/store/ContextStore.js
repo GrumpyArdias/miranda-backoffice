@@ -17,12 +17,12 @@ export const reducer = (state, action) => {
       ) {
         localStorage.setItem("mail", action.value.mail);
         localStorage.setItem("password", action.value.password);
-        localStorage.setItem("isAuthenticated", action.value.authenticated);
+        localStorage.setItem("isAuthenticated", true);
         return {
           ...state,
           mail: action.value.mail,
           password: action.value.password,
-          authenticated: action.value.authenticated,
+          authenticated: true,
         };
       } else {
         alert("Mail o contraseña invalidos");

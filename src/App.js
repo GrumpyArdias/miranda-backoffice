@@ -16,13 +16,27 @@ import store from "./store/Store";
 import { Provider } from "react-redux";
 import LoginContextProvider from "./store/ContextStore";
 import NewBooking from "./components/pages/NewBookings";
-
+import { NewRoom } from "./components/pages/newRoom";
 function App() {
   const [open, setOpen] = useState(false);
   const [width, setwidth] = useState(100);
   const [display, setDisplay] = useState("flex");
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAuthenticated") || false
+  );
 
-  const isAuthenticated = localStorage.getItem("isAuthenticated") || false;
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuthenticated");
+
+    !authStatus && localStorage.setItem("isAuthenticated", false);
+  }, []);
+
+  useEffect(() => {
+    setIsAuthenticated(
+      (prevState) => localStorage.getItem("isAuthenticated") || prevState
+    );
+  }, [isAuthenticated]);
+  console.log(`esto es el auth ${isAuthenticated}`);
 
   const toggleAside = () => {
     setOpen(!open);
@@ -33,7 +47,7 @@ function App() {
   }, [open]);
 
   useEffect(() => {
-    if (isAuthenticated === "false" || isAuthenticated === false) {
+    if (isAuthenticated === "false") {
       setDisplay("none");
     } else {
       setDisplay("flex");
@@ -68,6 +82,10 @@ function App() {
                     path="/newbooking"
                   />
                   <Route element={<Rooms display={display} />} path="/rooms" />
+                  <Route
+                    element={<NewRoom display={display} />}
+                    path="/rooms/newroom"
+                  />
                   <Route element={<Users display={display} />} path="/users" />
                   <Route
                     element={<Contact display={display} />}

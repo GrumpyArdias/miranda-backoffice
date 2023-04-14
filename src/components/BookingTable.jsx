@@ -106,7 +106,7 @@ function BookingTable(props) {
                     ) : (
                       <NotesAvalaible
                         //this id must be change for a proper booking id
-                        onClick={() => handleNoteClick(data.room_id)}
+                        onClick={() => handleNoteClick(data.id)}
                       >
                         <p>View Notes</p>
                       </NotesAvalaible>
