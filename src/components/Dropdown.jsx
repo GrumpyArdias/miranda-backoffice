@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BookigTopSelect } from "./styles/Bookings.styles";
+import { BookingTopSelect } from "./styles/Bookings.styles";
 
 const Dropdown = ({ options, onSelect }) => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -10,7 +10,7 @@ const Dropdown = ({ options, onSelect }) => {
   };
 
   return (
-    <BookigTopSelect
+    <BookingTopSelect
       value={selectedOption}
       onChange={(e) => handleSelect(e.target.value)}
     >
@@ -20,7 +20,7 @@ const Dropdown = ({ options, onSelect }) => {
           {option}
         </option>
       ))}
-    </BookigTopSelect>
+    </BookingTopSelect>
   );
 };
 

@@ -9,10 +9,12 @@ import RoomsTable from "../RoomsTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRooms } from "../../slices/roomsSlice";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Rooms() {
   const dispatch = useDispatch();
   const rooms = useSelector((state) => state.rooms.rooms);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllRooms());
@@ -49,7 +51,7 @@ function Rooms() {
           </div>
         </RoomsTopLeftWrap>
         <RoomsTopRightWrap>
-          <NewRoomButton>
+          <NewRoomButton onClick={() => navigate("/rooms/newroom")}>
             <p>+ New Room</p>
           </NewRoomButton>
           <Dropdown options={options} onSelect={handleSelect} />

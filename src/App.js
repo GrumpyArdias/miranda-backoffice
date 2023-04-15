@@ -16,7 +16,7 @@ import store from "./store/Store";
 import { Provider } from "react-redux";
 import LoginContextProvider from "./store/ContextStore";
 import NewBooking from "./components/pages/NewBookings";
-import { NewRoom } from "./components/pages/newRoom";
+import { NewRoom } from "./components/pages/NewRoom";
 function App() {
   const [open, setOpen] = useState(false);
   const [width, setwidth] = useState(100);

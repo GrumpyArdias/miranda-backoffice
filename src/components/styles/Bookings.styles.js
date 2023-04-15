@@ -40,7 +40,7 @@ export const BookingsTopRightWrap = styled.div`
   margin-top: 10px;
 `;
 
-export const BookigTopSelect = styled.select`
+export const BookingTopSelect = styled.select`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
