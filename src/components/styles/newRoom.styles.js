@@ -13,6 +13,7 @@ export const PriceWrap = styled.div`
   max-width: 80%;
   justify-content: space-around;
   margin: 0 auto;
+  margin-bottom: 50px;
 `;
 export const InputWrap = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ export const InputWrap = styled.div`
 `;
 export const InputCell = styled.div``;
 export const RoomType = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 `;
 
 export const Price = styled.div`
@@ -38,6 +39,7 @@ export const StatusWrapper = styled.div`
   display: flex;
   gap: 10px;
   justify-content: center;
+  margin-bottom: 50px;
 `;
 export const StatusCell = styled.div``;
 export const Floor = styled.div``;
@@ -47,6 +49,7 @@ export const FloorWrapper = styled.div`
   margin: 0 auto;
   max-width: 80%;
   justify-content: center;
+  margin-bottom: 50px;
 `;
 export const FloorCell = styled.div`
   min-width: 60%;
@@ -102,4 +105,13 @@ export const SubmitButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
+`;
+
+export const Amenities = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 80%;
+  margin: 0 auto;
+  margin-bottom: 50px;
 `;

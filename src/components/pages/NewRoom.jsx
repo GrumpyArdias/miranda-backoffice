@@ -12,6 +12,7 @@ import {
   Discount,
   SubmitButton,
   FloorCell,
+  Amenities,
 } from "../styles/newRoom.styles";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,11 +25,25 @@ export function NewRoom() {
     floorNumber: "",
     bedType: "",
     roomStatus: "",
+    amenities: "",
   };
 
   const [room, setRoom] = useState(initialObjet);
   const [discountedPrice, setDiscountedPrice] = useState("");
   const dispatch = useDispatch();
+
+  const handleAmenitiesChange = (e) => {
+    const selectedAmenity = e.target.value;
+    const isChecked = e.target.checked;
+    if (isChecked) {
+      setRoom({ ...room, amenities: [...room.amenities, selectedAmenity] });
+    } else {
+      setRoom({
+        ...room,
+        amenities: room.amenities.filter((item) => item !== selectedAmenity),
+      });
+    }
+  };
   const handleRoomChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -71,7 +86,91 @@ export function NewRoom() {
               <option value="suite">Suite</option>
             </Select>
           </RoomType>
-          <h3>2. Pricing and Discount</h3>
+          <h3>2. Choose Amenities</h3>
+          <Amenities className="Amenities">
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="wifi"
+                checked={room.amenities.includes("wifi")}
+                onChange={handleAmenitiesChange}
+              />
+              WiFi
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="tv"
+                checked={room.amenities.includes("tv")}
+                onChange={handleAmenitiesChange}
+              />
+              TV
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="ac"
+                checked={room.amenities.includes("ac")}
+                onChange={handleAmenitiesChange}
+              />
+              AC
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="fridge"
+                checked={room.amenities.includes("fridge")}
+                onChange={handleAmenitiesChange}
+              />
+              Mini Fridge
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="bathtub"
+                checked={room.amenities.includes("bathtub")}
+                onChange={handleAmenitiesChange}
+              />
+              Bathtub
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="sauna"
+                checked={room.amenities.includes("sauna")}
+                onChange={handleAmenitiesChange}
+              />
+              Sauna
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="roomService"
+                checked={room.amenities.includes("roomService")}
+                onChange={handleAmenitiesChange}
+              />
+              Room Service
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="amenities"
+                value="butler"
+                checked={room.amenities.includes("butler")}
+                onChange={handleAmenitiesChange}
+              />
+              Butler
+            </label>
+          </Amenities>
+          <h3>3. Pricing and Discount</h3>
           <PriceWrap className="PriceWrap">
             <Price className="price">
               <label htmlFor="price">Price</label>
@@ -85,6 +184,7 @@ export function NewRoom() {
                 required
               />
             </Price>
+            <h4>Discounted Price: {discountedPrice}</h4>
             <Discount className="discount">
               <label htmlFor="discount">Discount</label>
               <br />
@@ -99,10 +199,8 @@ export function NewRoom() {
             </Discount>
           </PriceWrap>
 
-          <h4>Discounted Price: {discountedPrice}</h4>
-
           <div className="Status">
-            <h3>3. Status</h3>
+            <h3>4. Status</h3>
             <StatusWrapper className="StatusWrapper">
               <Select
                 name="roomStatus"
@@ -118,7 +216,7 @@ export function NewRoom() {
           </div>
 
           <Floor className="floor">
-            <h3>4. Floor Choice</h3>
+            <h3>5. Floor Choice</h3>
             <FloorWrapper className="floorWrapper">
               <FloorCell className="FloorCell">
                 <label htmlFor="floor">Floor</label>
