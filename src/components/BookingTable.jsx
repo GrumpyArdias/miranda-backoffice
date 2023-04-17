@@ -3,22 +3,30 @@ import {
   DataRowWrapper,
   PhotoRowWrapper,
   TextRowWrapper,
-  NotesAvalaible,
-  NotNotesAvalible,
+  NotesAvailable,
+  NotNotesAvailable,
   RefoundStatus,
   BookedStatus,
   PendingStatus,
+  TdWrapper,
+  StatusWrapper,
+  IconWrapper,
 } from "./styles/BookingTable.styles";
 import Cat from "../images/cat3.jpg";
 import { v4 as uuid } from "uuid";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import { deleteBooking } from "../slices/bookingsSlice";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useDispatch } from "react-redux";
 import Rooms from "../data/rooms.json";
 
 function BookingTable(props) {
   const [clickedId, setClickedId] = useState(null);
   const headerArray = props.headerArray;
   const rowDataArray = props.rowDataArray;
+
+  const dispatch = useDispatch();
 
   const handleNoteClick = (dataId) => {
     setClickedId(dataId);
@@ -66,6 +74,10 @@ function BookingTable(props) {
     }
   };
 
+  const handleDelete = (id) => {
+    dispatch(deleteBooking(id));
+  };
+
   return (
     <div>
       <BookingTableStyle>
@@ -104,21 +116,33 @@ function BookingTable(props) {
                     clickedId ? (
                       <Navigate to={`/bookings/${clickedId}`} />
                     ) : (
-                      <NotesAvalaible
+                      <NotesAvailable
                         //this id must be change for a proper booking id
                         onClick={() => handleNoteClick(data.id)}
                       >
                         <p>View Notes</p>
-                      </NotesAvalaible>
+                      </NotesAvailable>
                     )
                   ) : (
-                    <NotNotesAvalible>
+                    <NotNotesAvailable>
                       <p>No Notes</p>
-                    </NotNotesAvalible>
+                    </NotNotesAvailable>
                   )}
                 </td>
-                <td colSpan={2}>{handelRoomSwitch(data.room_id)}</td>
-                <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
+                <td colSpan={2}>{handelRoomSwitch(data.id)}</td>
+                <td colSpan={2}>
+                  <TdWrapper className="TdWrapper">
+                    <StatusWrapper>
+                      {handleStatusSwitch(data.status)}
+                    </StatusWrapper>
+                    <IconWrapper>
+                      <DeleteForeverIcon
+                        style={{ color: "red" }}
+                        onClick={() => handleDelete(data.id)}
+                      />
+                    </IconWrapper>
+                  </TdWrapper>
+                </td>
               </tr>
             );
           })}

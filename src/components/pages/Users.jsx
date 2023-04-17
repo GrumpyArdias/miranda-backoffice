@@ -10,14 +10,23 @@ import UserTable from "../UsersTable";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../slices/userSlice";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Users() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch, users]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (users.length === 0) {
+      navigate("/");
+    }
+    console.log(users);
+  }, [users, navigate]);
 
   const options = ["Option 1", "Option 2", "Option 3"];
 

@@ -69,3 +69,12 @@ export const NotArchiveStatus = styled.div`
     padding: 10px;
   }
 `;
+export const TdWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+export const StatusWrapper = styled.div`
+  min-width: 100%;
+`;
+export const IconWrapper = styled.div``;

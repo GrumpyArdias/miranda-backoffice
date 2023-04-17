@@ -20,6 +20,13 @@ function Rooms() {
     dispatch(getAllRooms());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (rooms.length === 0) {
+      navigate("/");
+    }
+    console.log(rooms);
+  }, [rooms, navigate]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -29,7 +36,7 @@ function Rooms() {
   const headerArray = [
     "Room",
     "Bed Type",
-    "Facilites",
+    "Facilities",
     "Rate",
     "Offer Price",
     "Status",

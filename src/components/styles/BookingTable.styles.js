@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const BookingTableStyle = styled.table`
   border-collapse: collapse;
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
 
   tbody {
@@ -49,7 +49,7 @@ export const TextRowWrapper = styled.div`
     margin-top: -20px;
   }
 `;
-export const NotesAvalaible = styled.div`
+export const NotesAvailable = styled.div`
   background-color: #e8ffee;
   color: #5ad07a;
   max-width: 40%;
@@ -63,7 +63,7 @@ export const NotesAvalaible = styled.div`
     cursor: pointer;
   }
 `;
-export const NotNotesAvalible = styled.div`
+export const NotNotesAvailable = styled.div`
   background-color: #ffedec;
   color: #e23428;
   max-width: 40%;
@@ -90,7 +90,7 @@ export const RefoundStatus = styled.div`
 export const BookedStatus = styled.div`
   background-color: #e8ffee;
   color: #5ad07a;
-  max-width: 54%;
+  max-width: 70%;
   margin: 0 auto;
   border-radius: 10px;
 
@@ -102,11 +102,12 @@ export const BookedStatus = styled.div`
 export const PendingStatus = styled.div`
   background-color: yellow;
   color: #f9bc03;
-  max-width: 54%;
+  max-width: 70%;
   margin: 0 auto;
   border-radius: 10px;
 
   p {
+    text-align: center;
     padding: 10px;
   }
 `;
@@ -114,7 +115,7 @@ export const PendingStatus = styled.div`
 export const CanceledStatus = styled.div`
   background-color: yellow;
   color: #f9bc03;
-  max-width: 54%;
+  max-width: 70%;
   margin: 0 auto;
   border-radius: 10px;
 
@@ -123,3 +124,13 @@ export const CanceledStatus = styled.div`
     text-align: center;
   }
 `;
+
+export const TdWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+export const StatusWrapper = styled.div`
+  min-width: 60%;
+`;
+export const IconWrapper = styled.div``;

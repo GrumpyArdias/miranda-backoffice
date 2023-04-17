@@ -5,9 +5,15 @@ import {
   TextRowWrapper,
   AvailableStatus,
   BookedStatus,
+  TdWrapper,
+  StatusWrapper,
+  IconWrapper,
 } from "./styles/RoomsTable.styles";
 import { v4 as uuid } from "uuid";
 import Cat from "../images/cat3.jpg";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useDispatch } from "react-redux";
+import { deleteRoom } from "../slices/roomsSlice";
 
 function RoomsTable(props) {
   const headerArray = props.headerArray;
@@ -55,6 +61,11 @@ function RoomsTable(props) {
 
     return finalPrice;
   };
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(deleteRoom(id));
+  };
 
   return (
     <RoomsTableStyle>
@@ -91,7 +102,19 @@ function RoomsTable(props) {
               <td colSpan={2}>
                 {handleDiscount(data.price)} € <br /> (-10% off)
               </td>
-              <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
+              <td colSpan={2}>
+                <TdWrapper className="TdWrapper">
+                  <StatusWrapper>
+                    {handleStatusSwitch(data.status)}
+                  </StatusWrapper>
+                  <IconWrapper>
+                    <DeleteForeverIcon
+                      style={{ color: "red" }}
+                      onClick={() => handleDelete(data.id)}
+                    />
+                  </IconWrapper>
+                </TdWrapper>
+              </td>
             </tr>
           );
         })}

@@ -91,7 +91,7 @@ const userSlice = createSlice({
       console.log("Error Fetching the User...");
     },
 
-    // CRREATE ONE ROOM
+    // CRREATE ONE USER
     [createUser.fulfilled]: (state, action) => {
       console.log("success");
       state.users = [...state.users, action.payload];
@@ -103,10 +103,10 @@ const userSlice = createSlice({
       console.log("Error creating new User");
     },
 
-    // DELETING ONE ROOM
+    // DELETING ONE USER
     [deleteUser.fulfilled]: (state, action) => {
       console.log("success");
-      state.users = state.user.filter((user) => user.id !== action.payload);
+      state.users = state.users.filter((user) => user.id !== action.payload);
     },
     [deleteUser.pending]: (state) => {
       console.log("Loading...");
@@ -114,7 +114,7 @@ const userSlice = createSlice({
     [deleteUser.rejected]: (state) => {
       console.log("Error Deleting the User");
     },
-    // UPDATING ONE BOOKING
+    // UPDATING ONE USER
     [updateUser.fulfilled]: (state, action) => {
       console.log("success");
       state.users = state.users.map((user) => {

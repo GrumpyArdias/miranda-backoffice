@@ -2,7 +2,6 @@ import {
   BookingsTopWrap,
   BookingsTopLeftWrap,
   BookingsTopRightWrap,
-  UserEditButton,
 } from "../styles/Bookings.styles";
 import Dropdown from "../Dropdown";
 import BookingsTable from "../BookingTable";
@@ -19,6 +18,13 @@ function Bookings() {
   useEffect(() => {
     dispatch(getAllBookings());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (bookings.length === 0) {
+      navigate("/");
+    }
+    console.log(bookings);
+  }, [bookings, navigate]);
 
   const options = ["Option 1", "Option 2", "Option 3"];
 
@@ -55,9 +61,6 @@ function Bookings() {
           </div>
         </BookingsTopLeftWrap>
         <BookingsTopRightWrap>
-          <UserEditButton onClick={() => navigate("/newbooking")}>
-            <p>+ New Booking</p>
-          </UserEditButton>
           <Dropdown options={options} onSelect={handleSelect} />
         </BookingsTopRightWrap>
       </BookingsTopWrap>
