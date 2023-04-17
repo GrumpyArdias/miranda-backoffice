@@ -94,7 +94,8 @@ const roomSlice = createSlice({
     // CRREATE ONE ROOM
     [createRoom.fulfilled]: (state, action) => {
       console.log("success");
-      state.rooms = [...state.romms, action.payload];
+      state.rooms = [...state.rooms, action.payload];
+      console.log(state.rooms);
     },
     [createRoom.pending]: (state) => {
       console.log("Loading...");

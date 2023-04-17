@@ -16,9 +16,12 @@ import {
 } from "../styles/newRoom.styles";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createRoom } from "../../slices/roomsSlice";
+import { v4 as uuid } from "uuid";
 
 export function NewRoom() {
   const initialObjet = {
+    id: uuid(),
     price: "",
     discount: "",
     doorNumber: "",
@@ -59,11 +62,9 @@ export function NewRoom() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const name = event.target.name;
-    const value = "";
-    setRoom((prev) => ({ ...prev, [name]: value }));
-    event.target.reset();
-    console.log("test");
+    const newRoom = { ...room, id: uuid() }; // Generate UUID for the new room
+    dispatch(createRoom(newRoom));
+    setRoom(initialObjet); // Reset the room state after submitting
   };
 
   return (
@@ -85,8 +86,8 @@ export function NewRoom() {
               <option value="doubleSuperior">Double Superior</option>
               <option value="suite">Suite</option>
             </Select>
+            <h3>2. Choose Amenities</h3>
           </RoomType>
-          <h3>2. Choose Amenities</h3>
           <Amenities className="Amenities">
             <label>
               <input
