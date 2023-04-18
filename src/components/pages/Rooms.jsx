@@ -58,7 +58,11 @@ function Rooms() {
           </div>
         </RoomsTopLeftWrap>
         <RoomsTopRightWrap>
-          <NewRoomButton onClick={() => navigate("/rooms/newroom")}>
+          <NewRoomButton
+            className="NewRoomButton"
+            data-testid="new-room-button"
+            onClick={() => navigate("/rooms/newroom")}
+          >
             <p>+ New Room</p>
           </NewRoomButton>
           <Dropdown options={options} onSelect={handleSelect} />

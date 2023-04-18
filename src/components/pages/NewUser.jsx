@@ -100,7 +100,11 @@ export function NewUser() {
             <option value="inactive">Inactive</option>
           </Select>
         </InputWrapper>
-        <SubmitButton type="submit" onClick={handleSubmit}>
+        <SubmitButton
+          data-testid="NewUserButtonTest"
+          type="submit"
+          onClick={handleSubmit}
+        >
           Submit
         </SubmitButton>
       </NewUserForm>

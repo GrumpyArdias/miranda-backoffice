@@ -82,7 +82,7 @@ const bookingsSlice = createSlice({
       (state, action) => {
         console.log("esto es el estado de bookings id ");
         console.log(typeof state.bookings.id);
-        console.log("success");
+
         state.bookings = action.payload;
 
         switch (action.type) {
