@@ -15,7 +15,7 @@ import {
   Amenities,
 } from "../styles/newRoom.styles";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createRoom } from "../../slices/roomsSlice";
 import { v4 as uuid } from "uuid";
 

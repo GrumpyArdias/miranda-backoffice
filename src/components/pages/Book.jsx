@@ -27,11 +27,11 @@ function Book() {
   const dispatch = useDispatch();
   const OneBook = useSelector((state) => state.bookings.book);
 
-  console.table(OneBook);
-
   useEffect(() => {
+    console.log(`esto es el ${id}`);
     dispatch(getOneBook(id));
-    console.log(`esto es  el oneBook ${OneBook}`);
+    console.log(typeof id);
+    console.table(OneBook);
   }, [dispatch, OneBook, id]);
 
   const room = Rooms.find((obj) => obj.id === id);

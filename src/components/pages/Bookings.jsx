@@ -19,12 +19,12 @@ function Bookings() {
     dispatch(getAllBookings());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (bookings.length === 0) {
-      navigate("/");
-    }
-    console.log(bookings);
-  }, [bookings, navigate]);
+  // useEffect(() => {
+  //   if (bookings.length === 0) {
+  //     navigate("/");
+  //   }
+  //   console.log(bookings);
+  // }, [bookings, navigate]);
 
   const options = ["Option 1", "Option 2", "Option 3"];
 

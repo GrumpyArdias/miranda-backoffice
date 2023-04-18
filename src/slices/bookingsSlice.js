@@ -76,70 +76,57 @@ const bookingsSlice = createSlice({
   name: "bookings",
   initialState,
   reducers: {},
-  extraReducers: {
-    // GET ALL BOOKS
-    [getAllBookings.fulfilled]: (state, action) => {
-      console.log("success");
-      state.bookings = action.payload;
-    },
-    [getAllBookings.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getAllBookings.rejected]: (state) => {
-      console.log("Error fetching Bookings...");
-    },
-    // GET ONE BOOK
-    [getOneBook.fulfilled]: (state, action) => {
-      console.log("success");
-      state.book = state.bookings.find(
-        (booking) => booking.id === action.payload
-      );
-    },
-    [getOneBook.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getOneBook.rejected]: (state) => {
-      console.log("Error Fetching the book...");
-    },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      (action) => action.type.endsWith("/fulfilled"),
+      (state, action) => {
+        console.log("esto es el estado de bookings id ");
+        console.log(typeof state.bookings.id);
+        console.log("success");
+        state.bookings = action.payload;
 
-    // CRREATE ONE BOOKING
-    [createBookings.fulfilled]: (state, action) => {
-      console.log("success");
-      state.bookings = [...state.bookings, action.payload];
-    },
-    [createBookings.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [createBookings.rejected]: (state) => {
-      console.log("Error creating new Booking");
-    },
+        switch (action.type) {
+          case getAllBookings.fulfilled.type:
+            state.bookings = action.payload;
+            break;
+          case getOneBook.fulfilled.type:
+            state.book = state.bookings.find(
+              (booking) => booking.id === action.payload
+            );
+            console.log(state.book.id);
+            break;
+          case createBookings.fulfilled.type:
+            state.bookings = [...state.bookings, action.payload];
+            break;
+          case deleteBooking.fulfilled.type:
+            state.bookings = state.bookings.filter(
+              (booking) => booking.id !== action.payload
+            );
+            break;
+          case updateBooking.fulfilled.type:
+            state.bookings = state.bookings.map((booking) =>
+              booking.id === action.payload.id ? action.payload : booking
+            );
+            break;
+          default:
+            // Default case
+            break;
+        }
+      }
+    );
 
-    // DELETING ONE BOOKING
-    [deleteBooking.fulfilled]: (state, action) => {
-      console.log("success");
-      state.bookings = state.bookings.filter(
-        (booking) => booking.id !== action.payload
-      );
-    },
-    [deleteBooking.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [deleteBooking.rejected]: (state) => {
-      console.log("Error Deleting the Booking");
-    },
-    // UPDATING ONE BOOKING
-    [updateBooking.fulfilled]: (state, action) => {
-      console.log("success");
-      state.bookings = state.bookings.map((booking) => {
-        return booking.id === action.payload.id ? action.payload : booking;
-      });
-    },
-    [updateBooking.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [updateBooking.rejected]: (state) => {
-      console.log("Error updating the Booking");
-    },
+    builder.addMatcher(
+      (action) => action.type.endsWith("/pending"),
+      (state) => {
+        console.log("Loading...");
+      }
+    );
+    builder.addMatcher(
+      (action) => action.type.endsWith("/rejected"),
+      (state) => {
+        console.log("Error...");
+      }
+    );
   },
 });
 

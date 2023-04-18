@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Login from "./components/pages/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
@@ -15,8 +15,10 @@ import { BodyWrap } from "./components/styles/App.styles";
 import store from "./store/Store";
 import { Provider } from "react-redux";
 import LoginContextProvider from "./store/ContextStore";
-import NewBooking from "./components/pages/NewBookings";
 import { NewRoom } from "./components/pages/NewRoom";
+import { NewUser } from "./components/pages/NewUser";
+import { UserProfile } from "./components/pages/UserProfile";
+
 function App() {
   const [open, setOpen] = useState(false);
   const [width, setwidth] = useState(100);
@@ -77,16 +79,20 @@ function App() {
                     element={<Book display={display} />}
                     path="/bookings/:id"
                   />
-                  <Route
-                    element={<NewBooking display={display} />}
-                    path="/newbooking"
-                  />
                   <Route element={<Rooms display={display} />} path="/rooms" />
                   <Route
                     element={<NewRoom display={display} />}
                     path="/rooms/newroom"
                   />
                   <Route element={<Users display={display} />} path="/users" />
+                  <Route
+                    element={<NewUser display={display} />}
+                    path="/users/newuser"
+                  />
+                  <Route
+                    element={<UserProfile display={display} />}
+                    path="/users/:id"
+                  />
                   <Route
                     element={<Contact display={display} />}
                     path="/contact"

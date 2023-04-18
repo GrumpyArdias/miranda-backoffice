@@ -21,12 +21,12 @@ function Users() {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (users.length === 0) {
-      navigate("/");
-    }
-    console.log(users);
-  }, [users, navigate]);
+  // useEffect(() => {
+  //   if (users.length === 0) {
+  //     navigate("/");
+  //   }
+  //   console.log(users);
+  // }, [users, navigate]);
 
   const options = ["Option 1", "Option 2", "Option 3"];
 
@@ -52,7 +52,7 @@ function Users() {
           </div>
         </UsersTopLeftWrap>
         <UsersTopRightWrap>
-          <UserEditButton>
+          <UserEditButton onClick={() => navigate("/users/newuser")}>
             <p>+ New Employee</p>
           </UserEditButton>
           <Dropdown options={options} onSelect={handleSelect} />
