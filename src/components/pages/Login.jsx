@@ -20,16 +20,6 @@ function Login() {
     });
   };
 
-  // const handleMail = (e) => {
-  //   console.log(`esto es el handleMail ${e.target.value}`);
-  //   setMail(e.target.value);
-  // };
-
-  // const handlePassword = (e) => {
-  //   console.log(`esto es el handlePassword ${e.target.value}`);
-  //   setPass(e.target.value);
-  // };
-
   if (state.authenticated) return <Navigate to={"/"} />;
 
   return (
@@ -40,6 +30,7 @@ function Login() {
           <br />
           <input
             type="email"
+            data-cy="email"
             placeholder="a@a.com"
             value={mail}
             onChange={(e) => {
@@ -51,6 +42,7 @@ function Login() {
           <br />
           <input
             type="password"
+            data-cy="password"
             value={pass}
             placeholder="password"
             onChange={(e) => {
@@ -58,7 +50,10 @@ function Login() {
             }}
           />
           <br />
-          <button type="submit"> Login</button>
+          <button type="submit" data-cy="LoginSubmit">
+            {" "}
+            Login
+          </button>
         </LoginForm>
       </MiniContainer>
     </Container>

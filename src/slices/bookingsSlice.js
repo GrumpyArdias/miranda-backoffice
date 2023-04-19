@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import BookingArray from "../data/bookings.json";
 
 const initialState = {
@@ -78,7 +78,7 @@ const bookingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
-      (action) => action.type.endsWith("/fulfilled"),
+      isAnyOf((action) => action.type.endsWith("/fulfilled")),
       (state, action) => {
         console.log("esto es el estado de bookings id ");
         console.log(typeof state.bookings.id);
