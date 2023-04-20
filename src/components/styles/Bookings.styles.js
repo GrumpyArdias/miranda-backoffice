@@ -40,7 +40,7 @@ export const BookingsTopRightWrap = styled.div`
   margin-top: 10px;
 `;
 
-export const BookigTopSelect = styled.select`
+export const BookingTopSelect = styled.select`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -80,6 +80,6 @@ export const UserEditButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #3e8e41;
+    background-color: #4c3102;
   }
 `;

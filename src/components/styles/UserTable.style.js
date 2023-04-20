@@ -6,14 +6,17 @@ export const UsersTableStyle = styled.table`
   margin: 20px auto;
 
   tbody {
-    th {
+    tr {
       padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+      text-align: center;
+
       td {
         padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+        text-align: center;
+      }
+      &:hover {
+        scale: 1.05;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
       }
     }
   }
@@ -46,7 +49,7 @@ export const TextRowWrapper = styled.div`
 `;
 
 export const ActiveStatus = styled.div`
-  max-width: 54%;
+  max-width: 80%;
   margin: 0 auto;
   border-radius: 10px;
   background-color: #e8ffee;
@@ -58,7 +61,7 @@ export const ActiveStatus = styled.div`
 `;
 
 export const InactiveStatus = styled.div`
-  max-width: 54%;
+  max-width: 80%;
   margin: 0 auto;
   border-radius: 10px;
   background-color: #ffedec;
@@ -68,3 +71,12 @@ export const InactiveStatus = styled.div`
     padding: 10px;
   }
 `;
+export const TdWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+export const StatusWrapper = styled.div`
+  min-width: 60%;
+`;
+export const IconWrapper = styled.div``;

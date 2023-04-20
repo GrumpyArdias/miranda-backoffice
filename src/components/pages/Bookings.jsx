@@ -2,13 +2,29 @@ import {
   BookingsTopWrap,
   BookingsTopLeftWrap,
   BookingsTopRightWrap,
-  UserEditButton,
 } from "../styles/Bookings.styles";
 import Dropdown from "../Dropdown";
-import GridTable from "../GridTable";
-import Data from "../../data.json";
+import BookingsTable from "../BookingTable";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBookings } from "../../slices/bookingsSlice";
+import { useEffect } from "react";
 
 function Bookings() {
+  const dispatch = useDispatch();
+  const bookings = useSelector((state) => state.bookings.bookings);
+  console.log("bookings:", bookings);
+
+  useEffect(() => {
+    dispatch(getAllBookings());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (bookings.length === 0) {
+  //     navigate("/");
+  //   }
+  //   console.log(bookings);
+  // }, [bookings, navigate]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -24,7 +40,8 @@ function Bookings() {
     "Room Type",
     "Status",
   ];
-  const rowDataArray = Data;
+  const rowDataArray = bookings;
+
   return (
     <div>
       <BookingsTopWrap>
@@ -43,13 +60,10 @@ function Bookings() {
           </div>
         </BookingsTopLeftWrap>
         <BookingsTopRightWrap>
-          <UserEditButton>
-            <p>+ New Room</p>
-          </UserEditButton>
           <Dropdown options={options} onSelect={handleSelect} />
         </BookingsTopRightWrap>
       </BookingsTopWrap>
-      <GridTable headerArray={headerArray} rowDataArray={rowDataArray} />
+      <BookingsTable headerArray={headerArray} rowDataArray={rowDataArray} />
     </div>
   );
 }

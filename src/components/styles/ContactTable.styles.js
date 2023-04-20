@@ -6,14 +6,17 @@ export const ContactTableStyle = styled.table`
   margin: 20px auto;
 
   tbody {
-    th {
+    tr {
       padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
+      text-align: center;
+
       td {
         padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+        text-align: center;
+      }
+      &:hover {
+        scale: 1.05;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
       }
     }
   }
@@ -66,3 +69,12 @@ export const NotArchiveStatus = styled.div`
     padding: 10px;
   }
 `;
+export const TdWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+export const StatusWrapper = styled.div`
+  min-width: 100%;
+`;
+export const IconWrapper = styled.div``;

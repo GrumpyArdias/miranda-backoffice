@@ -5,11 +5,18 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GroupIcon from "@mui/icons-material/Group";
 import Logo from "../images/hotel-miranda-logo.png";
 import { LeftMainContainer, StyledLink } from "./styles/Aside.styles";
+import { useNavigate } from "react-router-dom";
 
 function Aside(props) {
   const asideStyle = {
     display: props.visible ? "flex" : "none",
   };
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/");
+  };
+
   return (
     <LeftMainContainer style={asideStyle}>
       <div className="cell">

@@ -6,9 +6,27 @@ import {
 } from "../styles/Rooms.styles";
 import Dropdown from "../Dropdown";
 import RoomsTable from "../RoomsTable";
-import Data from "../../data.json";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllRooms } from "../../slices/roomsSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Rooms() {
+  const dispatch = useDispatch();
+  const rooms = useSelector((state) => state.rooms.rooms);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getAllRooms());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (rooms.length === 0) {
+  //     navigate("/");
+  //   }
+  //   console.log(rooms);
+  // }, [rooms, navigate]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -18,12 +36,12 @@ function Rooms() {
   const headerArray = [
     "Room",
     "Bed Type",
-    "Facilites",
+    "Facilities",
     "Rate",
     "Offer Price",
     "Status",
   ];
-  const rowDataArray = Data;
+  const rowDataArray = rooms;
 
   return (
     <>
@@ -40,7 +58,11 @@ function Rooms() {
           </div>
         </RoomsTopLeftWrap>
         <RoomsTopRightWrap>
-          <NewRoomButton>
+          <NewRoomButton
+            className="NewRoomButton"
+            data-testid="new-room-button"
+            onClick={() => navigate("/rooms/newroom")}
+          >
             <p>+ New Room</p>
           </NewRoomButton>
           <Dropdown options={options} onSelect={handleSelect} />

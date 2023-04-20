@@ -1,10 +1,13 @@
+// Importa los módulos necesarios
+import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { LoginContext } from "../store/ContextStore";
 
 function PrivateRoutes() {
-  let auth = localStorage.getItem("logged") || false;
-  console.log(`Esto es el valor de auth: ${auth}`);
+  const { state } = useContext(LoginContext);
+  const isAuthenticated = state.authenticated;
 
-  return auth ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default PrivateRoutes;

@@ -4,21 +4,22 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import { MainHeader } from "./styles/Header.styles";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { LoginContext } from "../store/ContextStore";
+import { useContext } from "react";
 
 function Header(props) {
-  const navigate = useNavigate();
-  const [isLogged, setIsLogged] = useState(
-    localStorage.getItem("logged") === "true"
-  );
+  const { dispatch } = useContext(LoginContext);
+  const authContext = useContext(LoginContext);
+
   const [display, setDisplay] = useState("flex");
   const [path, setPath] = useState("");
   const location = useLocation();
-
-  const handleLogOut = (props) => {
-    localStorage.removeItem("logged");
-    setIsLogged(false);
-    navigate("/login");
+  const isAuthenticated = authContext.state.authenticated;
+  const handleLogout = () => {
+    dispatch({
+      type: "LOGOUT",
+    });
   };
 
   useEffect(() => {
@@ -29,18 +30,18 @@ function Header(props) {
       case location.pathname === "/bookings":
         setPath("Bookings");
         break;
-      // case /\/bookings\/[0-9]/.test(location.pathname):
-      //   setPath("Booking Details");
-      //   break;
+      case /\/bookings\/[0-9]/.test(location.pathname):
+        setPath("Booking Details");
+        break;
       case location.pathname === "/contact":
         setPath("Contact");
         break;
       case location.pathname === "/rooms":
         setPath("Rooms");
         break;
-      // case location.pathname==="/rooms/newRoom":
-      //   setPath("New Room");
-      //   break;
+      case location.pathname === "/rooms/newRoom":
+        setPath("New Room");
+        break;
       case location.pathname === "/users":
         setPath("Users");
         break;
@@ -53,13 +54,12 @@ function Header(props) {
   }, [location]);
 
   useEffect(() => {
-    setDisplay(isLogged ? "flex" : "none");
-  }, [setDisplay]);
+    setDisplay(isAuthenticated ? "flex" : "none");
+  }, [setDisplay, isAuthenticated]);
 
-  console.log(`esto es el width ${props.width}`);
   return (
     <MainHeader display={{ display: display }}>
-      {isLogged && (
+      {isAuthenticated && (
         <>
           <div
             className="mainHeaderLeft"
@@ -90,7 +90,7 @@ function Header(props) {
               <NotificationsNoneIcon />
             </div>
             <div className="iconCell">
-              <LogoutIcon onClick={handleLogOut} />
+              <LogoutIcon onClick={handleLogout} />
             </div>
           </div>
         </>

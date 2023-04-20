@@ -1,24 +1,44 @@
 import "./App.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Login from "./components/pages/Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 import Dashboard from "./components/pages/Dashboard";
-import { useState } from "react";
 import Aside from "./components/Aside";
 import Header from "./components/Header";
-import { useEffect } from "react";
 import Bookings from "./components/pages/Bookings";
 import Rooms from "./components/pages/Rooms";
 import Users from "./components/pages/Users";
 import Contact from "./components/pages/Contact";
+import Book from "./components/pages/Book";
 import { BodyWrap } from "./components/styles/App.styles";
+import store from "./store/Store";
+import { Provider } from "react-redux";
+import LoginContextProvider from "./store/ContextStore";
+import { NewRoom } from "./components/pages/NewRoom";
+import { NewUser } from "./components/pages/NewUser";
+import { UserProfile } from "./components/pages/UserProfile";
 
 function App() {
   const [open, setOpen] = useState(false);
   const [width, setwidth] = useState(100);
   const [display, setDisplay] = useState("flex");
-  const loginStatus = localStorage.getItem("logged");
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem("isAuthenticated") || false
+  );
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuthenticated");
+
+    !authStatus && localStorage.setItem("isAuthenticated", false);
+  }, []);
+
+  useEffect(() => {
+    setIsAuthenticated(
+      (prevState) => localStorage.getItem("isAuthenticated") || prevState
+    );
+  }, [isAuthenticated]);
+  console.log(`esto es el auth ${isAuthenticated}`);
 
   const toggleAside = () => {
     setOpen(!open);
@@ -29,39 +49,62 @@ function App() {
   }, [open]);
 
   useEffect(() => {
-    if (loginStatus === "false" || loginStatus === false) {
+    if (isAuthenticated === "false") {
       setDisplay("none");
     } else {
       setDisplay("flex");
     }
-  }, []);
+  }, [isAuthenticated]);
 
   return (
-    <Router>
-      <div className="App" style={{ display: "flex" }}>
-        <Aside visible={open} />
-        <BodyWrap
-          style={{
-            minWidth: `${width}%`,
-          }}
-        >
-          <Header toggleAside={toggleAside} />
-          <Routes>
-            <Route element={<PrivateRoutes />}>
-              <Route element={<Dashboard display={display} />} path="/" />
-              <Route
-                element={<Bookings display={display} />}
-                path="/bookings"
-              />
-              <Route element={<Rooms display={display} />} path="/rooms" />
-              <Route element={<Users display={display} />} path="/users" />
-              <Route element={<Contact display={display} />} path="/contact" />
-            </Route>
-            <Route element={<Login />} path="/login" />
-          </Routes>
-        </BodyWrap>
-      </div>
-    </Router>
+    <LoginContextProvider>
+      <Provider store={store}>
+        <Router>
+          <div className="App" style={{ display: "flex" }}>
+            <Aside visible={open} />
+            <BodyWrap
+              style={{
+                minWidth: `${width}%`,
+              }}
+            >
+              <Header toggleAside={toggleAside} />
+              <Routes>
+                <Route element={<PrivateRoutes />}>
+                  <Route element={<Dashboard display={display} />} path="/" />
+                  <Route
+                    element={<Bookings display={display} />}
+                    path="/bookings"
+                  />
+                  <Route
+                    element={<Book display={display} />}
+                    path="/bookings/:id"
+                  />
+                  <Route element={<Rooms display={display} />} path="/rooms" />
+                  <Route
+                    element={<NewRoom display={display} />}
+                    path="/rooms/newroom"
+                  />
+                  <Route element={<Users display={display} />} path="/users" />
+                  <Route
+                    element={<NewUser display={display} />}
+                    path="/users/newuser"
+                  />
+                  <Route
+                    element={<UserProfile display={display} />}
+                    path="/users/:id"
+                  />
+                  <Route
+                    element={<Contact display={display} />}
+                    path="/contact"
+                  />
+                </Route>
+                <Route element={<Login />} path="/login" />
+              </Routes>
+            </BodyWrap>
+          </div>
+        </Router>
+      </Provider>
+    </LoginContextProvider>
   );
 }
 

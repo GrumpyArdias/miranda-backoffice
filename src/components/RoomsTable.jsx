@@ -5,9 +5,15 @@ import {
   TextRowWrapper,
   AvailableStatus,
   BookedStatus,
+  TdWrapper,
+  StatusWrapper,
+  IconWrapper,
 } from "./styles/RoomsTable.styles";
 import { v4 as uuid } from "uuid";
 import Cat from "../images/cat3.jpg";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useDispatch } from "react-redux";
+import { deleteRoom } from "../slices/roomsSlice";
 
 function RoomsTable(props) {
   const headerArray = props.headerArray;
@@ -15,13 +21,13 @@ function RoomsTable(props) {
 
   const handleRoomSwitch = (option) => {
     switch (option) {
-      case "1":
+      case "single":
         return "Single Bed";
-      case "2":
+      case "double":
         return "Double Bed";
-      case "3":
+      case "doubleSuperior":
         return "Double Superior";
-      case "4":
+      case "suite":
         return "Suite";
       default:
         return "error in the room type";
@@ -31,13 +37,13 @@ function RoomsTable(props) {
   // Fix the status, take care of the number of inputs
   const handleStatusSwitch = (status) => {
     switch (status) {
-      case "1":
+      case true:
         return (
           <AvailableStatus>
             <p>Available</p>
           </AvailableStatus>
         );
-      case "2":
+      case false:
         return (
           <BookedStatus>
             <p>Booked</p>
@@ -54,6 +60,11 @@ function RoomsTable(props) {
     const finalPrice = cost - discountPrice;
 
     return finalPrice;
+  };
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(deleteRoom(id));
   };
 
   return (
@@ -85,13 +96,25 @@ function RoomsTable(props) {
                   </TextRowWrapper>
                 </DataRowWrapper>
               </td>
-              <td colSpan={2}>{handleRoomSwitch(data.room_type)}</td>
-              <td colSpan={2}> {data.amenities}</td>
+              <td colSpan={2}>{handleRoomSwitch(data.bed_type)}</td>
+              <td colSpan={2}> {data.facilites}</td>
               <td colSpan={2}> {data.price} € / Night</td>
               <td colSpan={2}>
                 {handleDiscount(data.price)} € <br /> (-10% off)
               </td>
-              <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
+              <td colSpan={2}>
+                <TdWrapper className="TdWrapper">
+                  <StatusWrapper>
+                    {handleStatusSwitch(data.status)}
+                  </StatusWrapper>
+                  <IconWrapper>
+                    <DeleteForeverIcon
+                      style={{ color: "red" }}
+                      onClick={() => handleDelete(data.id)}
+                    />
+                  </IconWrapper>
+                </TdWrapper>
+              </td>
             </tr>
           );
         })}

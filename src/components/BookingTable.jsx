@@ -1,79 +1,86 @@
 import {
-  BookingTable,
+  BookingTableStyle,
   DataRowWrapper,
   PhotoRowWrapper,
   TextRowWrapper,
-  NotesAvalaible,
-  NotNotesAvalible,
+  NotesAvailable,
+  NotNotesAvailable,
   RefoundStatus,
   BookedStatus,
   PendingStatus,
-  CanceledStatus,
-} from "./styles/GridTable.styles";
+  TdWrapper,
+  StatusWrapper,
+  IconWrapper,
+} from "./styles/BookingTable.styles";
 import Cat from "../images/cat3.jpg";
 import { v4 as uuid } from "uuid";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import { deleteBooking } from "../slices/bookingsSlice";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useDispatch } from "react-redux";
+import Rooms from "../data/rooms.json";
 
-function GridTable(props) {
+function BookingTable(props) {
   const [clickedId, setClickedId] = useState(null);
   const headerArray = props.headerArray;
   const rowDataArray = props.rowDataArray;
+
+  const dispatch = useDispatch();
 
   const handleNoteClick = (dataId) => {
     setClickedId(dataId);
   };
 
-  const handelRoomSwitch = (option) => {
-    switch (option) {
-      case "1":
-        return "Single Bed";
-      case "2":
-        return "Double Bed";
-      case "3":
-        return "Double Superior";
-      case "4":
-        return "Suite";
-      default:
-        return "error in the room type";
-    }
+  const handelRoomSwitch = (data) => {
+    let roomType = "Error assigning Room"; // Default room type
+
+    Rooms.forEach((room) => {
+      if (data.status === "booked" || data.status === "inProgress") {
+        if (room.id === data.id) {
+          roomType = room.bed_type;
+        }
+      } else {
+        roomType = "Status not eligible for a Room"; // Update room type for ineligible status
+      }
+    });
+    console.log("esto es RoomType", roomType);
+    return roomType; // Return the final room type
   };
 
-  // Fix the status, take care of the number of inputs
   const handleStatusSwitch = (status) => {
     switch (status) {
-      case "1":
+      case "refound":
         return (
           <RefoundStatus>
             <p>Refound</p>
           </RefoundStatus>
         );
-      case "2":
+      case "booked":
         return (
           <BookedStatus>
             <p>Booked</p>
           </BookedStatus>
         );
-      case "3":
+      case "inProgress":
         return (
           <PendingStatus>
             <p>In progress</p>
           </PendingStatus>
         );
-      case "4":
-        return (
-          <CanceledStatus>
-            <p>In progress</p>
-          </CanceledStatus>
-        );
+
       default:
         return "error in the room type";
     }
   };
 
+  const handleDelete = (id) => {
+    dispatch(deleteBooking(id));
+  };
+
   return (
     <div>
-      <BookingTable>
+      <BookingTableStyle>
         <thead>
           <tr>
             {headerArray.map((header) => {
@@ -101,36 +108,48 @@ function GridTable(props) {
                     </TextRowWrapper>
                   </DataRowWrapper>
                 </td>
-                <td colSpan={2}>{data.order_date}</td>
+                <td colSpan={2}>{data.date}</td>
                 <td colSpan={2}>{data.check_in}</td>
                 <td colSpan={2}>{data.check_out}</td>
                 <td colSpan={2}>
-                  {data.notes ? (
+                  {data.special_request ? (
                     clickedId ? (
                       <Navigate to={`/bookings/${clickedId}`} />
                     ) : (
-                      <NotesAvalaible
+                      <NotesAvailable
                         //this id must be change for a proper booking id
-                        onClick={() => handleNoteClick(data.room_id)}
+                        onClick={() => handleNoteClick(data.id)}
                       >
                         <p>View Notes</p>
-                      </NotesAvalaible>
+                      </NotesAvailable>
                     )
                   ) : (
-                    <NotNotesAvalible>
+                    <NotNotesAvailable>
                       <p>No Notes</p>
-                    </NotNotesAvalible>
+                    </NotNotesAvailable>
                   )}
                 </td>
-                <td colSpan={2}>{handelRoomSwitch(data.room_type)}</td>
-                <td colSpan={2}>{handleStatusSwitch(data.status)}</td>
+                <td colSpan={2}>{handelRoomSwitch(data)}</td>
+                <td colSpan={2}>
+                  <TdWrapper className="TdWrapper">
+                    <StatusWrapper>
+                      {handleStatusSwitch(data.status)}
+                    </StatusWrapper>
+                    <IconWrapper>
+                      <DeleteForeverIcon
+                        style={{ color: "red" }}
+                        onClick={() => handleDelete(data.id)}
+                      />
+                    </IconWrapper>
+                  </TdWrapper>
+                </td>
               </tr>
             );
           })}
         </tbody>
-      </BookingTable>
+      </BookingTableStyle>
     </div>
   );
 }
 
-export default GridTable;
+export default BookingTable;

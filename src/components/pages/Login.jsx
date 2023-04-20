@@ -1,74 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Container, MiniContainer } from "../styles/Login.styles";
 import { LoginForm } from "../styles/Form.styles";
 import { Navigate } from "react-router-dom";
+import { LoginContext } from "../../store/ContextStore";
 
 function Login() {
+  const { dispatch, state } = useContext(LoginContext);
   const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [logged, setLogged] = useState(localStorage.getItem("logged") || false);
-
-  useEffect(() => {
-    console.log(`username changed to: ${mail}`);
-  }, [mail]);
-
-  useEffect(() => {
-    console.log(`password changed to: ${password}`);
-  }, [password]);
-
-  useEffect(() => {
-    localStorage.setItem("logged", logged);
-  }, [logged]);
-
+  const [pass, setPass] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
-    if (!mail || !password) {
-      alert("Please enter both a username and password");
-      return;
-    }
-    if (mail === "a@a.com" && password === "password") {
-      setLogged(true);
-    } else {
-      alert("Invalid username or password");
-    }
+    dispatch({
+      type: "LOGIN",
+      value: {
+        mail: mail,
+        password: pass,
+        authenticated: true,
+      },
+    });
   };
 
-  const habdleMail = (e) => {
-    setMail(e.target.value);
-    console.log(mail);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-    console.log(password);
-  };
+  if (state.authenticated) return <Navigate to={"/"} />;
 
   return (
-    <>
-      {logged ? (
-        <Navigate to={"/"} />
-      ) : (
-        <Container>
-          <MiniContainer>
-            <LoginForm onSubmit={handleLogin}>
-              <label>Mail:</label>
-              <br />
-              <input type="email" value={mail} onChange={habdleMail} />
-              <br />
-              <label> Password: </label>
-              <br />
-              <input
-                type="password"
-                value={password}
-                onChange={handlePassword}
-              />
-              <br />
-              <button type="submit"> Login</button>
-            </LoginForm>
-          </MiniContainer>
-        </Container>
-      )}
-    </>
+    <Container>
+      <MiniContainer>
+        <LoginForm onSubmit={handleLogin}>
+          <label>Mail:</label>
+          <br />
+          <input
+            type="email"
+            data-cy="email"
+            placeholder="a@a.com"
+            value={mail}
+            onChange={(e) => {
+              setMail(e.target.value);
+            }}
+          />
+          <br />
+          <label> Password: </label>
+          <br />
+          <input
+            type="password"
+            data-cy="password"
+            value={pass}
+            placeholder="password"
+            onChange={(e) => {
+              setPass(e.target.value);
+            }}
+          />
+          <br />
+          <button type="submit" data-cy="LoginSubmit">
+            {" "}
+            Login
+          </button>
+        </LoginForm>
+      </MiniContainer>
+    </Container>
   );
 }
+
 export default Login;

@@ -5,10 +5,29 @@ import {
   UserEditButton,
 } from "../styles/Users.styles";
 import Dropdown from "../Dropdown";
-import UserData from "../../Users.json";
+
 import UserTable from "../UsersTable";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllUsers } from "../../slices/userSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Users() {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (users.length === 0) {
+  //     navigate("/");
+  //   }
+  //   console.log(users);
+  // }, [users, navigate]);
+
   const options = ["Option 1", "Option 2", "Option 3"];
 
   const handleSelect = (option) => {
@@ -16,7 +35,7 @@ function Users() {
   };
 
   const headerArray = ["Name", "Email", "Description", "Contact", "Status"];
-  const rowDataArray = UserData;
+  const rowDataArray = users;
   return (
     <>
       {" "}
@@ -33,7 +52,7 @@ function Users() {
           </div>
         </UsersTopLeftWrap>
         <UsersTopRightWrap>
-          <UserEditButton>
+          <UserEditButton onClick={() => navigate("/users/newuser")}>
             <p>+ New Employee</p>
           </UserEditButton>
           <Dropdown options={options} onSelect={handleSelect} />
