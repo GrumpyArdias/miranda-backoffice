@@ -8,25 +8,9 @@ function Login() {
   const { dispatch, state } = useContext(LoginContext);
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    if (mail === "" || pass === "") {
-      setErrorMessage("Please enter both email and password.");
-      return;
-    }
-
-    if (!isValidEmail(mail)) {
-      setErrorMessage("Please enter a valid email.");
-      return;
-    }
-
-    if (pass.length < 6) {
-      setErrorMessage("Password should be at least 6 characters.");
-      return;
-    }
 
     // If all validations pass, dispatch the login action
     dispatch({
@@ -35,14 +19,9 @@ function Login() {
         mail: mail,
         password: pass,
         authenticated: true,
+        errorMessage: "",
       },
     });
-  };
-
-  const isValidEmail = (email) => {
-    // Regular expression to validate email format
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
   };
 
   if (state.authenticated) return <Navigate to={"/"} />;
@@ -80,7 +59,9 @@ function Login() {
             Login
           </button>
         </LoginForm>
-        {errorMessage && <ErrorMsg data-cy="error">{errorMessage}</ErrorMsg>}
+        {state.errorMessage && (
+          <ErrorMsg data-cy="error">{state.errorMessage}</ErrorMsg>
+        )}
       </MiniContainer>
     </Container>
   );

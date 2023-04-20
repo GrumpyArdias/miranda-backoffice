@@ -137,6 +137,7 @@ function BookingTable(props) {
                     </StatusWrapper>
                     <IconWrapper>
                       <DeleteForeverIcon
+                        data-cy="deleteButton"
                         style={{ color: "red" }}
                         onClick={() => handleDelete(data.id)}
                       />

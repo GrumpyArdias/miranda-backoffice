@@ -90,7 +90,7 @@ function Header(props) {
               <NotificationsNoneIcon />
             </div>
             <div className="iconCell">
-              <LogoutIcon onClick={handleLogout} />
+              <LogoutIcon data-cy="LogoutSubmit" onClick={handleLogout} />
             </div>
           </div>
         </>
