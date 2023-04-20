@@ -13,5 +13,6 @@ describe("Login Test", () => {
     cy.get('[data-cy="email"]').type("paco@a.com");
     cy.get('[data-cy="password"]').type("a");
     cy.get('[data-cy="LoginSubmit"]').click();
+    cy.get('[data-cy="error"]').should("be.visible");
   });
 });
