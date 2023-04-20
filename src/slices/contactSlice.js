@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import ContactsArray from "../data/coments.json";
 
 const initialState = {
@@ -76,70 +76,77 @@ const contactSlice = createSlice({
   name: "coment",
   initialState,
   reducers: {},
-  extraReducers: {
-    // GET ALL COMENT
-    [getAllContacts.fulfilled]: (state, action) => {
-      console.log("success");
-      state.contacts = action.payload;
-    },
-    [getAllContacts.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getAllContacts.rejected]: (state) => {
-      console.log("Error fetching Coment...");
-    },
-    // GET ONE COMENT
-    [getOneContact.fulfilled]: (state, action) => {
-      console.log("success");
-      state.contact = state.contacts.find(
-        (contact) => contact.id === action.payload
-      );
-    },
-    [getOneContact.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getOneContact.rejected]: (state) => {
-      console.log("Error Fetching the Contact...");
-    },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      isAnyOf(
+        getAllContacts.fulfilled,
+        getOneContact.fulfilled,
+        createContact.fulfilled,
+        deleteContact.fulfilled
+      ),
+      (state, action) => {
+        switch (action.type) {
+          case getAllContacts.fulfilled.type:
+            state.contacts = action.payload;
+            console.log("getAllContacts.fulfilled", state.contacts);
 
-    // CRREATE ONE COMENT
-    [createContact.fulfilled]: (state, action) => {
-      console.log("success");
-      state.contacts = [...state.contacts, action.payload];
-    },
-    [createContact.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [createContact.rejected]: (state) => {
-      console.log("Error creating new Contacts");
-    },
+            break;
 
-    // DELETING ONE COMENT
-    [deleteContact.fulfilled]: (state, action) => {
-      console.log("success");
-      state.contacts = state.contacts.filter(
-        (contact) => contact.id !== action.payload
-      );
-    },
-    [deleteContact.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [deleteContact.rejected]: (state) => {
-      console.log("Error Deleting the Contact");
-    },
-    // UPDATING ONE BOOKING
-    [updateContact.fulfilled]: (state, action) => {
-      console.log("success");
-      state.contacts = state.contacts.map((contact) => {
-        return contact.id === action.payload.id ? action.payload : contact;
-      });
-    },
-    [updateContact.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [updateContact.rejected]: (state) => {
-      console.log("Error updating the Contact");
-    },
+          case getOneContact.fulfilled.type:
+            state.coment = state.contacts.find(
+              (contact) => contact.id === action.payload
+            );
+            console.log("getOneContact.fulfilled", state.contact);
+            break;
+
+          case createContact.fulfilled.type:
+            state.contacts = [...state.contacts, action.payload];
+            console.log("createContact.fulfilled", state.contacts);
+            break;
+
+          case deleteContact.fulfilled.type:
+            state.contacts = state.contacts.filter(
+              (contact) => contact.id !== action.payload
+            );
+            console.log("deleteContact.fulfilled", state.contacts);
+            break;
+          case updateContact.fulfilled.type:
+            state.contacts = state.contacts.map((contact) => {
+              return contact.id === action.payload.id
+                ? action.payload
+                : contact;
+            });
+            break;
+
+          default:
+            break;
+        }
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(
+        getAllContacts.pending,
+        getOneContact.pending,
+        createContact.pending,
+        deleteContact.pending,
+        updateContact.pending
+      ),
+      (state) => {
+        console.log("Loading...");
+      }
+    );
+    builder.addMatcher(
+      isAnyOf(
+        getAllContacts.rejected,
+        getOneContact.rejected,
+        createContact.rejected,
+        deleteContact.rejected,
+        updateContact.rejected
+      ),
+      (state) => {
+        console.log("Error");
+      }
+    );
   },
 });
 

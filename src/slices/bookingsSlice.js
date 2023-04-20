@@ -95,8 +95,7 @@ const bookingsSlice = createSlice({
         switch (action.type) {
           case getAllBookings.fulfilled.type:
             state.bookings = action.payload;
-            // console.log("state", current(state));
-            // console.log("ActionPayload:", action.payload);
+            console.log("getAllBookings.fulfilled", state.bookings);
             break;
 
           case getOneBook.fulfilled.type:

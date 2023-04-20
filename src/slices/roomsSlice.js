@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import RoomArray from "../data/rooms.json";
 
 const initialState = {
@@ -67,67 +67,53 @@ const roomSlice = createSlice({
   name: "rooms",
   initialState,
   reducers: {},
-  extraReducers: {
-    // GET ALL ROOM
-    [getAllRooms.fulfilled]: (state, action) => {
-      console.log("success");
-      state.rooms = action.payload;
-    },
-    [getAllRooms.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getAllRooms.rejected]: (state) => {
-      console.log("Error fetching Room...");
-    },
-    // GET ONE ROOM
-    [getOneRoom.fulfilled]: (state, action) => {
-      console.log("success");
-      state.room = state.rooms.find((room) => room.id === action.payload);
-    },
-    [getOneRoom.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getOneRoom.rejected]: (state) => {
-      console.log("Error Fetching the Room...");
-    },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      isAnyOf(
+        getAllRooms.fulfilled,
+        getOneRoom.fulfilled,
+        createRoom.fulfilled,
+        deleteRoom.fulfilled,
+        updateRoom.fulfilled
+      ),
+      (state, action) => {
+        switch (action.type) {
+          case getAllRooms.fulfilled.type:
+            state.rooms = action.payload;
+            console.log("getAllRooms.fulfilled", state.rooms);
+            break;
 
-    // CRREATE ONE ROOM
-    [createRoom.fulfilled]: (state, action) => {
-      console.log("success");
-      state.rooms = [...state.rooms, action.payload];
-      console.log(state.rooms);
-    },
-    [createRoom.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [createRoom.rejected]: (state) => {
-      console.log("Error creating new Room");
-    },
+          case getOneRoom.fulfilled.type:
+            state.room = state.rooms.find(
+              (room) => room.id === action.payload.id
+            );
+            console.log("getOneRoom.fulfilled", state.room);
+            break;
 
-    // DELETING ONE ROOM
-    [deleteRoom.fulfilled]: (state, action) => {
-      console.log("success");
-      state.rooms = state.rooms.filter((room) => room.id !== action.payload);
-    },
-    [deleteRoom.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [deleteRoom.rejected]: (state) => {
-      console.log("Error Deleting the Room");
-    },
-    // UPDATING ONE BOOKING
-    [updateRoom.fulfilled]: (state, action) => {
-      console.log("success");
-      state.rooms = state.rooms.map((room) => {
-        return room.id === action.payload.id ? action.payload : room;
-      });
-    },
-    [updateRoom.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [updateRoom.rejected]: (state) => {
-      console.log("Error updating the Room");
-    },
+          case createRoom.fulfilled.type:
+            state.rooms = [...state.rooms, action.payload];
+            console.log("createRoom.fulfilled", state.rooms);
+            break;
+
+          case deleteRoom.fulfilled.type:
+            state.rooms = state.rooms.filter(
+              (room) => room.id !== action.payload
+            );
+            console.log("deleteRoom.fulfilled", state.rooms);
+            break;
+
+          case updateRoom.fulfilled.type:
+            state.rooms = state.rooms.map((room) =>
+              room.id === action.payload.id ? action.payload : room
+            );
+            console.log("updateRoom.fulfilled", state.rooms);
+            break;
+
+          default:
+            break;
+        }
+      }
+    );
   },
 });
 

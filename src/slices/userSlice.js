@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import UserArray from "../data/users.json";
 
 const initialState = {
@@ -67,66 +67,53 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {},
-  extraReducers: {
-    // GET ALL USER
-    [getAllUsers.fulfilled]: (state, action) => {
-      console.log("success");
-      state.users = action.payload;
-    },
-    [getAllUsers.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getAllUsers.rejected]: (state) => {
-      console.log("Error fetching Room...");
-    },
-    // GET ONE USERS
-    [getOneUser.fulfilled]: (state, action) => {
-      console.log("success");
-      state.user = state.users.find((user) => user.id === action.payload);
-    },
-    [getOneUser.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [getOneUser.rejected]: (state) => {
-      console.log("Error Fetching the User...");
-    },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      isAnyOf(
+        getAllUsers.fulfilled,
+        getOneUser.fulfilled,
+        createUser.fulfilled,
+        deleteUser.fulfilled,
+        updateUser.fulfilled
+      ),
+      (state, action) => {
+        switch (action.type) {
+          case getAllUsers.fulfilled.type:
+            state.users = action.payload;
+            console.log("getAllUsers.fulfilled", state.users);
+            break;
 
-    // CRREATE ONE USER
-    [createUser.fulfilled]: (state, action) => {
-      console.log("success");
-      state.users = [...state.users, action.payload];
-    },
-    [createUser.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [createUser.rejected]: (state) => {
-      console.log("Error creating new User");
-    },
+          case getOneUser.fulfilled.type:
+            state.user = state.users.find(
+              (user) => user.id === action.payload.id
+            );
+            console.log("getOneUser.fulfilled", state.user);
+            break;
 
-    // DELETING ONE USER
-    [deleteUser.fulfilled]: (state, action) => {
-      console.log("success");
-      state.users = state.users.filter((user) => user.id !== action.payload);
-    },
-    [deleteUser.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [deleteUser.rejected]: (state) => {
-      console.log("Error Deleting the User");
-    },
-    // UPDATING ONE USER
-    [updateUser.fulfilled]: (state, action) => {
-      console.log("success");
-      state.users = state.users.map((user) => {
-        return user.id === action.payload.id ? action.payload : user;
-      });
-    },
-    [updateUser.pending]: (state) => {
-      console.log("Loading...");
-    },
-    [updateUser.rejected]: (state) => {
-      console.log("Error updating the User");
-    },
+          case createUser.fulfilled.type:
+            state.users = [...state.users, action.payload];
+            console.log("createUser.fulfilled", state.users);
+            break;
+
+          case deleteUser.fulfilled.type:
+            state.users = state.users.filter(
+              (user) => user.id !== action.payload
+            );
+            console.log("deleteUser.fulfilled", state.users);
+            break;
+
+          case updateUser.fulfilled.type:
+            state.users = state.users.map((user) =>
+              user.id === action.payload.id ? action.payload : user
+            );
+            console.log("updateUser.fulfilled", state.users);
+            break;
+
+          default:
+            break;
+        }
+      }
+    );
   },
 });
 
