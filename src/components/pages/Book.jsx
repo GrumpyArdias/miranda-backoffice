@@ -30,8 +30,7 @@ function Book() {
   useEffect(() => {
     console.log(`esto es el ${id}`);
     dispatch(getOneBook(id));
-    console.log(typeof id);
-    console.table(OneBook);
+    console.log("esto es el OneBook", OneBook);
   }, [dispatch, OneBook, id]);
 
   const room = Rooms.find((obj) => obj.id === id);

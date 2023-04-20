@@ -1,4 +1,4 @@
-import { createContext, useEffect } from "react";
+import { createContext } from "react";
 import { useReducer } from "react";
 
 export const LoginContext = createContext();

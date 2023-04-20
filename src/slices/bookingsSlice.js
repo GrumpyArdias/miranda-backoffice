@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  isAnyOf,
+  current,
+} from "@reduxjs/toolkit";
 import BookingArray from "../data/bookings.json";
 
 const initialState = {
@@ -18,6 +23,7 @@ export const getAllBookings = createAsyncThunk(
   "bookings/getAllBookings",
   async () => {
     try {
+      console.log("esto es el BookingArray", BookingArray);
       return await delay(BookingArray);
     } catch (error) {
       alert(`Can't get all the bookings right now, error: ${error}`);
@@ -78,36 +84,49 @@ const bookingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
-      isAnyOf((action) => action.type.endsWith("/fulfilled")),
+      isAnyOf(
+        getAllBookings.fulfilled,
+        getOneBook.fulfilled,
+        createBookings.fulfilled,
+        deleteBooking.fulfilled,
+        updateBooking.fulfilled
+      ),
       (state, action) => {
-        console.log("esto es el estado de bookings id ");
-        console.log(typeof state.bookings.id);
-
-        state.bookings = action.payload;
-
         switch (action.type) {
           case getAllBookings.fulfilled.type:
             state.bookings = action.payload;
+            // console.log("state", current(state));
+            // console.log("ActionPayload:", action.payload);
             break;
+
           case getOneBook.fulfilled.type:
             state.book = state.bookings.find(
               (booking) => booking.id === action.payload
             );
-            console.log(state.book.id);
+            console.log("getOneBook.fulfilled", state.book.id);
             break;
+
           case createBookings.fulfilled.type:
             state.bookings = [...state.bookings, action.payload];
+            console.log("createBookings.fulfilled", state.bookings);
             break;
+
           case deleteBooking.fulfilled.type:
+            console.log("state", current(state));
+            console.log("Action Payload:", action.payload);
             state.bookings = state.bookings.filter(
               (booking) => booking.id !== action.payload
             );
+            console.log("deleteBooking.fulfilled", state.bookings);
             break;
+
           case updateBooking.fulfilled.type:
             state.bookings = state.bookings.map((booking) =>
               booking.id === action.payload.id ? action.payload : booking
             );
+            console.log("updateBooking.fulfilled", state.bookings);
             break;
+
           default:
             // Default case
             break;
@@ -116,15 +135,31 @@ const bookingsSlice = createSlice({
     );
 
     builder.addMatcher(
-      (action) => action.type.endsWith("/pending"),
+      isAnyOf(
+        getAllBookings.pending,
+        getOneBook.pending,
+        createBookings.pending,
+        deleteBooking.pending,
+        updateBooking.pending
+      ),
       (state) => {
         console.log("Loading...");
+        // console.log("state", current(state));
       }
     );
+
     builder.addMatcher(
-      (action) => action.type.endsWith("/rejected"),
-      (state) => {
-        console.log("Error...");
+      isAnyOf(
+        getAllBookings.rejected,
+        getOneBook.rejected,
+        createBookings.rejected,
+        deleteBooking.rejected,
+        updateBooking.rejected
+      ),
+      (state, action) => {
+        console.log("Error:", action.error.message);
+        console.log("Error action type:", action.type);
+        console.log("Previous state:", state);
       }
     );
   },

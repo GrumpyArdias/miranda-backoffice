@@ -32,19 +32,19 @@ function BookingTable(props) {
     setClickedId(dataId);
   };
 
-  const handelRoomSwitch = (id) => {
+  const handelRoomSwitch = (data) => {
     let roomType = "Error assigning Room"; // Default room type
 
     Rooms.forEach((room) => {
-      if (room.status === "booked" || room.status === "inProgress") {
-        if (room.id === id) {
+      if (data.status === "booked" || data.status === "inProgress") {
+        if (room.id === data.id) {
           roomType = room.bed_type;
         }
       } else {
         roomType = "Status not eligible for a Room"; // Update room type for ineligible status
       }
     });
-
+    console.log("esto es RoomType", roomType);
     return roomType; // Return the final room type
   };
 
@@ -129,7 +129,7 @@ function BookingTable(props) {
                     </NotNotesAvailable>
                   )}
                 </td>
-                <td colSpan={2}>{handelRoomSwitch(data.id)}</td>
+                <td colSpan={2}>{handelRoomSwitch(data)}</td>
                 <td colSpan={2}>
                   <TdWrapper className="TdWrapper">
                     <StatusWrapper>
