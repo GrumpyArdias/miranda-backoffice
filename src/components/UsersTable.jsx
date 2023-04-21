@@ -85,6 +85,7 @@ function UserTable(props) {
                   </StatusWrapper>
                   <IconWrapper>
                     <DeleteForeverIcon
+                      data-cy="deleteButtonUser"
                       style={{ color: "red" }}
                       onClick={() => handleDelete(data.id)}
                     />

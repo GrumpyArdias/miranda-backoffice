@@ -52,7 +52,10 @@ function Users() {
           </div>
         </UsersTopLeftWrap>
         <UsersTopRightWrap>
-          <UserEditButton onClick={() => navigate("/users/newuser")}>
+          <UserEditButton
+            data-cy="new-user-button"
+            onClick={() => navigate("/users/newuser")}
+          >
             <p>+ New Employee</p>
           </UserEditButton>
           <Dropdown options={options} onSelect={handleSelect} />

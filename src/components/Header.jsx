@@ -70,7 +70,7 @@ function Header(props) {
               display: "flex",
             }}
           >
-            <MenuIcon onClick={props.toggleAside} />
+            <MenuIcon data-cy="MenuButton" onClick={props.toggleAside} />
             <h3 style={{ margin: "0px 20px" }}>{path}</h3>
           </div>
           <div
@@ -90,7 +90,11 @@ function Header(props) {
               <NotificationsNoneIcon />
             </div>
             <div className="iconCell">
-              <LogoutIcon data-cy="LogoutSubmit" onClick={handleLogout} />
+              <LogoutIcon
+                data-cy="LogoutSubmit"
+                id="Logout"
+                onClick={handleLogout}
+              />
             </div>
           </div>
         </>

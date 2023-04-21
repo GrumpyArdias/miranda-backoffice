@@ -109,6 +109,7 @@ function RoomsTable(props) {
                   </StatusWrapper>
                   <IconWrapper>
                     <DeleteForeverIcon
+                      data-cy="deleteButtonRoom"
                       style={{ color: "red" }}
                       onClick={() => handleDelete(data.id)}
                     />

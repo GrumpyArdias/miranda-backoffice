@@ -63,7 +63,11 @@ function Bookings() {
           <Dropdown options={options} onSelect={handleSelect} />
         </BookingsTopRightWrap>
       </BookingsTopWrap>
-      <BookingsTable headerArray={headerArray} rowDataArray={rowDataArray} />
+      <BookingsTable
+        data-cy="BookingsTable"
+        headerArray={headerArray}
+        rowDataArray={rowDataArray}
+      />
     </div>
   );
 }

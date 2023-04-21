@@ -5,16 +5,10 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GroupIcon from "@mui/icons-material/Group";
 import Logo from "../images/hotel-miranda-logo.png";
 import { LeftMainContainer, StyledLink } from "./styles/Aside.styles";
-import { useNavigate } from "react-router-dom";
 
 function Aside(props) {
   const asideStyle = {
     display: props.visible ? "flex" : "none",
-  };
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/");
   };
 
   return (
@@ -33,25 +27,25 @@ function Aside(props) {
         to="/bookings"
       >
         <div className="cell">
-          <EventAvailableIcon />
+          <EventAvailableIcon data-cy="Bookings" />
           <h3>Bookings</h3>
         </div>
       </StyledLink>
       <StyledLink to="/rooms">
         <div className="cell">
-          <VpnKeyIcon />
+          <VpnKeyIcon data-cy="Rooms" />
           <h3>Rooms</h3>
         </div>
       </StyledLink>
       <StyledLink to="/contact">
         <div className="cell">
-          <PermContactCalendarIcon />
+          <PermContactCalendarIcon data-cy="Contact" />
           <h3>Contact</h3>
         </div>
       </StyledLink>
       <StyledLink to="/users">
         <div className="cell">
-          <GroupIcon />
+          <GroupIcon data-cy="Users" />
           <h3>Users</h3>
         </div>
       </StyledLink>
