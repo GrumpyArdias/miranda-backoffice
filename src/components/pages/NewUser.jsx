@@ -48,6 +48,7 @@ export function NewUser() {
           <h3>1. New Employee Full Name</h3>
 
           <Input
+            data-cy="NewUserFullname"
             type="text"
             id="full_name"
             name="full_name"
@@ -60,6 +61,7 @@ export function NewUser() {
           <h3>2. New Employee Email</h3>
 
           <Input
+            data-cy="NewUserEmail"
             type="email"
             id="email"
             name="email"
@@ -71,6 +73,7 @@ export function NewUser() {
           <h3>3. New Employee Phone Number</h3>
 
           <Input
+            data-cy="NewUserPhoneNumber"
             type="text"
             id="number"
             name="number"
@@ -81,6 +84,7 @@ export function NewUser() {
         <InputWrapper className="UserJobTitle">
           <h3>4. New Employee Job Title</h3>
           <Input
+            data-cy="NewUserJobTitle"
             type="text"
             id="description"
             name="description"
@@ -91,6 +95,7 @@ export function NewUser() {
         <InputWrapper className="UserStatus">
           <h3>5. User Status</h3>
           <Select
+            data-cy="NewUserStatus"
             name="status"
             id="UserStatus"
             value={user.status}
@@ -101,6 +106,7 @@ export function NewUser() {
           </Select>
         </InputWrapper>
         <SubmitButton
+          data-cy="SubmitButton"
           data-testid="NewUserButtonTest"
           type="submit"
           onClick={handleSubmit}

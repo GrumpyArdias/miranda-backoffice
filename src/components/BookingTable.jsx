@@ -111,7 +111,7 @@ function BookingTable(props) {
                 <td colSpan={2}>{data.date}</td>
                 <td colSpan={2}>{data.check_in}</td>
                 <td colSpan={2}>{data.check_out}</td>
-                <td colSpan={2}>
+                <td colSpan={2} data-cy="NotesButton">
                   {data.special_request ? (
                     clickedId ? (
                       <Navigate to={`/bookings/${clickedId}`} />
@@ -137,6 +137,7 @@ function BookingTable(props) {
                     </StatusWrapper>
                     <IconWrapper>
                       <DeleteForeverIcon
+                        data-cy="deleteButton"
                         style={{ color: "red" }}
                         onClick={() => handleDelete(data.id)}
                       />

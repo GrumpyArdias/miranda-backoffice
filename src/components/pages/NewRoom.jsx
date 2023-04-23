@@ -75,6 +75,7 @@ export function NewRoom() {
           <RoomType className="RoomType">
             <h3>1. Choose the Room Type</h3>
             <Select
+              data-cy="roomType"
               name="bedType"
               value={room.bedType}
               onChange={handleRoomChange}
@@ -177,6 +178,7 @@ export function NewRoom() {
               <label htmlFor="price">Price</label>
               <br />
               <Input
+                data-cy="price"
                 type="number"
                 id="price"
                 name="price"
@@ -190,6 +192,7 @@ export function NewRoom() {
               <label htmlFor="discount">Discount</label>
               <br />
               <Input
+                data-cy="discount"
                 type="number"
                 id="discount"
                 name="discount"
@@ -204,6 +207,7 @@ export function NewRoom() {
             <h3>4. Status</h3>
             <StatusWrapper className="StatusWrapper">
               <Select
+                data-cy="roomStatus"
                 name="roomStatus"
                 value={room.roomStatus}
                 onChange={handleRoomChange}
@@ -223,6 +227,7 @@ export function NewRoom() {
                 <label htmlFor="floor">Floor</label>
                 <br />
                 <Input
+                  data-cy="floor"
                   type="number"
                   id="floor"
                   name="floorNumber"
@@ -235,6 +240,7 @@ export function NewRoom() {
                 <label htmlFor="door">Door</label>
                 <br />
                 <Input
+                  data-cy="door"
                   type="number"
                   id="door"
                   name="doorNumber"
@@ -246,7 +252,11 @@ export function NewRoom() {
             </FloorWrapper>
           </Floor>
         </NewRoomForm>
-        <SubmitButton type="submit" onClick={handleSubmit}>
+        <SubmitButton
+          data-cy="SubmitButton"
+          type="submit"
+          onClick={handleSubmit}
+        >
           Save the Room
         </SubmitButton>
       </FormWrap>

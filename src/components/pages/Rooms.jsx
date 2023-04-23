@@ -59,6 +59,7 @@ function Rooms() {
         </RoomsTopLeftWrap>
         <RoomsTopRightWrap>
           <NewRoomButton
+            data-cy="new-room-button"
             className="NewRoomButton"
             data-testid="new-room-button"
             onClick={() => navigate("/rooms/newroom")}
