@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { MainHeader } from "./styles/Header.styles";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { LoginContext } from "../store/ContextStore";
+import { LoginContext } from "../store/LoginContext";
 import { useContext } from "react";
 
 function Header(props) {

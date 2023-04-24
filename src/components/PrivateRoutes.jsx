@@ -1,7 +1,7 @@
 // Importa los módulos necesarios
 import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { LoginContext } from "../store/ContextStore";
+import { LoginContext } from "../store/LoginContext";
 
 function PrivateRoutes() {
   const { state } = useContext(LoginContext);

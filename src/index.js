@@ -4,14 +4,17 @@ import { Provider } from "react-redux"; // import Provider from react-redux
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import store from "./store/Store"; // import your existing store
+import store from "./store/Store";
+import LoginContextProvider from "./store/LoginContext"; // import your existing store
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <LoginContextProvider>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </LoginContextProvider>,
   document.getElementById("root")
 );
 
