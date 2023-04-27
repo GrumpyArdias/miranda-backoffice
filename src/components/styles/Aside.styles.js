@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const LeftMainContainer = styled.div`
   display: flex;
-  min-width: 10%;
+  max-width: 10%;
   margin-top: 10px;
   align-items: flex-start;
   flex-direction: column;

@@ -8,15 +8,17 @@ import {
 } from "./styles/ContactTable.styles";
 import { v4 as uuid } from "uuid";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useDispatch } from "react-redux";
-import { deleteContact } from "../slices/contactSlice";
+import { useAppDispatch } from "../hooks/hooks";
+import { deleteComment } from "../slices/contactSlice";
+import React from "react";
+import { CommentProps, CommentType } from "../@types/contacts";
 
-function ContactTable(props) {
+function ContactTable(props: CommentProps) {
   const headerArray = props.headerArray;
   const rowDataArray = props.rowDataArray;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleStatusSwitch = (status) => {
+  const handleStatusSwitch = (status: boolean) => {
     switch (status) {
       case true:
         return (
@@ -36,7 +38,7 @@ function ContactTable(props) {
     }
   };
 
-  const handleComentSwitch = (coment) => {
+  const handleComentSwitch = (coment: boolean) => {
     switch (coment) {
       case true:
         return (
@@ -56,8 +58,8 @@ function ContactTable(props) {
     }
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteContact(id));
+  const handleDelete = (comment: CommentType) => {
+    dispatch(deleteComment(comment));
   };
 
   return (
@@ -92,7 +94,7 @@ function ContactTable(props) {
                   <IconWrapper>
                     <DeleteForeverIcon
                       style={{ color: "red" }}
-                      onClick={() => handleDelete(data.id)}
+                      onClick={() => handleDelete(data)}
                     />
                   </IconWrapper>
                 </TdWrapper>

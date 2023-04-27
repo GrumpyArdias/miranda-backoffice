@@ -14,40 +14,44 @@ import {
   FloorCell,
   Amenities,
 } from "../styles/newRoom.styles";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { ChangeEvent, useEffect, useState, FormEvent } from "react";
 import { createRoom } from "../../slices/roomsSlice";
 import { v4 as uuid } from "uuid";
+import React from "react";
+import { useAppDispatch } from "../../hooks/hooks";
+import { RoomType as RoomTypeTS } from "../../@types/rooms";
 
 export function NewRoom() {
-  const initialObjet = {
-    id: uuid(),
-    price: "",
-    discount: "",
-    doorNumber: "",
-    floorNumber: "",
+  const initialObjet: RoomTypeTS = {
+    id: "",
     bedType: "",
-    roomStatus: "",
-    amenities: "",
+    status: false,
+    facilites: [],
+    price: 0,
+    discount: 0,
+    doorNumber: 0,
+    floorNumber: 0,
   };
 
   const [room, setRoom] = useState(initialObjet);
-  const [discountedPrice, setDiscountedPrice] = useState("");
-  const dispatch = useDispatch();
+  const [discountedPrice, setDiscountedPrice] = useState(0);
+  const dispatch = useAppDispatch();
 
-  const handleAmenitiesChange = (e) => {
+  const handleAmenitiesChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedAmenity = e.target.value;
     const isChecked = e.target.checked;
     if (isChecked) {
-      setRoom({ ...room, amenities: [...room.amenities, selectedAmenity] });
+      setRoom({ ...room, facilites: [...room.facilites, selectedAmenity] });
     } else {
       setRoom({
         ...room,
-        amenities: room.amenities.filter((item) => item !== selectedAmenity),
+        facilites: room.facilites.filter((item) => item !== selectedAmenity),
       });
     }
   };
-  const handleRoomChange = (event) => {
+  const handleRoomChange = (
+    event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+  ) => {
     const name = event.target.name;
     const value = event.target.value;
     setRoom((prev) => ({ ...prev, [name]: value }));
@@ -55,12 +59,14 @@ export function NewRoom() {
 
   useEffect(() => {
     console.log(room);
-    const calculatedDiscountedPrice =
+    const calculatedDiscountedPrice: number =
       room.price - (room.price * room.discount) / 100;
     setDiscountedPrice(calculatedDiscountedPrice);
   }, [room.price, room.discount, room]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (
+    event: FormEvent<HTMLDivElement> | FormEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
     const newRoom = { ...room, id: uuid() }; // Generate UUID for the new room
     dispatch(createRoom(newRoom));
@@ -95,7 +101,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="wifi"
-                checked={room.amenities.includes("wifi")}
+                checked={room.facilites.includes("wifi")}
                 onChange={handleAmenitiesChange}
               />
               WiFi
@@ -105,7 +111,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="tv"
-                checked={room.amenities.includes("tv")}
+                checked={room.facilites.includes("tv")}
                 onChange={handleAmenitiesChange}
               />
               TV
@@ -115,7 +121,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="ac"
-                checked={room.amenities.includes("ac")}
+                checked={room.facilites.includes("ac")}
                 onChange={handleAmenitiesChange}
               />
               AC
@@ -126,7 +132,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="fridge"
-                checked={room.amenities.includes("fridge")}
+                checked={room.facilites.includes("fridge")}
                 onChange={handleAmenitiesChange}
               />
               Mini Fridge
@@ -136,7 +142,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="bathtub"
-                checked={room.amenities.includes("bathtub")}
+                checked={room.facilites.includes("bathtub")}
                 onChange={handleAmenitiesChange}
               />
               Bathtub
@@ -146,7 +152,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="sauna"
-                checked={room.amenities.includes("sauna")}
+                checked={room.facilites.includes("sauna")}
                 onChange={handleAmenitiesChange}
               />
               Sauna
@@ -156,7 +162,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="roomService"
-                checked={room.amenities.includes("roomService")}
+                checked={room.facilites.includes("roomService")}
                 onChange={handleAmenitiesChange}
               />
               Room Service
@@ -166,7 +172,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="butler"
-                checked={room.amenities.includes("butler")}
+                checked={room.facilites.includes("butler")}
                 onChange={handleAmenitiesChange}
               />
               Butler
@@ -203,22 +209,21 @@ export function NewRoom() {
             </Discount>
           </PriceWrap>
 
-          <div className="Status">
+          {/* <div className="Status">
             <h3>4. Status</h3>
             <StatusWrapper className="StatusWrapper">
               <Select
                 data-cy="roomStatus"
                 name="roomStatus"
-                value={room.roomStatus}
+                value={room.status}
                 onChange={handleRoomChange}
                 required
               >
-                <option value="none">Room status</option>
                 <option value="booked">Booked</option>
                 <option value="available">Available</option>
               </Select>
             </StatusWrapper>
-          </div>
+          </div> */}
 
           <Floor className="floor">
             <h3>5. Floor Choice</h3>

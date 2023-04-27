@@ -12,13 +12,16 @@ import {
 import { v4 as uuid } from "uuid";
 import Cat from "../images/cat3.jpg";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useDispatch } from "react-redux";
 import { deleteUser } from "../slices/userSlice";
-function UserTable(props) {
+import React from "react";
+import { UserProps, UserType } from "../@types/users";
+import { useAppDispatch } from "../hooks/hooks";
+function UserTable(props: UserProps) {
+  const dispatch = useAppDispatch();
   const headerArray = props.headerArray;
   const rowDataArray = props.rowDataArray;
 
-  const handleStatusSwitch = (status) => {
+  const handleStatusSwitch = (status: boolean) => {
     switch (status) {
       case true:
         return (
@@ -37,9 +40,9 @@ function UserTable(props) {
         return "error in the User Status";
     }
   };
-  const dispatch = useDispatch();
-  const handleDelete = (id) => {
-    dispatch(deleteUser(id));
+
+  const handleDelete = (user: UserType) => {
+    dispatch(deleteUser(user));
   };
 
   return (
@@ -66,10 +69,10 @@ function UserTable(props) {
                     <img src={Cat} alt="it's employees face" />
                   </PhotoRowWrapper>
                   <TextRowWrapper className="text">
-                    <h5>{data.full_name}</h5>
+                    <h5>{data.fullName}</h5>
                     <p>
                       #{employeeNumber} <br />
-                      {data.join_date}
+                      {data.joinDate}
                     </p>
                   </TextRowWrapper>
                 </DataRowWrapper>
@@ -87,7 +90,7 @@ function UserTable(props) {
                     <DeleteForeverIcon
                       data-cy="deleteButtonUser"
                       style={{ color: "red" }}
-                      onClick={() => handleDelete(data.id)}
+                      onClick={() => handleDelete(data)}
                     />
                   </IconWrapper>
                 </TdWrapper>

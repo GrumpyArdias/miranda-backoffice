@@ -8,18 +8,20 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ContactTable from "../ContactTable";
 import Dropdown from "../Dropdown";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllContacts } from "../../slices/contactSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { getAllComments } from "../../slices/contactSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
-function Contact() {
-  const dispatch = useDispatch();
-  const contact = useSelector((state) => state.contacts.contacts);
+export const Contact = () => {
+  const dispatch = useAppDispatch();
+  const contact = useAppSelector((state) => state.contacts.comments);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getAllContacts());
+    dispatch(getAllComments());
   }, [dispatch]);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ function Contact() {
 
   const options = ["Option 1", "Option 2", "Option 3"];
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: string[]) => {
     console.log(`Selected option: ${option}`);
   };
 
@@ -144,5 +146,4 @@ function Contact() {
       <ContactTable headerArray={headerArray} rowDataArray={rowDataArray} />
     </>
   );
-}
-export default Contact;
+};

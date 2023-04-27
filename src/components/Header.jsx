@@ -7,11 +7,12 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { LoginContext } from "../store/LoginContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Header(props) {
   const { dispatch } = useContext(LoginContext);
   const authContext = useContext(LoginContext);
-
+  const navigate = useNavigate();
   const [display, setDisplay] = useState("flex");
   const [path, setPath] = useState("");
   const location = useLocation();
@@ -20,6 +21,7 @@ function Header(props) {
     dispatch({
       type: "LOGOUT",
     });
+    navigate("/login");
   };
 
   useEffect(() => {

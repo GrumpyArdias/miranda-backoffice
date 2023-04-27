@@ -12,14 +12,16 @@ import {
 import { v4 as uuid } from "uuid";
 import Cat from "../images/cat3.jpg";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useDispatch } from "react-redux";
 import { deleteRoom } from "../slices/roomsSlice";
+import { RoomProps, RoomType } from "../@types/rooms";
+import React from "react";
+import { useAppDispatch } from "../hooks/hooks";
 
-function RoomsTable(props) {
+function RoomsTable(props: RoomProps) {
   const headerArray = props.headerArray;
   const rowDataArray = props.rowDataArray;
-
-  const handleRoomSwitch = (option) => {
+  const dispatch = useAppDispatch();
+  const handleRoomSwitch = (option: string) => {
     switch (option) {
       case "single":
         return "Single Bed";
@@ -35,7 +37,7 @@ function RoomsTable(props) {
   };
 
   // Fix the status, take care of the number of inputs
-  const handleStatusSwitch = (status) => {
+  const handleStatusSwitch = (status: boolean) => {
     switch (status) {
       case true:
         return (
@@ -54,17 +56,16 @@ function RoomsTable(props) {
         return "error in the room type";
     }
   };
-  const handleDiscount = (cost) => {
+  const handleDiscount = (cost: number) => {
     const fixedDiscount = 10;
     const discountPrice = (cost * fixedDiscount) / 100;
     const finalPrice = cost - discountPrice;
 
     return finalPrice;
   };
-  const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
-    dispatch(deleteRoom(id));
+  const handleDelete = (data: RoomType) => {
+    dispatch(deleteRoom(data));
   };
 
   return (
@@ -92,11 +93,11 @@ function RoomsTable(props) {
                     <img src={Cat} alt="it's user face" />
                   </PhotoRowWrapper>
                   <TextRowWrapper className="text">
-                    <h5>{data.room_id}</h5>
+                    <h5>{data.id}</h5>
                   </TextRowWrapper>
                 </DataRowWrapper>
               </td>
-              <td colSpan={2}>{handleRoomSwitch(data.bed_type)}</td>
+              <td colSpan={2}>{handleRoomSwitch(data.bedType)}</td>
               <td colSpan={2}> {data.facilites}</td>
               <td colSpan={2}> {data.price} € / Night</td>
               <td colSpan={2}>
@@ -111,7 +112,7 @@ function RoomsTable(props) {
                     <DeleteForeverIcon
                       data-cy="deleteButtonRoom"
                       style={{ color: "red" }}
-                      onClick={() => handleDelete(data.id)}
+                      onClick={() => handleDelete(data)}
                     />
                   </IconWrapper>
                 </TdWrapper>

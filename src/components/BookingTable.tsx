@@ -18,27 +18,33 @@ import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import { deleteBooking } from "../slices/bookingsSlice";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks/hooks";
 import Rooms from "../data/rooms.json";
+import React from "react";
+import { BookingType, BookingProps } from "../@types/bookings";
 
-function BookingTable(props) {
+function BookingTable(props: BookingProps) {
   const [clickedId, setClickedId] = useState(null);
-  const headerArray = props.headerArray;
-  const rowDataArray = props.rowDataArray;
+  const headerArray: string[] = props.headerArray;
+  const rowDataArray: BookingType[] = props.rowDataArray;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleNoteClick = (dataId) => {
+  const handleNoteClick = (dataId: string) => {
     setClickedId(dataId);
   };
 
-  const handelRoomSwitch = (data) => {
+  //TODO FIX THIS AFTER ROOMS REFACTOR
+  const handelRoomSwitch = (data: BookingType) => {
     let roomType = "Error assigning Room"; // Default room type
 
     Rooms.forEach((room) => {
-      if (data.status === "booked" || data.status === "inProgress") {
+      if (
+        (room.status === true && data.status === "Booked") ||
+        data.status === "inProgress"
+      ) {
         if (room.id === data.id) {
-          roomType = room.bed_type;
+          roomType = room.bedType;
         }
       } else {
         roomType = "Status not eligible for a Room"; // Update room type for ineligible status
@@ -48,7 +54,7 @@ function BookingTable(props) {
     return roomType; // Return the final room type
   };
 
-  const handleStatusSwitch = (status) => {
+  const handleStatusSwitch = (status: string) => {
     switch (status) {
       case "refound":
         return (
@@ -74,8 +80,8 @@ function BookingTable(props) {
     }
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteBooking(id));
+  const handleDelete = (booking: BookingType) => {
+    dispatch(deleteBooking(booking));
   };
 
   return (
@@ -103,16 +109,16 @@ function BookingTable(props) {
                       <img src={Cat} alt="it's user face" />
                     </PhotoRowWrapper>
                     <TextRowWrapper className="text">
-                      <h4>{data.full_name}</h4>
-                      <h5>{data.client_id}</h5>
+                      <h4>{data.fullName}</h4>
+                      <h5>{data.id}</h5>
                     </TextRowWrapper>
                   </DataRowWrapper>
                 </td>
                 <td colSpan={2}>{data.date}</td>
-                <td colSpan={2}>{data.check_in}</td>
-                <td colSpan={2}>{data.check_out}</td>
+                <td colSpan={2}>{data.checkIn}</td>
+                <td colSpan={2}>{data.checkOut}</td>
                 <td colSpan={2} data-cy="NotesButton">
-                  {data.special_request ? (
+                  {data.specialRquest ? (
                     clickedId ? (
                       <Navigate to={`/bookings/${clickedId}`} />
                     ) : (
@@ -139,7 +145,7 @@ function BookingTable(props) {
                       <DeleteForeverIcon
                         data-cy="deleteButton"
                         style={{ color: "red" }}
-                        onClick={() => handleDelete(data.id)}
+                        onClick={() => handleDelete(data)}
                       />
                     </IconWrapper>
                   </TdWrapper>

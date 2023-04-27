@@ -1,9 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Container, MiniContainer, ErrorMsg } from "../styles/Login.styles";
+import React, { useState, useContext } from "react";
+import {
+  Container,
+  MiniContainer,
+  ErrorMsg,
+  LogoContainer,
+} from "../styles/Login.styles";
 import { LoginForm } from "../styles/Form.styles";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../store/LoginContext";
-
+import Logo from "../../images/hotel-miranda-logo.png";
 function Login() {
   const { dispatch, state } = useContext(LoginContext);
   const [mail, setMail] = useState("");
@@ -27,6 +32,9 @@ function Login() {
   return (
     <Container>
       <MiniContainer className="container">
+        <LogoContainer className="LogoWrapper">
+          <img src={Logo} alt="" />
+        </LogoContainer>
         <LoginForm onSubmit={handleLogin}>
           <label>Mail:</label>
           <br />
@@ -53,7 +61,6 @@ function Login() {
           />
           <br />
           <button type="submit" data-cy="LoginSubmit">
-            {" "}
             Login
           </button>
         </LoginForm>
@@ -64,5 +71,4 @@ function Login() {
     </Container>
   );
 }
-
 export default Login;

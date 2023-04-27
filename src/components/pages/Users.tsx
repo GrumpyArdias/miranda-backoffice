@@ -7,30 +7,24 @@ import {
 import Dropdown from "../Dropdown";
 
 import UserTable from "../UsersTable";
-import { useDispatch, useSelector } from "react-redux";
+
 import { getAllUsers } from "../../slices/userSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 function Users() {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.users.users);
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((state) => state.users.users);
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (users.length === 0) {
-  //     navigate("/");
-  //   }
-  //   console.log(users);
-  // }, [users, navigate]);
-
   const options = ["Option 1", "Option 2", "Option 3"];
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: string) => {
     console.log(`Selected option: ${option}`);
   };
 

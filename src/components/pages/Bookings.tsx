@@ -5,14 +5,18 @@ import {
 } from "../styles/Bookings.styles";
 import Dropdown from "../Dropdown";
 import BookingsTable from "../BookingTable";
-import { useDispatch, useSelector } from "react-redux";
 import { getAllBookings } from "../../slices/bookingsSlice";
 import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import React from "react";
+import { BookingType } from "../../@types/bookings";
 
 function Bookings() {
-  const dispatch = useDispatch();
-  const bookings = useSelector((state) => state.bookings.bookings);
-  console.log("bookings:", bookings);
+  const dispatch = useAppDispatch();
+  const bookings: BookingType[] = useAppSelector(
+    (state) => state.bookings.bookings
+  );
+  console.log("This is bookings in Bookings:", bookings);
 
   useEffect(() => {
     dispatch(getAllBookings());
@@ -27,11 +31,11 @@ function Bookings() {
 
   const options = ["Option 1", "Option 2", "Option 3"];
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: string[]) => {
     console.log(`Selected option: ${option}`);
   };
 
-  const headerArray = [
+  const headerArray: string[] = [
     "Nombre",
     "Date",
     "Check-In",
@@ -40,7 +44,7 @@ function Bookings() {
     "Room Type",
     "Status",
   ];
-  const rowDataArray = bookings;
+  const rowDataArray: BookingType[] = bookings;
 
   return (
     <div>

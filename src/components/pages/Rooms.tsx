@@ -6,14 +6,17 @@ import {
 } from "../styles/Rooms.styles";
 import Dropdown from "../Dropdown";
 import RoomsTable from "../RoomsTable";
-import { useDispatch, useSelector } from "react-redux";
+
 import { getAllRooms } from "../../slices/roomsSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import { RoomType } from "../../@types/rooms";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 function Rooms() {
-  const dispatch = useDispatch();
-  const rooms = useSelector((state) => state.rooms.rooms);
+  const dispatch = useAppDispatch();
+  const rooms = useAppSelector((state) => state.rooms.rooms);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +32,7 @@ function Rooms() {
 
   const options = ["Option 1", "Option 2", "Option 3"];
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: string[]) => {
     console.log(`Selected option: ${option}`);
   };
 
