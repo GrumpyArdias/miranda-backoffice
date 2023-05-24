@@ -12,7 +12,7 @@ function Aside(props) {
   return (
     <LeftMainContainer style={{ display: asideDisplay }}>
       <div className="cell">
-        <img src={Logo} alt="Hotel miranda Logo" />
+        <img src={Logo} alt="Hotel miranda Logo" id="hotelLogo" />
       </div>
       <StyledLink to="/">
         <div className="cell">

@@ -14,11 +14,15 @@ export const LeftMainContainer = styled.div`
 
   .cell {
     margin-left: 25px;
+    margin-right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     h3 {
       margin-left: 10px;
+    }
+    #hotelLogo {
+      margin-left: -30px;
     }
   }
   .cell:hover {

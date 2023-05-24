@@ -1,7 +1,7 @@
 export type BookingType = {
   id: string;
   fullName: string;
-  date: string;
+  bookingDate: string;
   checkIn: string;
   checkOut: string;
   specialRquest: string;

@@ -1,12 +1,7 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isAnyOf,
-  isAllOf,
-} from "@reduxjs/toolkit";
-import ContactsArray from "../data/coments.json";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { CommentType, ICommentState, UpdateComment } from "../@types/contacts";
 import { v4 as uuid } from "uuid";
+import { apiFetch } from "../utils/apiFetch";
 
 const initialState: ICommentState = {
   comments: [],
@@ -16,11 +11,8 @@ export const getAllComments = createAsyncThunk(
   "comments/getAllComments",
   async () => {
     try {
-      const data = await new Promise<CommentType[]>((resolve) => {
-        setTimeout(() => {
-          resolve(ContactsArray);
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const data = await apiFetch("comments", "GET", token);
       return data;
     } catch (e) {
       console.log(e);
@@ -32,11 +24,8 @@ export const getOneComment = createAsyncThunk(
   "comments/getOneComment",
   async ({ id }: CommentType) => {
     try {
-      const data = await new Promise<CommentType>((resolve) => {
-        setTimeout(() => {
-          resolve(ContactsArray.find((coment) => coment.id === id));
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const data = await apiFetch("comments", "GET", token, id);
       return data;
     } catch (e) {
       console.log(e);
@@ -49,11 +38,10 @@ export const createComment = createAsyncThunk(
   async (newComment: CommentType) => {
     try {
       const id = uuid();
-      const data = await new Promise<CommentType>((resolve) => {
-        setTimeout(() => {
-          resolve({ ...newComment, id });
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      newComment.id = id;
+      const commentToString = JSON.stringify(newComment);
+      const data = await apiFetch("comments", "POST", token, commentToString);
       return data;
     } catch (e) {
       console.log(e);
@@ -65,9 +53,8 @@ export const deleteComment = createAsyncThunk(
   "comments/deleteComment",
   async ({ id }: CommentType) => {
     try {
-      const data = await new Promise<string>((resolve) => {
-        resolve(id);
-      });
+      const token = localStorage.getItem("token");
+      const data = await apiFetch("comments", "DELETE", token, id);
       return data;
     } catch (e) {
       console.log(e);
@@ -79,11 +66,15 @@ export const updateComment = createAsyncThunk(
   "comments/updateComment",
   async ({ body, id }: UpdateComment) => {
     try {
-      const data = await new Promise<CommentType>((resolve) => {
-        setTimeout(() => {
-          resolve({ ...body, id });
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const commentToString = JSON.stringify(body);
+      const data = await apiFetch(
+        "comments",
+        "PUT",
+        token,
+        id,
+        commentToString
+      );
       return data;
     } catch (e) {
       console.log(e);

@@ -1,12 +1,7 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isAllOf,
-  isAnyOf,
-} from "@reduxjs/toolkit";
-import RoomArray from "../data/rooms.json";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 import { RoomType, UpdateRoom, IRoomsState } from "../@types/rooms";
+import { apiFetch } from "../utils/apiFetch";
 
 const initialState: IRoomsState = {
   rooms: [],
@@ -15,11 +10,8 @@ const initialState: IRoomsState = {
 
 export const getAllRooms = createAsyncThunk("rooms/getAllrooms", async () => {
   try {
-    const data = await new Promise<RoomType[]>((resolve) => {
-      setTimeout(() => {
-        resolve(RoomArray);
-      }, 200);
-    });
+    const token = localStorage.getItem("token");
+    const data = await apiFetch("rooms", "GET", token);
     return data;
   } catch (error) {
     console.error(error);
@@ -30,11 +22,8 @@ export const getOneRoom = createAsyncThunk(
   "room/getOneBook",
   async ({ id }: RoomType) => {
     try {
-      const data = await new Promise<RoomType>((resolve) => {
-        setTimeout(() => {
-          resolve(RoomArray.find((room) => room.id === id));
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const data = await apiFetch("rooms", "GET", token, id);
       return data;
     } catch (error) {
       console.error(error);
@@ -46,12 +35,11 @@ export const createRoom = createAsyncThunk(
   "room/createRoom",
   async (newRoom: RoomType) => {
     try {
+      const token = localStorage.getItem("token");
       const id = uuid();
-      const data = await new Promise<RoomType>((resolve) => {
-        setTimeout(() => {
-          resolve({ ...newRoom, id });
-        }, 200);
-      });
+      newRoom.id = id;
+      const roomToString = JSON.stringify(newRoom);
+      const data = await apiFetch("rooms", "POST", token, roomToString);
       return data;
     } catch (error) {
       console.error(error);
@@ -63,11 +51,8 @@ export const deleteRoom = createAsyncThunk(
   "room/deleteRoom",
   async ({ id }: RoomType) => {
     try {
-      const data = await new Promise<RoomType>((resolve) => {
-        setTimeout(() => {
-          resolve(RoomArray.find((room) => room.id === id));
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const data = await apiFetch("rooms", "DELETE", token, id);
       return data;
     } catch (error) {
       console.error(error);
@@ -79,11 +64,9 @@ export const updateRoom = createAsyncThunk(
   "room/updateRoom",
   async ({ body, id }: UpdateRoom) => {
     try {
-      const data = await new Promise<RoomType>((resolve) => {
-        setTimeout(() => {
-          resolve({ ...body, id });
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const roomsToStrings = JSON.stringify(body);
+      const data = await apiFetch("rooms", "PUT", token, id, roomsToStrings);
       return data;
     } catch (error) {
       console.error(error);
@@ -104,13 +87,11 @@ const roomSlice = createSlice({
       .addCase(getOneRoom.fulfilled, (state, action) => {
         state.room = state.rooms.find((room) => room.id === action.payload.id);
         console.log("getOneRoom.fulfilled", state.room);
-      });
-    builder
+      })
       .addCase(createRoom.fulfilled, (state, action) => {
         state.rooms = [...state.rooms, action.payload];
         console.log("createRoom.fulfilled", state.rooms);
       })
-
       .addCase(deleteRoom.fulfilled, (state, action) => {
         const { id } = action.payload;
         state.rooms = state.rooms.filter((room) => room.id !== id);
@@ -121,33 +102,33 @@ const roomSlice = createSlice({
           room.id === action.payload.id ? action.payload : room
         );
         console.log("updateRoom.fulfilled", state.rooms);
-      });
+      })
 
-    builder.addMatcher(
-      isAnyOf(
-        getAllRooms.pending,
-        getOneRoom.pending,
-        createRoom.pending,
-        deleteRoom.pending,
-        updateRoom.pending
-      ),
-      (state) => {
-        console.log("Loading...");
-      }
-    );
+      .addMatcher(
+        isAnyOf(
+          getAllRooms.pending,
+          getOneRoom.pending,
+          createRoom.pending,
+          deleteRoom.pending,
+          updateRoom.pending
+        ),
+        (state) => {
+          console.log("Loading...");
+        }
+      )
 
-    builder.addMatcher(
-      isAnyOf(
-        getAllRooms.rejected,
-        getOneRoom.rejected,
-        createRoom.rejected,
-        deleteRoom.rejected,
-        updateRoom.rejected
-      ),
-      (state, action) => {
-        console.log("Error action type:", action.type);
-      }
-    );
+      .addMatcher(
+        isAnyOf(
+          getAllRooms.rejected,
+          getOneRoom.rejected,
+          createRoom.rejected,
+          deleteRoom.rejected,
+          updateRoom.rejected
+        ),
+        (state, action) => {
+          console.log("Error action type:", action.type);
+        }
+      );
   },
 });
 

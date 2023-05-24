@@ -84,6 +84,8 @@ function BookingTable(props: BookingProps) {
     dispatch(deleteBooking(booking));
   };
 
+  console.log(rowDataArray);
+
   return (
     <div>
       <BookingTableStyle>
@@ -114,7 +116,7 @@ function BookingTable(props: BookingProps) {
                     </TextRowWrapper>
                   </DataRowWrapper>
                 </td>
-                <td colSpan={2}>{data.date}</td>
+                <td colSpan={2}>{data.bookingDate}</td>
                 <td colSpan={2}>{data.checkIn}</td>
                 <td colSpan={2}>{data.checkOut}</td>
                 <td colSpan={2} data-cy="NotesButton">

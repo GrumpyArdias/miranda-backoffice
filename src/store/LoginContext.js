@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { useReducer } from "react";
-
+import { apiLoginFetch } from "../utils/apiFetch";
 export const LoginContext = createContext();
 
 function isValidEmail(email) {
@@ -13,7 +13,7 @@ const types = {
   LOGOUT: "LOGOUT",
 };
 
-export const reducer = (state, action) => {
+export const reducer = async (state, action) => {
   switch (action.type) {
     case types.LOGIN:
       if (action.value.mail === "" || action.value.password === "") {
@@ -28,12 +28,17 @@ export const reducer = (state, action) => {
           errorMessage: "Please enter a valid email.",
         };
       }
-      if (
-        action.value.mail === "a@a.com" &&
-        action.value.password === "password"
-      ) {
+
+      const token = await apiLoginFetch(
+        action.value.mail,
+        action.value.password
+      );
+      console.log(token);
+
+      if (token) {
         localStorage.setItem("mail", action.value.mail);
         localStorage.setItem("isAuthenticated", true);
+        localStorage.setItem("token", token);
         return {
           ...state,
           mail: action.value.mail,

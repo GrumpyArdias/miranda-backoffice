@@ -1,12 +1,7 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  isAllOf,
-  isAnyOf,
-} from "@reduxjs/toolkit";
-import UserArray from "../data/users.json";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { UserType, IUserState, UpdateUser } from "../@types/users.d";
 import { v4 as uuid } from "uuid";
+import { apiFetch } from "../utils/apiFetch";
 
 const initialState: IUserState = {
   users: [],
@@ -15,11 +10,8 @@ const initialState: IUserState = {
 
 export const getAllUsers = createAsyncThunk("user/getAllUsers", async () => {
   try {
-    const data: UserType[] = await new Promise<UserType[]>((resolve) => {
-      setTimeout(() => {
-        return resolve(UserArray);
-      }, 200);
-    });
+    const token = localStorage.getItem("token");
+    const data = await apiFetch("users", "GET", token);
     return data;
   } catch (error) {
     console.error(error);
@@ -30,11 +22,8 @@ export const getOneUser = createAsyncThunk(
   "user/getOneUser",
   async ({ id }: UserType) => {
     try {
-      const data = await new Promise<UserType>((resolve) => {
-        setTimeout(() => {
-          resolve(UserArray.find((user) => user.id === id));
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const data = await apiFetch("users", "GET", token, id);
       return data;
     } catch (error) {
       console.error(error);
@@ -47,11 +36,10 @@ export const createUser = createAsyncThunk(
   async (newUser: UserType) => {
     try {
       const id = uuid();
-      const data = await new Promise<UserType>((resolve) => {
-        setTimeout(() => {
-          resolve({ ...newUser, id });
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      newUser.id = id;
+      const userToString = JSON.stringify(newUser);
+      const data = await apiFetch("users", "POST", token, id, userToString);
       return data;
     } catch (error) {
       console.error(error);
@@ -63,11 +51,8 @@ export const deleteUser = createAsyncThunk(
   "room/deleteUser",
   async ({ id }: UserType) => {
     try {
-      const data = await new Promise<string>((resolve) => {
-        setTimeout(() => {
-          resolve(id);
-        }, 200);
-      });
+      const token = localStorage.getItem("token");
+      const data = await apiFetch("users", "DELETE", token, id);
       return data;
     } catch (error) {
       console.error(error);
@@ -78,11 +63,9 @@ export const deleteUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   "room/updateRoom",
   async ({ body, id }: UpdateUser) => {
-    const data = await new Promise<UserType>((resolve) => {
-      setTimeout(() => {
-        resolve({ ...body, id });
-      }, 200);
-    });
+    const token = localStorage.getItem("token");
+    const userToString = JSON.stringify(body);
+    const data = await apiFetch("users", "PUT", token, id, userToString);
     return data;
   }
 );
