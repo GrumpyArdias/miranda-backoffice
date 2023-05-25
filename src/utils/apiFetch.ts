@@ -23,6 +23,7 @@ export async function apiFetch(
       headers: headers,
       body: body,
     });
+    console.log(res);
     if (res.status >= 400) {
       console.error("Bad response from Server");
     }

@@ -1,8 +1,8 @@
 export type RoomType = {
   id: string;
   bedType: string;
-  status: boolean;
-  facilites: string[];
+  estatus: boolean;
+  facilities: string[];
   price: number;
   discount: number;
   doorNumber: number;

@@ -53,7 +53,8 @@ export const deleteRoom = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const data = await apiFetch("rooms", "DELETE", token, id);
-      return data;
+      console.log(data);
+      return id;
     } catch (error) {
       console.error(error);
     }
@@ -93,7 +94,7 @@ const roomSlice = createSlice({
         console.log("createRoom.fulfilled", state.rooms);
       })
       .addCase(deleteRoom.fulfilled, (state, action) => {
-        const { id } = action.payload;
+        const id = action.payload;
         state.rooms = state.rooms.filter((room) => room.id !== id);
         console.log("deleteRoom.fulfilled", state.rooms);
       })

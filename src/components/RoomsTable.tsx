@@ -10,24 +10,28 @@ import {
   IconWrapper,
 } from "./styles/RoomsTable.styles";
 import { v4 as uuid } from "uuid";
-import Cat from "../images/cat3.jpg";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { deleteRoom } from "../slices/roomsSlice";
 import { RoomProps, RoomType } from "../@types/rooms";
 import React from "react";
 import { useAppDispatch } from "../hooks/hooks";
+import Single from "../images/single.jpg";
+import Double from "../images/double.jpg";
+import DoubleSuperior from "../images/doubleSuperior.jpg";
+import Suite from "../images/suite.jpg";
 
 function RoomsTable(props: RoomProps) {
   const headerArray = props.headerArray;
   const rowDataArray = props.rowDataArray;
   const dispatch = useAppDispatch();
+
   const handleRoomSwitch = (option: string) => {
     switch (option) {
       case "single":
         return "Single Bed";
       case "double":
         return "Double Bed";
-      case "doubleSuperior":
+      case "double-superior":
         return "Double Superior";
       case "suite":
         return "Suite";
@@ -36,9 +40,23 @@ function RoomsTable(props: RoomProps) {
     }
   };
 
-  // Fix the status, take care of the number of inputs
-  const handleStatusSwitch = (status: boolean) => {
-    switch (status) {
+  const handleRoomImage = (option: string) => {
+    switch (option) {
+      case "single":
+        return Single;
+      case "double":
+        return Double;
+      case "double-superior":
+        return DoubleSuperior;
+      case "suite":
+        return Suite;
+      default:
+        return "error in the room type";
+    }
+  };
+
+  const handleStatusSwitch = (estatus: boolean) => {
+    switch (estatus) {
       case true:
         return (
           <AvailableStatus>
@@ -56,9 +74,8 @@ function RoomsTable(props: RoomProps) {
         return "error in the room type";
     }
   };
-  const handleDiscount = (cost: number) => {
-    const fixedDiscount = 10;
-    const discountPrice = (cost * fixedDiscount) / 100;
+  const handleDiscount = (cost: number, discount: number) => {
+    const discountPrice = (cost * discount) / 100;
     const finalPrice = cost - discountPrice;
 
     return finalPrice;
@@ -85,28 +102,35 @@ function RoomsTable(props: RoomProps) {
       <tbody>
         {rowDataArray.map((data) => {
           return (
-            //this must be change for a prorper room ID
-            <tr key={uuid()}>
+            <tr key={data.id}>
               <td colSpan={2}>
                 <DataRowWrapper className="wrapper">
                   <PhotoRowWrapper className="image">
-                    <img src={Cat} alt="it's user face" />
+                    {<img src={handleRoomImage(data.bedType)} alt="" />}
                   </PhotoRowWrapper>
                   <TextRowWrapper className="text">
-                    <h5>{data.id}</h5>
+                    <h5>
+                      Floor: {data.floorNumber} <br /> Room: {data.doorNumber}
+                    </h5>
+                    <h6>{data.id}</h6>
                   </TextRowWrapper>
                 </DataRowWrapper>
               </td>
               <td colSpan={2}>{handleRoomSwitch(data.bedType)}</td>
-              <td colSpan={2}> {data.facilites}</td>
+              <td colSpan={2}>
+                {data.facilities.map((f) => {
+                  return `${f}, `;
+                })}
+              </td>
               <td colSpan={2}> {data.price} € / Night</td>
               <td colSpan={2}>
-                {handleDiscount(data.price)} € <br /> (-10% off)
+                {Math.round(handleDiscount(data.price, data.discount))} € <br />{" "}
+                ({Math.round(data.discount)} % off)
               </td>
               <td colSpan={2}>
                 <TdWrapper className="TdWrapper">
                   <StatusWrapper>
-                    {handleStatusSwitch(data.status)}
+                    {handleStatusSwitch(data.estatus)}
                   </StatusWrapper>
                   <IconWrapper>
                     <DeleteForeverIcon

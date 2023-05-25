@@ -81,6 +81,7 @@ function BookingTable(props: BookingProps) {
   };
 
   const handleDelete = (booking: BookingType) => {
+    console.log(booking);
     dispatch(deleteBooking(booking));
   };
 

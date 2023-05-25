@@ -4,7 +4,6 @@ import {
   FormWrap,
   Price,
   PriceWrap,
-  StatusWrapper,
   Floor,
   FloorWrapper,
   Select,
@@ -25,8 +24,8 @@ export function NewRoom() {
   const initialObjet: RoomTypeTS = {
     id: "",
     bedType: "",
-    status: false,
-    facilites: [],
+    estatus: false,
+    facilities: [],
     price: 0,
     discount: 0,
     doorNumber: 0,
@@ -41,11 +40,11 @@ export function NewRoom() {
     const selectedAmenity = e.target.value;
     const isChecked = e.target.checked;
     if (isChecked) {
-      setRoom({ ...room, facilites: [...room.facilites, selectedAmenity] });
+      setRoom({ ...room, facilities: [...room.facilities, selectedAmenity] });
     } else {
       setRoom({
         ...room,
-        facilites: room.facilites.filter((item) => item !== selectedAmenity),
+        facilities: room.facilities.filter((item) => item !== selectedAmenity),
       });
     }
   };
@@ -101,7 +100,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="wifi"
-                checked={room.facilites.includes("wifi")}
+                checked={room.facilities.includes("wifi")}
                 onChange={handleAmenitiesChange}
               />
               WiFi
@@ -111,7 +110,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="tv"
-                checked={room.facilites.includes("tv")}
+                checked={room.facilities.includes("tv")}
                 onChange={handleAmenitiesChange}
               />
               TV
@@ -121,7 +120,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="ac"
-                checked={room.facilites.includes("ac")}
+                checked={room.facilities.includes("ac")}
                 onChange={handleAmenitiesChange}
               />
               AC
@@ -132,7 +131,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="fridge"
-                checked={room.facilites.includes("fridge")}
+                checked={room.facilities.includes("fridge")}
                 onChange={handleAmenitiesChange}
               />
               Mini Fridge
@@ -142,7 +141,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="bathtub"
-                checked={room.facilites.includes("bathtub")}
+                checked={room.facilities.includes("bathtub")}
                 onChange={handleAmenitiesChange}
               />
               Bathtub
@@ -152,7 +151,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="sauna"
-                checked={room.facilites.includes("sauna")}
+                checked={room.facilities.includes("sauna")}
                 onChange={handleAmenitiesChange}
               />
               Sauna
@@ -162,7 +161,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="roomService"
-                checked={room.facilites.includes("roomService")}
+                checked={room.facilities.includes("roomService")}
                 onChange={handleAmenitiesChange}
               />
               Room Service
@@ -172,7 +171,7 @@ export function NewRoom() {
                 type="checkbox"
                 name="amenities"
                 value="butler"
-                checked={room.facilites.includes("butler")}
+                checked={room.facilities.includes("butler")}
                 onChange={handleAmenitiesChange}
               />
               Butler

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const RoomsTableStyle = styled.table`
   border-collapse: collapse;
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
 
   tbody {
@@ -35,8 +35,9 @@ export const DataRowWrapper = styled.div`
   padding-top: 20px;
 `;
 export const PhotoRowWrapper = styled.div`
+  padding-right: 5px;
   img {
-    width: 80px;
+    width: 120px;
     height: auto;
     border-radius: 5px;
   }
@@ -80,6 +81,6 @@ export const TdWrapper = styled.div`
   align-items: center;
 `;
 export const StatusWrapper = styled.div`
-  min-width: 60%;
+  min-width: 100%;
 `;
 export const IconWrapper = styled.div``;

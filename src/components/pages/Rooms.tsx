@@ -11,7 +11,7 @@ import { getAllRooms } from "../../slices/roomsSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { RoomType } from "../../@types/rooms";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 function Rooms() {
@@ -19,16 +19,11 @@ function Rooms() {
   const rooms = useAppSelector((state) => state.rooms.rooms);
   const navigate = useNavigate();
 
+  console.log("this is rooms", rooms);
+
   useEffect(() => {
     dispatch(getAllRooms());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (rooms.length === 0) {
-  //     navigate("/");
-  //   }
-  //   console.log(rooms);
-  // }, [rooms, navigate]);
 
   const options = ["Option 1", "Option 2", "Option 3"];
 
