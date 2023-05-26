@@ -58,6 +58,7 @@ export const AvailableStatus = styled.div`
   border-radius: 10px;
   background-color: #e8ffee;
   color: #5ad07a;
+  padding-right: 3px;
 
   p {
     padding: 10px;
@@ -84,3 +85,20 @@ export const StatusWrapper = styled.div`
   min-width: 100%;
 `;
 export const IconWrapper = styled.div``;
+
+export const Chip = styled.div`
+  margin: 0 auto;
+  border: 1px solid #999578;
+  background-color: #999578;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  color: white;
+  max-width: 45%;
+  padding: 5px 10px;
+`;
+
+export const BedWrapper = styled.div`
+  margin: 0 auto;
+  border-radius: 15px;
+  max-width: 67%;
+`;

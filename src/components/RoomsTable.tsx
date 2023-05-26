@@ -8,9 +8,11 @@ import {
   TdWrapper,
   StatusWrapper,
   IconWrapper,
+  Chip,
+  BedWrapper,
 } from "./styles/RoomsTable.styles";
 import { v4 as uuid } from "uuid";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { deleteRoom } from "../slices/roomsSlice";
 import { RoomProps, RoomType } from "../@types/rooms";
 import React from "react";
@@ -55,6 +57,21 @@ function RoomsTable(props: RoomProps) {
     }
   };
 
+  const handleColor = (option: string) => {
+    switch (option) {
+      case "single":
+        return { backgroundColor: "#cd7f32" };
+      case "double":
+        return { backgroundColor: "#C0C0C0" };
+      case "double-superior":
+        return { backgroundColor: "#e5e4e2" };
+      case "suite":
+        return { backgroundColor: "#999578" };
+      default:
+        return { backgroundColor: "error in the room type" };
+    }
+  };
+
   const handleStatusSwitch = (estatus: boolean) => {
     switch (estatus) {
       case true:
@@ -84,6 +101,20 @@ function RoomsTable(props: RoomProps) {
   const handleDelete = (data: RoomType) => {
     dispatch(deleteRoom(data));
   };
+
+  // const handleFilter = (option: string) =>{
+
+  //   switch(option){
+
+  //     case "All":
+  //       return rowDataArray;
+  //     case "Available":
+  //       const availableRooms = [...rowDataArray].sort((b.estatus ? -1 : 1) - (a.estatus ? -1 : 1))
+
+  //     default:
+  //       return "error using the filter";
+  //   }
+  // }
 
   return (
     <RoomsTableStyle>
@@ -116,10 +147,18 @@ function RoomsTable(props: RoomProps) {
                   </TextRowWrapper>
                 </DataRowWrapper>
               </td>
-              <td colSpan={2}>{handleRoomSwitch(data.bedType)}</td>
+              <td colSpan={2}>
+                <BedWrapper style={handleColor(data.bedType)}>
+                  {handleRoomSwitch(data.bedType)}
+                </BedWrapper>
+              </td>
               <td colSpan={2}>
                 {data.facilities.map((f) => {
-                  return `${f}, `;
+                  return (
+                    <Chip key={uuid()} id="chip">
+                      {f}{" "}
+                    </Chip>
+                  );
                 })}
               </td>
               <td colSpan={2}> {data.price} € / Night</td>
@@ -132,14 +171,16 @@ function RoomsTable(props: RoomProps) {
                   <StatusWrapper>
                     {handleStatusSwitch(data.estatus)}
                   </StatusWrapper>
-                  <IconWrapper>
-                    <DeleteForeverIcon
-                      data-cy="deleteButtonRoom"
-                      style={{ color: "red" }}
-                      onClick={() => handleDelete(data)}
-                    />
-                  </IconWrapper>
                 </TdWrapper>
+              </td>
+              <td>
+                <IconWrapper>
+                  <RemoveCircleOutlineIcon
+                    data-cy="deleteButtonRoom"
+                    style={{ color: "red" }}
+                    onClick={() => handleDelete(data)}
+                  />
+                </IconWrapper>
               </td>
             </tr>
           );

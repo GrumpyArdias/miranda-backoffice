@@ -56,7 +56,8 @@ export const deleteBooking = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const data = await apiFetch("bookings", "DELETE", token, id);
-      return data;
+      console.log(data);
+      return id;
     } catch (error) {
       console.error(error);
     }

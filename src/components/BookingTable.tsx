@@ -19,7 +19,6 @@ import { useState } from "react";
 import { deleteBooking } from "../slices/bookingsSlice";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useAppDispatch } from "../hooks/hooks";
-import Rooms from "../data/rooms.json";
 import React from "react";
 import { BookingType, BookingProps } from "../@types/bookings";
 
@@ -35,34 +34,30 @@ function BookingTable(props: BookingProps) {
   };
 
   //TODO FIX THIS AFTER ROOMS REFACTOR
-  const handelRoomSwitch = (data: BookingType) => {
-    let roomType = "Error assigning Room"; // Default room type
-
-    Rooms.forEach((room) => {
-      if (
-        (room.status === true && data.status === "Booked") ||
-        data.status === "inProgress"
-      ) {
-        if (room.id === data.id) {
-          roomType = room.bedType;
-        }
-      } else {
-        roomType = "Status not eligible for a Room"; // Update room type for ineligible status
-      }
-    });
-    console.log("esto es RoomType", roomType);
-    return roomType; // Return the final room type
+  const handelRoomSwitch = (option: string) => {
+    switch (option) {
+      case "single":
+        return "Single Bed";
+      case "double":
+        return "Double Bed";
+      case "double-superior":
+        return "Double Superior";
+      case "suite":
+        return "Suite";
+      default:
+        return "error in the room type";
+    }
   };
 
   const handleStatusSwitch = (status: string) => {
     switch (status) {
-      case "refound":
+      case "Canceled":
         return (
           <RefoundStatus>
             <p>Refound</p>
           </RefoundStatus>
         );
-      case "booked":
+      case "Booked":
         return (
           <BookedStatus>
             <p>Booked</p>
@@ -104,8 +99,7 @@ function BookingTable(props: BookingProps) {
         <tbody>
           {rowDataArray.map((data) => {
             return (
-              // This must be shorted using a proper ID
-              <tr key={uuid()}>
+              <tr key={data.id}>
                 <td colSpan={2}>
                   <DataRowWrapper className="wrapper">
                     <PhotoRowWrapper className="image">
@@ -138,7 +132,7 @@ function BookingTable(props: BookingProps) {
                     </NotNotesAvailable>
                   )}
                 </td>
-                <td colSpan={2}>{handelRoomSwitch(data)}</td>
+                <td colSpan={2}>{handelRoomSwitch(data.roomType)}</td>
                 <td colSpan={2}>
                   <TdWrapper className="TdWrapper">
                     <StatusWrapper>
