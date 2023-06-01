@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const RoomsTableStyle = styled.table`
   border-collapse: collapse;
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
 
   tbody {
@@ -35,8 +35,9 @@ export const DataRowWrapper = styled.div`
   padding-top: 20px;
 `;
 export const PhotoRowWrapper = styled.div`
+  padding-right: 5px;
   img {
-    width: 80px;
+    width: 120px;
     height: auto;
     border-radius: 5px;
   }
@@ -57,6 +58,7 @@ export const AvailableStatus = styled.div`
   border-radius: 10px;
   background-color: #e8ffee;
   color: #5ad07a;
+  padding-right: 3px;
 
   p {
     padding: 10px;
@@ -80,6 +82,23 @@ export const TdWrapper = styled.div`
   align-items: center;
 `;
 export const StatusWrapper = styled.div`
-  min-width: 60%;
+  min-width: 100%;
 `;
 export const IconWrapper = styled.div``;
+
+export const Chip = styled.div`
+  margin: 0 auto;
+  border: 1px solid #999578;
+  background-color: #999578;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  color: white;
+  max-width: 45%;
+  padding: 5px 10px;
+`;
+
+export const BedWrapper = styled.div`
+  margin: 0 auto;
+  border-radius: 15px;
+  max-width: 67%;
+`;

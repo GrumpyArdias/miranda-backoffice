@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const LeftMainContainer = styled.div`
   display: flex;
-  min-width: 10%;
+  max-width: 10%;
   margin-top: 10px;
   align-items: flex-start;
   flex-direction: column;
@@ -14,11 +14,15 @@ export const LeftMainContainer = styled.div`
 
   .cell {
     margin-left: 25px;
+    margin-right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     h3 {
       margin-left: 10px;
+    }
+    #hotelLogo {
+      margin-left: -30px;
     }
   }
   .cell:hover {

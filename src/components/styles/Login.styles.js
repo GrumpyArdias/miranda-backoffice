@@ -7,9 +7,9 @@ export const Container = styled.div`
 `;
 
 export const MiniContainer = styled.div`
-  min-width: 40%;
-  padding: 5px 10px;
-  margin: 0 auto;
+  max-width: 10%;
+  padding: 0px 10px;
+  margin: 10px auto;
   background-color: #ad9d82;
   display: flex;
   justify-content: center;
@@ -24,4 +24,8 @@ export const ErrorMsg = styled.div`
   color: red;
   font-size: 12px;
   padding: 5px;
+`;
+
+export const LogoContainer = styled.div`
+  margin: 10px auto;
 `;

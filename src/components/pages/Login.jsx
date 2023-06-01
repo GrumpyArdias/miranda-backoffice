@@ -1,18 +1,22 @@
 import React, { useState, useContext } from "react";
-import { Container, MiniContainer, ErrorMsg } from "../styles/Login.styles";
+import {
+  Container,
+  MiniContainer,
+  ErrorMsg,
+  LogoContainer,
+} from "../styles/Login.styles";
 import { LoginForm } from "../styles/Form.styles";
-import { Navigate } from "react-router-dom";
-import { LoginContext } from "../../store/ContextStore";
-
+import { useNavigate } from "react-router-dom";
+import { LoginContext } from "../../store/LoginContext";
+import Logo from "../../images/hotel-miranda-logo.png";
 function Login() {
   const { dispatch, state } = useContext(LoginContext);
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // If all validations pass, dispatch the login action
     dispatch({
       type: "LOGIN",
       value: {
@@ -22,13 +26,15 @@ function Login() {
         errorMessage: "",
       },
     });
+    return navigate("/");
   };
-
-  if (state.authenticated) return <Navigate to={"/"} />;
 
   return (
     <Container>
       <MiniContainer className="container">
+        <LogoContainer className="LogoWrapper">
+          <img src={Logo} alt="" />
+        </LogoContainer>
         <LoginForm onSubmit={handleLogin}>
           <label>Mail:</label>
           <br />
@@ -55,7 +61,6 @@ function Login() {
           />
           <br />
           <button type="submit" data-cy="LoginSubmit">
-            {" "}
             Login
           </button>
         </LoginForm>
@@ -66,5 +71,4 @@ function Login() {
     </Container>
   );
 }
-
 export default Login;

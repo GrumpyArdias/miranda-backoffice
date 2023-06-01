@@ -7,14 +7,12 @@ import Logo from "../images/hotel-miranda-logo.png";
 import { LeftMainContainer, StyledLink } from "./styles/Aside.styles";
 
 function Aside(props) {
-  const asideStyle = {
-    display: props.visible ? "flex" : "none",
-  };
+  const asideDisplay = props.visible ? "flex" : "none";
 
   return (
-    <LeftMainContainer style={asideStyle}>
+    <LeftMainContainer style={{ display: asideDisplay }}>
       <div className="cell">
-        <img src={Logo} alt="Hotel miranda Logo" />
+        <img src={Logo} alt="Hotel miranda Logo" id="hotelLogo" />
       </div>
       <StyledLink to="/">
         <div className="cell">

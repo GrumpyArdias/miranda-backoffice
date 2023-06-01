@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const BookingTableStyle = styled.table`
   border-collapse: collapse;
-  width: 90%;
+  width: 94%;
   margin: 20px auto;
 
   tbody {
@@ -36,7 +36,7 @@ export const DataRowWrapper = styled.div`
 `;
 export const PhotoRowWrapper = styled.div`
   img {
-    width: 40px;
+    width: 100px;
     height: auto;
     border-radius: 5px;
   }
@@ -44,9 +44,14 @@ export const PhotoRowWrapper = styled.div`
 
 export const TextRowWrapper = styled.div`
   margin-top: -25px;
+  margin-left: 10px;
 
+  h4 {
+    font-size: 18px;
+  }
   h5 {
     margin-top: -20px;
+    font-size: 8px;
   }
 `;
 export const NotesAvailable = styled.div`
@@ -131,6 +136,6 @@ export const TdWrapper = styled.div`
   align-items: center;
 `;
 export const StatusWrapper = styled.div`
-  min-width: 60%;
+  min-width: 75%;
 `;
 export const IconWrapper = styled.div``;
