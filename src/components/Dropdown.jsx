@@ -14,7 +14,9 @@ const Dropdown = ({ options, onSelect }) => {
       value={selectedOption}
       onChange={(e) => handleSelect(e.target.value)}
     >
-      <option value="">Select an option</option>
+      <option value="" hidden>
+        Select an option
+      </option>
       {options.map((option) => (
         <option key={option} value={option}>
           {option}

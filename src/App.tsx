@@ -1,7 +1,12 @@
 import "./App.css";
 import React, { useState } from "react";
 import Login from "./components/pages/Login";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import PrivateRoutes from "./components/PrivateRoutes";
 import Dashboard from "./components/pages/Dashboard";
 import Aside from "./components/Aside";
@@ -15,11 +20,9 @@ import { BodyWrap } from "./components/styles/App.styles";
 import { NewRoom } from "./components/pages/NewRoom";
 import { NewUser } from "./components/pages/NewUser";
 import { UserProfile } from "./components/pages/UserProfile";
-import { LoginContext } from "./store/LoginContext";
-import { useContext } from "react";
+import { Wrapper } from "./components/Wrapper";
 
 export function App() {
-  const { state } = useContext(LoginContext);
   const [open, setOpen] = useState(false);
 
   const toggleAside = () => {
@@ -28,30 +31,87 @@ export function App() {
 
   return (
     <Router>
-      {state.authenticated ? (
-        <div style={{ display: "flex" }}>
-          <Aside visible={open} />
-          <BodyWrap style={{ minWidth: open ? "90%" : "100%" }}>
-            <Header toggleAside={toggleAside} />
-            <Routes>
-              <Route element={<PrivateRoutes />} />
-              <Route element={<Dashboard />} path="/" />
-              <Route element={<Bookings />} path="/bookings" />
-              <Route element={<Book />} path="/bookings/:id" />
-              <Route element={<Rooms />} path="/rooms" />
-              <Route element={<NewRoom />} path="/rooms/newroom" />
-              <Route element={<Users />} path="/users" />
-              <Route element={<NewUser />} path="/users/newuser" />
-              <Route element={<UserProfile />} path="/users/:id" />
-              <Route element={<Contact />} path="/contact" />
-            </Routes>
-          </BodyWrap>
-        </div>
-      ) : (
-        <Routes>
-          <Route element={<Login />} path="/login" />
-        </Routes>
-      )}
+      <div style={{ display: "flex" }}>
+        <Aside visible={open} />
+        <BodyWrap style={{ minWidth: open ? "90%" : "100%" }}>
+          <Header toggleAside={toggleAside} />
+          <Routes>
+            <Route
+              element={
+                <Wrapper>
+                  <Dashboard />
+                </Wrapper>
+              }
+              path="/"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <Bookings />
+                </Wrapper>
+              }
+              path="/bookings"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <Book />
+                </Wrapper>
+              }
+              path="/bookings/:id"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <Rooms />
+                </Wrapper>
+              }
+              path="/rooms"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <NewRoom />
+                </Wrapper>
+              }
+              path="/rooms/newroom"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <Users />
+                </Wrapper>
+              }
+              path="/users"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <NewUser />
+                </Wrapper>
+              }
+              path="/users/newuser"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <UserProfile />
+                </Wrapper>
+              }
+              path="/users/:id"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <Contact />
+                </Wrapper>
+              }
+              path="/contact"
+            />
+            <Route element={<Login />} path="/login" />
+          </Routes>
+        </BodyWrap>
+      </div>
     </Router>
   );
 }

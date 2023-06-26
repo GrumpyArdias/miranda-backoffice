@@ -98,6 +98,7 @@ export const Chip = styled.div`
 `;
 
 export const BedWrapper = styled.div`
+  padding: 5px;
   margin: 0 auto;
   border-radius: 15px;
   max-width: 67%;
