@@ -78,13 +78,13 @@ function UserTable(props: UserProps) {
                 </DataRowWrapper>
               </td>
               <td colSpan={2}>{data.email}</td>
-              <td colSpan={2}>{data.description}</td>
+              <td colSpan={2}>{data.jobTitle}</td>
               <td colSpan={2}>{data.number}</td>
               <td colSpan={2}>
                 {" "}
                 <TdWrapper className="TdWrapper">
                   <StatusWrapper>
-                    {handleStatusSwitch(data.status)}
+                    {handleStatusSwitch(data.estatus)}
                   </StatusWrapper>
                   <IconWrapper>
                     <DeleteForeverIcon

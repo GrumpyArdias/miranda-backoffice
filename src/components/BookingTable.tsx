@@ -11,6 +11,7 @@ import {
   TdWrapper,
   StatusWrapper,
   IconWrapper,
+  BedWrapper,
 } from "./styles/BookingTable.styles";
 import Cat from "../images/cat3.jpg";
 import { v4 as uuid } from "uuid";
@@ -33,7 +34,6 @@ function BookingTable(props: BookingProps) {
     setClickedId(dataId);
   };
 
-  //TODO FIX THIS AFTER ROOMS REFACTOR
   const handelRoomSwitch = (option: string) => {
     switch (option) {
       case "single":
@@ -72,6 +72,21 @@ function BookingTable(props: BookingProps) {
 
       default:
         return "error in the room type";
+    }
+  };
+
+  const handleColor = (option: string) => {
+    switch (option) {
+      case "single":
+        return { backgroundColor: "#cd7f32" };
+      case "double":
+        return { backgroundColor: "#C0C0C0" };
+      case "double-superior":
+        return { backgroundColor: "#e5e4e2" };
+      case "suite":
+        return { backgroundColor: "#999578" };
+      default:
+        return { backgroundColor: "error in the room type" };
     }
   };
 
@@ -132,7 +147,11 @@ function BookingTable(props: BookingProps) {
                     </NotNotesAvailable>
                   )}
                 </td>
-                <td colSpan={2}>{handelRoomSwitch(data.roomType)}</td>
+                <td colSpan={2}>
+                  <BedWrapper style={handleColor(data.roomType)}>
+                    {handelRoomSwitch(data.roomType)}
+                  </BedWrapper>
+                </td>
                 <td colSpan={2}>
                   <TdWrapper className="TdWrapper">
                     <StatusWrapper>

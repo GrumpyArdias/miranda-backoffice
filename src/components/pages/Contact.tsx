@@ -10,14 +10,15 @@ import ContactTable from "../ContactTable";
 import Dropdown from "../Dropdown";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getAllComments } from "../../slices/contactSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { CommentType } from "../../@types/contacts";
 
 export const Contact = () => {
   const dispatch = useAppDispatch();
   const contact = useAppSelector((state) => state.contacts.comments);
-
+  const [rowDataArray, setRowDataArray] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,17 +26,8 @@ export const Contact = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (contact.length === 0) {
-      navigate("/");
-    }
-    console.log(contact);
-  }, [contact, navigate]);
-
-  const options = ["Option 1", "Option 2", "Option 3"];
-
-  const handleSelect = (option: string[]) => {
-    console.log(`Selected option: ${option}`);
-  };
+    setRowDataArray(contact);
+  }, [contact]);
 
   const headerArray = [
     "ID",
@@ -47,7 +39,22 @@ export const Contact = () => {
     "Coment",
     "Action",
   ];
-  const rowDataArray = contact;
+
+  const handleComments = (option: string) => {
+    if (option === "active") {
+      const inactive: CommentType[] = [...contact].filter(
+        (contact) => !contact.action
+      );
+
+      return setRowDataArray(inactive);
+    } else {
+      const active: CommentType[] = [...contact].filter(
+        (contact) => contact.action
+      );
+      return setRowDataArray(active);
+    }
+  };
+
   return (
     <>
       <Reviews>
@@ -132,16 +139,25 @@ export const Contact = () => {
       </Reviews>
       <ContactTopWrap>
         <ContactTopLeftWrap>
-          <div className="Rooms-menu-cell">
+          <div
+            className="Rooms-menu-cell"
+            onClick={() => setRowDataArray(contact)}
+          >
             <h3>All Contacts</h3>
           </div>
-          <div className="Rooms-menu-cell">
-            <h3>Archive</h3>
+          <div
+            className="Rooms-menu-cell"
+            onClick={() => handleComments("active")}
+          >
+            <h3>Active</h3>
+          </div>
+          <div
+            className="Rooms-menu-cell"
+            onClick={() => handleComments("inactive")}
+          >
+            <h3>Inactive</h3>
           </div>
         </ContactTopLeftWrap>
-        <ContactTopRightWrap>
-          <Dropdown options={options} onSelect={handleSelect} />
-        </ContactTopRightWrap>
       </ContactTopWrap>
       <ContactTable headerArray={headerArray} rowDataArray={rowDataArray} />
     </>

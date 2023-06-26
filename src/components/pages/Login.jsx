@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Container,
   MiniContainer,
@@ -8,26 +8,35 @@ import {
 import { LoginForm } from "../styles/Form.styles";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../store/LoginContext";
+import { apiLoginFetch } from "../../utils/apiFetch";
 import Logo from "../../images/hotel-miranda-logo.png";
 function Login() {
   const { dispatch, state } = useContext(LoginContext);
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
+  let token;
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: "LOGIN",
-      value: {
-        mail: mail,
-        password: pass,
-        authenticated: true,
-        errorMessage: "",
-      },
-    });
-    return navigate("/");
+    token = await apiLoginFetch(mail, pass);
+    if (token) {
+      dispatch({
+        type: "LOGIN",
+        value: {
+          mail: mail,
+          password: pass,
+          authenticated: true,
+          errorMessage: "",
+          token: token,
+        },
+      });
+    }
   };
+
+  useEffect(() => {
+    if (state.authenticated) return navigate("/");
+  }, [state]);
 
   return (
     <Container>

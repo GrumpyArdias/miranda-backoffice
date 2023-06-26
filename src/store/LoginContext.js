@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useReducer } from "react";
 import { apiLoginFetch } from "../utils/apiFetch";
+import { useEffect } from "react";
 export const LoginContext = createContext();
 
 function isValidEmail(email) {
@@ -13,52 +14,54 @@ const types = {
   LOGOUT: "LOGOUT",
 };
 
-export const reducer = async (state, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case types.LOGIN:
-      if (action.value.mail === "" || action.value.password === "") {
-        return {
-          ...state,
-          errorMessage: "Please enter both email and password.",
-        };
-      }
-      if (!isValidEmail(action.value.mail)) {
-        return {
-          ...state,
-          errorMessage: "Please enter a valid email.",
-        };
-      }
+      // if (action.value.mail === "" || action.value.password === "") {
+      //   return {
+      //     ...state,
+      //     errorMessage: "Please enter both email and password.",
+      //   };
+      // }
+      // if (!isValidEmail(action.value.mail)) {
+      //   return {
+      //     ...state,
+      //     errorMessage: "Please enter a valid email.",
+      //   };
+      // }
 
-      const token = await apiLoginFetch(
-        action.value.mail,
-        action.value.password
-      );
-      console.log(token);
+      // const token = await apiLoginFetch(
+      //   action.value.mail,
+      //   action.value.password
+      // );
+      // console.log(token);
 
-      if (token) {
-        localStorage.setItem("mail", action.value.mail);
-        localStorage.setItem("isAuthenticated", true);
-        localStorage.setItem("token", token);
-        return {
-          ...state,
-          mail: action.value.mail,
-          password: action.value.password,
-          authenticated: true,
-          errorMessage: "", // clear any previous error message
-        };
-      } else {
-        return {
-          ...state,
-          mail: null,
-          password: null,
-          authenticated: false,
-          errorMessage: "Invalid email or password.",
-        };
-      }
+      // if (token) {
+      localStorage.setItem("mail", action.value.mail);
+      localStorage.setItem("isAuthenticated", true);
+      localStorage.setItem("token", action.value.token);
+      return {
+        ...state,
+        mail: action.value.mail,
+        password: action.value.password,
+        authenticated: true,
+        errorMessage: "", // clear any previous error message
+      };
+    // }
+    // } else {
+    //   return {
+    //     ...state,
+    //     mail: null,
+    //     password: null,
+    //     authenticated: false,
+    //     errorMessage: "Invalid email or password.",
+    //   };
+    // }
 
     case types.LOGOUT:
       localStorage.removeItem("mail");
-      localStorage.setItem("isAuthenticated", false);
+      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("token");
 
       return {
         authenticated: false,
@@ -79,6 +82,7 @@ export const initialState = {
 
 const LoginContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // console.error(state);
 
   return (
     <LoginContext.Provider value={{ state, dispatch }}>

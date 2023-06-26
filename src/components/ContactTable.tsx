@@ -29,7 +29,7 @@ function ContactTable(props: CommentProps) {
       case false:
         return (
           <NotArchiveStatus>
-            <p>Acttive</p>
+            <p>Active</p>
           </NotArchiveStatus>
         );
 
@@ -80,12 +80,12 @@ function ContactTable(props: CommentProps) {
           return (
             <tr key={uuid()}>
               <td colSpan={2}>{data.id}</td>
-              <td colSpan={2}>{data.date}</td>
-              <td colSpan={2}>{data.full_name}</td>
+              <td colSpan={2}>{data.commentDate}</td>
+              <td colSpan={2}>{data.fullName}</td>
               <td colSpan={2}>{data.email}</td>
               <td colSpan={2}>{data.phone}</td>
-              <td colSpan={2}>{data.subjet}</td>
-              <td colSpan={2}>{handleComentSwitch(data.coment)}</td>
+              <td colSpan={2}>{data.subject}</td>
+              <td colSpan={2}>{handleComentSwitch(data.comment)}</td>
               <td colSpan={2}>
                 <TdWrapper className="TdWrapper">
                   <StatusWrapper>

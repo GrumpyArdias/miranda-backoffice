@@ -27,6 +27,7 @@ export const RoomsTopLeftWrap = styled.div`
   .Rooms-menu-cell:hover {
     color: #ad9d82;
     border-bottom: 2px solid #ad9d82;
+    cursor: pointer;
     h3 {
       margin: 5px 5px;
       font-size: 14px;

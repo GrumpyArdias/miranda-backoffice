@@ -102,20 +102,6 @@ function RoomsTable(props: RoomProps) {
     dispatch(deleteRoom(data));
   };
 
-  // const handleFilter = (option: string) =>{
-
-  //   switch(option){
-
-  //     case "All":
-  //       return rowDataArray;
-  //     case "Available":
-  //       const availableRooms = [...rowDataArray].sort((b.estatus ? -1 : 1) - (a.estatus ? -1 : 1))
-
-  //     default:
-  //       return "error using the filter";
-  //   }
-  // }
-
   return (
     <RoomsTableStyle>
       <thead>
