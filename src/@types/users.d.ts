@@ -6,6 +6,7 @@ export type UserType = {
   jobTitle: string;
   estatus: boolean;
   number: string;
+  password: string;
 };
 
 export interface IUserState {

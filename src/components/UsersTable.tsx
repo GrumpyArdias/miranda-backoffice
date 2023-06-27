@@ -72,7 +72,11 @@ function UserTable(props: UserProps) {
                     <h5>{data.fullName}</h5>
                     <p>
                       #{employeeNumber} <br />
-                      {data.joinDate}
+                      {data.joinDate
+                        .replace(/T.*/, "")
+                        .split("-")
+                        .reverse()
+                        .join("/")}
                     </p>
                   </TextRowWrapper>
                 </DataRowWrapper>

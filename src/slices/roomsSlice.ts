@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 import { RoomType, UpdateRoom, IRoomsState } from "../@types/rooms";
 import { apiFetch } from "../utils/apiFetch";
+import { param } from "cypress/types/jquery";
 
 const initialState: IRoomsState = {
   rooms: [],
@@ -11,7 +12,12 @@ const initialState: IRoomsState = {
 export const getAllRooms = createAsyncThunk("rooms/getAllrooms", async () => {
   try {
     const token = localStorage.getItem("token");
-    const data = await apiFetch("rooms", "GET", token);
+    const params = {
+      option: "rooms",
+      method: "GET",
+      token: token,
+    };
+    const data = await apiFetch(params);
     return data;
   } catch (error) {
     console.error(error);
@@ -23,7 +29,14 @@ export const getOneRoom = createAsyncThunk(
   async ({ id }: RoomType) => {
     try {
       const token = localStorage.getItem("token");
-      const data = await apiFetch("rooms", "GET", token, id);
+      const params = {
+        option: "rooms",
+        method: "GET",
+        token: token,
+        id: id,
+      };
+
+      const data = await apiFetch(params);
       return data;
     } catch (error) {
       console.error(error);
@@ -36,10 +49,14 @@ export const createRoom = createAsyncThunk(
   async (newRoom: RoomType) => {
     try {
       const token = localStorage.getItem("token");
-      const id = uuid();
-      newRoom.id = id;
       const roomToString = JSON.stringify(newRoom);
-      const data = await apiFetch("rooms", "POST", token, roomToString);
+      const params = {
+        option: "rooms",
+        method: "POST",
+        token: token,
+        body: roomToString,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (error) {
       console.error(error);
@@ -52,7 +69,13 @@ export const deleteRoom = createAsyncThunk(
   async ({ id }: RoomType) => {
     try {
       const token = localStorage.getItem("token");
-      const data = await apiFetch("rooms", "DELETE", token, id);
+      const params = {
+        option: "rooms",
+        method: "DELETE",
+        token: token,
+        id: id,
+      };
+      const data = await apiFetch(params);
       console.log(data);
       return id;
     } catch (error) {
@@ -67,7 +90,14 @@ export const updateRoom = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const roomsToStrings = JSON.stringify(body);
-      const data = await apiFetch("rooms", "PUT", token, id, roomsToStrings);
+      const params = {
+        option: "rooms",
+        method: "DELETE",
+        token: token,
+        id: id,
+        body: roomsToStrings,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (error) {
       console.error(error);
