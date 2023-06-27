@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { v4 as uuid } from "uuid";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../slices/userSlice";
 import {
@@ -13,30 +12,36 @@ import {
 
 export function NewUser() {
   const initialObjet = {
-    id: "",
-    full_name: "",
+    fullName: "",
     email: "",
-    phone_number: "",
-    description: "",
     number: "",
-    status: "",
+    jobTitle: "",
+    joinDate: "",
+    estatus: "",
+    password: "",
   };
   const [user, setUser] = useState(initialObjet);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   setUser(user);
+  // }, [user]);
 
   const handleUserChange = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
+    let value = event.target.value;
+    if (name === "estatus") value = event.target.value === "true";
     setUser((prev) => ({ ...prev, [name]: value }));
   };
+  const joinDate = new Date().toISOString();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newUser = { ...user, id: uuid() };
+
+    const newUser = {
+      ...user,
+      joinDate: joinDate,
+    };
+
     dispatch(createUser(newUser));
     setUser(initialObjet);
   };
@@ -50,9 +55,9 @@ export function NewUser() {
           <Input
             data-cy="NewUserFullname"
             type="text"
-            id="full_name"
-            name="full_name"
-            value={user.full_name}
+            id="fullName"
+            name="fullName"
+            value={user.fullName}
             onChange={handleUserChange}
             required
           />
@@ -86,23 +91,38 @@ export function NewUser() {
           <Input
             data-cy="NewUserJobTitle"
             type="text"
-            id="description"
-            name="description"
-            value={user.description}
+            id="jobTitle"
+            name="jobTitle"
+            value={user.jobTitle}
+            onChange={handleUserChange}
+          />
+        </InputWrapper>
+
+        <InputWrapper className="UserJobTitle">
+          <h3>5. New Employee Password</h3>
+          <Input
+            data-cy="NewUserJobTitle"
+            type="password"
+            id="password"
+            name="password"
+            value={user.password}
             onChange={handleUserChange}
           />
         </InputWrapper>
         <InputWrapper className="UserStatus">
-          <h3>5. User Status</h3>
+          <h3>6. User Status</h3>
           <Select
             data-cy="NewUserStatus"
-            name="status"
-            id="UserStatus"
-            value={user.status}
+            name="estatus"
+            id="estatus"
+            value={user.estatus}
             onChange={handleUserChange}
           >
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
+            <option value="" hidden>
+              Choose
+            </option>
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
           </Select>
         </InputWrapper>
         <SubmitButton

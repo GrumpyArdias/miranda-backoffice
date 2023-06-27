@@ -12,7 +12,12 @@ export const getAllBookings = createAsyncThunk(
   async () => {
     try {
       const token = localStorage.getItem("token");
-      const data: BookingType[] = await apiFetch("bookings", "GET", token);
+      const params = {
+        option: "bookings",
+        method: "GET",
+        token: token,
+      };
+      const data: BookingType[] = await apiFetch(params);
       console.log("Inside getAllBookings, after apiFetch", data);
       return data;
     } catch (error) {
@@ -27,7 +32,13 @@ export const getOneBook = createAsyncThunk(
   async ({ id }: BookingType) => {
     try {
       const token = localStorage.getItem("token");
-      const data: BookingType = await apiFetch("bookings", "GET", token, id);
+      const params = {
+        option: "bookings",
+        method: "GET",
+        token: token,
+        id: id,
+      };
+      const data: BookingType = await apiFetch(params);
       return data;
     } catch (error) {
       console.error(error);
@@ -39,12 +50,16 @@ export const createBookings = createAsyncThunk(
   "bookings/createBookings",
   async (newBooking: BookingType) => {
     try {
-      const token = localStorage.getItem("token");
-      const id = uuid();
-      newBooking.id = id;
-
       const bookingToString = JSON.stringify(newBooking);
-      const data = await apiFetch("bookings", "POST", token, bookingToString);
+      const token = localStorage.getItem("token");
+      const params = {
+        option: "bookings",
+        method: "POST",
+        token: token,
+        body: bookingToString,
+      };
+
+      const data = await apiFetch(params);
       return data;
     } catch (error) {}
   }
@@ -55,7 +70,13 @@ export const deleteBooking = createAsyncThunk(
   async ({ id }: BookingType) => {
     try {
       const token = localStorage.getItem("token");
-      const data = await apiFetch("bookings", "DELETE", token, id);
+      const params = {
+        option: "bookings",
+        method: "DELETE",
+        token: token,
+        id: id,
+      };
+      const data = await apiFetch(params);
       console.log(data);
       return id;
     } catch (error) {
@@ -70,13 +91,14 @@ export const updateBooking = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const bookingToString = JSON.stringify(body);
-      const data = await apiFetch(
-        "bookings",
-        "PUT",
-        token,
-        id,
-        bookingToString
-      );
+      const params = {
+        option: "bookings",
+        method: "PUT",
+        token: token,
+        id: id,
+        body: bookingToString,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (error) {
       console.error(error);

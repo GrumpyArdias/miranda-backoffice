@@ -18,6 +18,7 @@ import { Contact } from "./components/pages/Contact";
 import Book from "./components/pages/Book";
 import { BodyWrap } from "./components/styles/App.styles";
 import { NewRoom } from "./components/pages/NewRoom";
+import { NewBooking } from "./components/pages/NewBooking";
 import { NewUser } from "./components/pages/NewUser";
 import { UserProfile } from "./components/pages/UserProfile";
 import { Wrapper } from "./components/Wrapper";
@@ -63,6 +64,14 @@ export function App() {
             <Route
               element={
                 <Wrapper>
+                  <NewRoom />
+                </Wrapper>
+              }
+              path="/bookings/newbooking"
+            />
+            <Route
+              element={
+                <Wrapper>
                   <Rooms />
                 </Wrapper>
               }
@@ -71,7 +80,7 @@ export function App() {
             <Route
               element={
                 <Wrapper>
-                  <NewRoom />
+                  <NewBooking />
                 </Wrapper>
               }
               path="/rooms/newroom"

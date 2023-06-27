@@ -1,40 +1,34 @@
 import fetch from "cross-fetch";
+type fetchParam = {
+  option: string;
+  method: string;
+  token: string;
+  id?: string;
+  body?: string;
+};
 
-export async function apiFetch(
-  option: string,
-  method: string,
-  token: string,
-  id?: string,
-  body?: string
-) {
+export async function apiFetch(params: fetchParam) {
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
+    Authorization: "Bearer " + params.token,
   };
 
-  try {
-    let url = id
-      ? `http://localhost:3001/api/${option}/${id}`
-      : `http://localhost:3001/api/${option}/`;
-
-    const res = await fetch(url, {
-      method: method,
-      headers: headers,
-      body: body,
-    });
-    console.log(res);
-    if (res.status >= 400) {
-      console.error("Bad response from Server");
-    }
-    console.log("fetch succeded");
-    const response = await res.json();
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error("This is the error in the fetch", error);
-    return error;
+  let url = params.id
+    ? `http://localhost:3001/api/${params.option}/${params.id}`
+    : `http://localhost:3001/api/${params.option}`;
+  //
+  const res = await fetch(url, {
+    method: params.method,
+    headers: headers,
+    body: params.body,
+  });
+  console.log("this is the res", res);
+  if (!res.ok) {
+    throw new Error();
   }
+  const response = await res.json();
+  return response.data;
 }
 
 export async function apiLoginFetch(email: string, password: string) {
@@ -53,16 +47,12 @@ export async function apiLoginFetch(email: string, password: string) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
-      console.log("Login succeded");
       const token = await res.json();
       const tokenData = token.data;
-      console.log(tokenData);
       return tokenData;
     } else {
-      console.error("Bad response from server");
     }
   } catch (err) {
-    console.error("This is the error in the fetch", err);
-    return err;
+    throw new Error();
   }
 }

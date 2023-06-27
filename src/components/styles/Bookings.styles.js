@@ -38,6 +38,7 @@ export const BookingsTopLeftWrap = styled.div`
 export const BookingsTopRightWrap = styled.div`
   display: flex;
   margin-top: 10px;
+  gap: 10px;
 `;
 
 export const BookingTopSelect = styled.select`
@@ -64,7 +65,7 @@ export const BookingTopSelect = styled.select`
     margin: 5px 5pxe;
   }
 `;
-export const UserEditButton = styled.button`
+export const NewBookingButton = styled.button`
   margin-right: 10px;
   padding: 5px 10px;
   font-size: 16px;

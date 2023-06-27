@@ -2,6 +2,7 @@ import {
   BookingsTopWrap,
   BookingsTopLeftWrap,
   BookingsTopRightWrap,
+  NewBookingButton,
 } from "../styles/Bookings.styles";
 import Dropdown from "../Dropdown";
 import BookingsTable from "../BookingTable";
@@ -10,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import React from "react";
 import { BookingType } from "../../@types/bookings";
+import { useNavigate } from "react-router-dom";
 
 function Bookings() {
   const dispatch = useAppDispatch();
@@ -70,7 +72,7 @@ function Bookings() {
   //       return console.error("Error handleling the Filter");
   //   }
   // };
-
+  const navigate = useNavigate();
   const dateFixerHandler = (date: string) => {
     const dateParts: string[] = date.split("/");
     const dateObject: Date = new Date(
@@ -172,6 +174,12 @@ function Bookings() {
         </BookingsTopLeftWrap>
         <BookingsTopRightWrap>
           <Dropdown options={options} onSelect={handleBookingFilter} />
+          <NewBookingButton
+            data-cy="new-user-button"
+            onClick={() => navigate("/booking/newbooking")}
+          >
+            <p>+ New Booking</p>
+          </NewBookingButton>
         </BookingsTopRightWrap>
       </BookingsTopWrap>
       <BookingsTable

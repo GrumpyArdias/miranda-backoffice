@@ -6,14 +6,21 @@ export const Wrapper = styled.div`
   border: 1px solid #ad9d82;
 `;
 
-export const NewUserForm = styled.form``;
+export const NewUserForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
 `;
 export const Input = styled.input`
   height: 20px;
-  width: 20%;
+  width: 100%;
   border-radius: 5px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -26,8 +33,9 @@ export const Input = styled.input`
 `;
 export const SubmitButton = styled.button`
   margin-top: 50px;
+  margin-bottom: 50px;
   height: 40px;
-  width: 20%;
+  width: 40%;
   border-radius: 20px;
   padding: 10px;
   background-color: #ad9d82;
@@ -43,8 +51,8 @@ export const SubmitButton = styled.button`
   cursor: pointer;
 `;
 export const Select = styled.select`
-  height: 50px;
-  width: 20%;
+  /* height: 50px;
+  width: 100%;
   text-align: center;
   border-radius: 5px;
   -webkit-appearance: none;
@@ -61,6 +69,25 @@ export const Select = styled.select`
   }
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2)
+  } */
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 200px;
+  outline: none;
+  color: #000; /* Text color inside the dropdown */
+  background-color: #fff; /* Background color of the dropdown */
+  :hover {
+    border-color: #888;
+    :focus {
+      border-color: #555;
+
+      option {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
   }
 `;

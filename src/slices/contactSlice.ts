@@ -12,7 +12,12 @@ export const getAllComments = createAsyncThunk(
   async () => {
     try {
       const token = localStorage.getItem("token");
-      const data = await apiFetch("comments", "GET", token);
+      const params = {
+        option: "comments",
+        method: "GET",
+        token: token,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (e) {
       console.log(e);
@@ -25,7 +30,13 @@ export const getOneComment = createAsyncThunk(
   async ({ id }: CommentType) => {
     try {
       const token = localStorage.getItem("token");
-      const data = await apiFetch("comments", "GET", token, id);
+      const params = {
+        option: "comments",
+        method: "GET",
+        token: token,
+        id: id,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (e) {
       console.log(e);
@@ -37,11 +48,14 @@ export const createComment = createAsyncThunk(
   "comments/createComment",
   async (newComment: CommentType) => {
     try {
-      const id = uuid();
       const token = localStorage.getItem("token");
-      newComment.id = id;
       const commentToString = JSON.stringify(newComment);
-      const data = await apiFetch("comments", "POST", token, commentToString);
+      const params = {
+        option: "comments",
+        method: "POST",
+        token: token,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (e) {
       console.log(e);
@@ -54,7 +68,13 @@ export const deleteComment = createAsyncThunk(
   async ({ id }: CommentType) => {
     try {
       const token = localStorage.getItem("token");
-      const data = await apiFetch("comments", "DELETE", token, id);
+      const params = {
+        option: "comments",
+        method: "DELETE",
+        token: token,
+        id: id,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (e) {
       console.log(e);
@@ -68,13 +88,14 @@ export const updateComment = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const commentToString = JSON.stringify(body);
-      const data = await apiFetch(
-        "comments",
-        "PUT",
-        token,
-        id,
-        commentToString
-      );
+      const params = {
+        option: "comments",
+        method: "PUT",
+        token: token,
+        id: id,
+        body: commentToString,
+      };
+      const data = await apiFetch(params);
       return data;
     } catch (e) {
       console.log(e);

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { UserType, IUserState, UpdateUser } from "../@types/users.d";
-import { v4 as uuid } from "uuid";
+
 import { apiFetch } from "../utils/apiFetch";
 
 const initialState: IUserState = {
@@ -11,7 +11,12 @@ const initialState: IUserState = {
 export const getAllUsers = createAsyncThunk("user/getAllUsers", async () => {
   try {
     const token = localStorage.getItem("token");
-    const data = await apiFetch("users", "GET", token);
+    const params = {
+      option: "users",
+      method: "GET",
+      token: token,
+    };
+    const data = await apiFetch(params);
     return data;
   } catch (error) {
     console.error(error);
@@ -23,7 +28,14 @@ export const getOneUser = createAsyncThunk(
   async ({ id }: UserType) => {
     try {
       const token = localStorage.getItem("token");
-      const data = await apiFetch("users", "GET", token, id);
+      const params = {
+        option: "users",
+        method: "GET",
+        token: token,
+        id: id,
+      };
+
+      const data = await apiFetch(params);
       return data;
     } catch (error) {
       console.error(error);
@@ -35,11 +47,18 @@ export const createUser = createAsyncThunk(
   "room/createUser",
   async (newUser: UserType) => {
     try {
-      const id = uuid();
       const token = localStorage.getItem("token");
-      newUser.id = id;
+
       const userToString = JSON.stringify(newUser);
-      const data = await apiFetch("users", "POST", token, id, userToString);
+      const params = {
+        option: "users",
+        method: "POST",
+        token: token,
+        body: userToString,
+      };
+
+      const data = await apiFetch(params);
+      console.log("this is the data", data);
       return data;
     } catch (error) {
       console.error(error);
@@ -50,9 +69,16 @@ export const createUser = createAsyncThunk(
 export const deleteUser = createAsyncThunk(
   "room/deleteUser",
   async ({ id }: UserType) => {
+    const token = localStorage.getItem("token");
     try {
-      const token = localStorage.getItem("token");
-      const data = await apiFetch("users", "DELETE", token, id);
+      const params = {
+        option: "users",
+        method: "DELETE",
+        token: token,
+        id: id,
+      };
+
+      const data = await apiFetch(params);
       return data;
     } catch (error) {
       console.error(error);
@@ -65,7 +91,15 @@ export const updateUser = createAsyncThunk(
   async ({ body, id }: UpdateUser) => {
     const token = localStorage.getItem("token");
     const userToString = JSON.stringify(body);
-    const data = await apiFetch("users", "PUT", token, id, userToString);
+    const params = {
+      option: "users",
+      method: "PUT",
+      token: token,
+      id: id,
+      body: userToString,
+    };
+
+    const data = await apiFetch(params);
     return data;
   }
 );
