@@ -1,20 +1,32 @@
 import styled from "@emotion/styled";
-
+import Cat from "../../images/cat3.jpg";
 export const BookWrapper = styled.div`
   margin: 20px auto;
+  max-width: 90%;
   display: flex;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
   border: 1px solid black;
   margin-top: 40px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+
+  gap: 10px;
 `;
 export const BookLeft = styled.div`
   max-width: 50%;
   margin-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 `;
 
-export const BookRight = styled.div``;
+export const BookRight = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  max-width: 50%;
+
+  img {
+    max-width: 100%;
+  }
+`;
 export const BookLeftFirstBlock = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,7 +40,8 @@ export const UserInfo = styled.div`
 export const UserPhoto = styled.div`
   min-width: 156px;
   min-height: 156px;
-  background-color: gray;
+  background-image: url(${Cat});
+  background-size: cover;
   border-radius: 10px;
 `;
 export const UserData = styled.div`

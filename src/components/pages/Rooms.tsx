@@ -29,9 +29,6 @@ function Rooms() {
     setRowDataArray(rooms);
   }, [rooms]);
 
-  // useEffect(() => {
-  //   console.log(rowDataArray);
-  // }, [rowDataArray]);
 
   const headerArray = [
     "Room",
@@ -70,10 +67,6 @@ function Rooms() {
     }
   };
 
-  useEffect(() => {
-    console.log(rowDataArray);
-  }, [rowDataArray]);
-
   return (
     <>
       <RoomsTopWrap>
@@ -81,7 +74,6 @@ function Rooms() {
           <div
             className="Rooms-menu-cell"
             onClick={() => {
-              console.log("click");
               HandleRoomFilter("allRooms");
             }}
           >
@@ -90,7 +82,6 @@ function Rooms() {
           <div
             className="Rooms-menu-cell"
             onClick={() => {
-              console.log("test");
               return HandleRoomFilter("available");
             }}
           >

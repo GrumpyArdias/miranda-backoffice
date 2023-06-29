@@ -18,6 +18,7 @@ export const getAllRooms = createAsyncThunk("rooms/getAllrooms", async () => {
       token: token,
     };
     const data = await apiFetch(params);
+
     return data;
   } catch (error) {
     console.error(error);
@@ -26,7 +27,7 @@ export const getAllRooms = createAsyncThunk("rooms/getAllrooms", async () => {
 
 export const getOneRoom = createAsyncThunk(
   "room/getOneBook",
-  async ({ id }: RoomType) => {
+  async (id: string) => {
     try {
       const token = localStorage.getItem("token");
       const params = {
@@ -37,6 +38,7 @@ export const getOneRoom = createAsyncThunk(
       };
 
       const data = await apiFetch(params);
+      console.log("this is data in the roomSlice", data);
       return data;
     } catch (error) {
       console.error(error);
@@ -116,8 +118,8 @@ const roomSlice = createSlice({
         console.log("getAllRooms.fulfilled", state.rooms);
       })
       .addCase(getOneRoom.fulfilled, (state, action) => {
-        state.room = state.rooms.find((room) => room.id === action.payload.id);
-        console.log("getOneRoom.fulfilled", state.room);
+        console.log("This is the action payload in RoomSlice", action.payload);
+        state.room = action.payload;
       })
       .addCase(createRoom.fulfilled, (state, action) => {
         state.rooms = [...state.rooms, action.payload];

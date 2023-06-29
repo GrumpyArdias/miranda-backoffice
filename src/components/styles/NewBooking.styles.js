@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   border: 1px solid #ad9d82;
 `;
 
-export const NewUserForm = styled.form`
+export const NewBookingForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,14 +24,14 @@ export const Input = styled.input`
   border-radius: 5px;
   padding: 10px;
   border: 1px solid #ccc;
-  margin: 15px auto;
+  margin: 10px auto;
 
   &:focus {
     outline: none;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   }
 `;
-export const SubmitButton = styled.button`
+export const SubmitInput = styled.input`
   margin-top: 50px;
   margin-bottom: 50px;
   height: 40px;

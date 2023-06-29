@@ -126,9 +126,27 @@ function BookingTable(props: BookingProps) {
                     </TextRowWrapper>
                   </DataRowWrapper>
                 </td>
-                <td colSpan={2}>{data.bookingDate}</td>
-                <td colSpan={2}>{data.checkIn}</td>
-                <td colSpan={2}>{data.checkOut}</td>
+                <td colSpan={2}>
+                  {data.bookingDate
+                    .replace(/T.*/, "")
+                    .split("-")
+                    .reverse()
+                    .join("/")}
+                </td>
+                <td colSpan={2}>
+                  {data.checkIn
+                    .replace(/T.*/, "")
+                    .split("-")
+                    .reverse()
+                    .join("/")}
+                </td>
+                <td colSpan={2}>
+                  {data.checkOut
+                    .replace(/T.*/, "")
+                    .split("-")
+                    .reverse()
+                    .join("/")}
+                </td>
                 <td colSpan={2} data-cy="NotesButton">
                   {data.specialRquest ? (
                     clickedId ? (

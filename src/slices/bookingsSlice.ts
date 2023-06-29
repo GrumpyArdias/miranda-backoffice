@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { v4 as uuid } from "uuid";
 import { BookingType, IBookingState, UpdateBooking } from "../@types/bookings";
 import { apiFetch } from "../utils/apiFetch";
 const initialState: IBookingState = {
@@ -18,7 +17,6 @@ export const getAllBookings = createAsyncThunk(
         token: token,
       };
       const data: BookingType[] = await apiFetch(params);
-      console.log("Inside getAllBookings, after apiFetch", data);
       return data;
     } catch (error) {
       console.error(error);
@@ -29,7 +27,7 @@ export const getAllBookings = createAsyncThunk(
 
 export const getOneBook = createAsyncThunk(
   "bookings/getOneBook",
-  async ({ id }: BookingType) => {
+  async (id: string) => {
     try {
       const token = localStorage.getItem("token");
       const params = {
@@ -60,6 +58,7 @@ export const createBookings = createAsyncThunk(
       };
 
       const data = await apiFetch(params);
+      console.log("this is the data in the bookingSlice", data);
       return data;
     } catch (error) {}
   }
@@ -77,7 +76,6 @@ export const deleteBooking = createAsyncThunk(
         id: id,
       };
       const data = await apiFetch(params);
-      console.log(data);
       return id;
     } catch (error) {
       console.error(error);
@@ -113,26 +111,21 @@ const bookingsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllBookings.fulfilled, (state, action) => {
-        console.log("getAllBookings.fulfilled", action.payload);
         state.bookings = action.payload;
       })
 
       .addCase(getOneBook.fulfilled, (state, action) => {
-        const { id } = action.payload;
-        state.booking = state.bookings.find((booking) => booking.id === id);
-        console.log("getOneBook.fulfilled", state.booking.id);
+        state.booking = action.payload;
       })
 
       .addCase(createBookings.fulfilled, (state, action) => {
         state.bookings = [...state.bookings, action.payload];
-        console.log("createBookings.fulfilled", state.bookings);
       })
 
       .addCase(deleteBooking.fulfilled, (state, action) => {
         state.bookings = state.bookings.filter(
           (booking) => booking.id !== action.payload
         );
-        console.log("deleteBooking.fulfilled", state.bookings);
       })
 
       .addCase(updateBooking.fulfilled, (state, action) => {
