@@ -29,9 +29,7 @@ function Bookings() {
 
   const options = ["Date", "CheckIn", "CheckOut"];
 
-  const handleSelect = (option: string[]) => {
-    console.log(`Selected option: ${option}`);
-  };
+  const handleSelect = (option: string[]) => {};
 
   const headerArray: string[] = [
     "Nombre",
@@ -138,7 +136,6 @@ function Bookings() {
           <div
             className="Bookings-menu-cell"
             onClick={() => {
-              console.log("click");
               return handleBookingFilter("AllBookings");
             }}
           >
@@ -147,7 +144,6 @@ function Bookings() {
           <div
             className="Bookings-menu-cell"
             onClick={() => {
-              console.log("click");
               return handleBookingFilter("booked");
             }}
           >
@@ -156,7 +152,6 @@ function Bookings() {
           <div
             className="Bookings-menu-cell"
             onClick={() => {
-              console.log("click");
               return handleBookingFilter("refound");
             }}
           >
@@ -165,7 +160,6 @@ function Bookings() {
           <div
             className="Bookings-menu-cell"
             onClick={() => {
-              console.log("click");
               return handleBookingFilter("inProgress");
             }}
           >
@@ -176,7 +170,7 @@ function Bookings() {
           <Dropdown options={options} onSelect={handleBookingFilter} />
           <NewBookingButton
             data-cy="new-user-button"
-            onClick={() => navigate("/booking/newbooking")}
+            onClick={() => navigate("/bookings/newbooking")}
           >
             <p>+ New Booking</p>
           </NewBookingButton>

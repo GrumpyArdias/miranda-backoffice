@@ -64,7 +64,7 @@ export function App() {
             <Route
               element={
                 <Wrapper>
-                  <NewRoom />
+                  <NewBooking />
                 </Wrapper>
               }
               path="/bookings/newbooking"

@@ -23,7 +23,7 @@ export async function apiFetch(params: fetchParam) {
     headers: headers,
     body: params.body,
   });
-  console.log("this is the res", res);
+
   if (!res.ok) {
     throw new Error();
   }

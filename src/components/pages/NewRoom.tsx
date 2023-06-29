@@ -15,7 +15,6 @@ import {
 } from "../styles/newRoom.styles";
 import { ChangeEvent, useEffect, useState, FormEvent } from "react";
 import { createRoom } from "../../slices/roomsSlice";
-import { v4 as uuid } from "uuid";
 import React from "react";
 import { useAppDispatch } from "../../hooks/hooks";
 import { RoomType as RoomTypeTS } from "../../@types/rooms";
@@ -57,7 +56,6 @@ export function NewRoom() {
   };
 
   useEffect(() => {
-    console.log(room);
     const calculatedDiscountedPrice: number =
       room.price - (room.price * room.discount) / 100;
     setDiscountedPrice(calculatedDiscountedPrice);
@@ -67,7 +65,7 @@ export function NewRoom() {
     event: FormEvent<HTMLDivElement> | FormEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
-    const newRoom = { ...room, id: uuid() }; // Generate UUID for the new room
+    const newRoom = { ...room }; // Generate UUID for the new room
     dispatch(createRoom(newRoom));
     setRoom(initialObjet); // Reset the room state after submitting
   };
