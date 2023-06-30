@@ -25,7 +25,7 @@ export const getAllUsers = createAsyncThunk("user/getAllUsers", async () => {
 
 export const getOneUser = createAsyncThunk(
   "user/getOneUser",
-  async ({ id }: UserType) => {
+  async (id: string) => {
     try {
       const token = localStorage.getItem("token");
       const params = {
@@ -115,9 +115,7 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getOneUser.fulfilled, (state, action) => {
-      const { id } = action.payload;
-      state.user = state.users.find((user) => user.id === id);
-      console.log("getOneUser.fulfilled", state.user);
+      state.user = action.payload;
     });
 
     builder.addCase(createUser.fulfilled, (state, action) => {
