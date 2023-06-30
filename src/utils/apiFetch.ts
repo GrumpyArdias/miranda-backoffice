@@ -46,10 +46,11 @@ export async function apiLoginFetch(email: string, password: string) {
       headers: headers,
       body: JSON.stringify(data),
     });
+
     if (res.ok) {
-      const token = await res.json();
-      const tokenData = token.data;
-      return tokenData;
+      const data = await res.json();
+      const fixedData = data.data;
+      return fixedData;
     } else {
     }
   } catch (err) {

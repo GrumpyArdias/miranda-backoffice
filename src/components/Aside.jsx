@@ -5,9 +5,25 @@ import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import GroupIcon from "@mui/icons-material/Group";
 import Logo from "../images/hotel-miranda-logo.png";
 import { LeftMainContainer, StyledLink } from "./styles/Aside.styles";
+import { useEffect, useContext } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { getOneUser } from "../slices/userSlice";
+import { LoginContext } from "../store/LoginContext";
 
 function Aside(props) {
   const asideDisplay = props.visible ? "flex" : "none";
+  const dispatch = useAppDispatch();
+  const { state } = useContext(LoginContext);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (state.authenticated) {
+      console.log(userId);
+      dispatch(getOneUser(userId));
+    }
+  }, [dispatch, state.authenticated]);
+
+  const user = useAppSelector((state) => state.users.user);
 
   return (
     <LeftMainContainer style={{ display: asideDisplay }}>
@@ -49,9 +65,7 @@ function Aside(props) {
       </StyledLink>
       <div className="lateralUser">
         <div id="UserPhoto"></div>
-        <div id="UserName">
-          <h3>Paco</h3>
-        </div>
+        <div id="UserName">{user.id ? <h3>{user.fullName}</h3> : ""}</div>
         <button id="UserEditButton">Edit profile</button>
       </div>
     </LeftMainContainer>

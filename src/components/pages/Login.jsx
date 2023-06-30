@@ -15,20 +15,22 @@ function Login() {
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
-  let token;
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    token = await apiLoginFetch(mail, pass);
+    console.log("esto es el handleLogin");
+    const { token, userId } = await apiLoginFetch(mail, pass);
+
     if (token) {
       dispatch({
         type: "LOGIN",
         value: {
-          mail: mail,
+          mail,
           password: pass,
           authenticated: true,
           errorMessage: "",
-          token: token,
+          token,
+          userId,
         },
       });
     }
