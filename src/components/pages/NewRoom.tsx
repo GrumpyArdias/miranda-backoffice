@@ -21,7 +21,7 @@ import { RoomType as RoomTypeTS } from "../../@types/rooms";
 
 export function NewRoom() {
   const initialObjet: RoomTypeTS = {
-    id: "",
+    id: "1",
     bedType: "",
     estatus: false,
     facilities: [],
@@ -65,9 +65,10 @@ export function NewRoom() {
     event: FormEvent<HTMLDivElement> | FormEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
-    const newRoom = { ...room }; // Generate UUID for the new room
+    const newRoom = { ...room };
+
     dispatch(createRoom(newRoom));
-    setRoom(initialObjet); // Reset the room state after submitting
+    setRoom(initialObjet);
   };
 
   return (
@@ -84,7 +85,9 @@ export function NewRoom() {
               onChange={handleRoomChange}
               required
             >
-              <option value="none">Choose Bed Type</option>
+              <option value="none" hidden>
+                Choose Bed Type
+              </option>
               <option value="single">Single</option>
               <option value="double">Double</option>
               <option value="doubleSuperior">Double Superior</option>
@@ -97,8 +100,8 @@ export function NewRoom() {
               <input
                 type="checkbox"
                 name="amenities"
-                value="wifi"
-                checked={room.facilities.includes("wifi")}
+                value="Wifi"
+                checked={room.facilities.includes("Wifi")}
                 onChange={handleAmenitiesChange}
               />
               WiFi
@@ -107,8 +110,8 @@ export function NewRoom() {
               <input
                 type="checkbox"
                 name="amenities"
-                value="tv"
-                checked={room.facilities.includes("tv")}
+                value="TV"
+                checked={room.facilities.includes("TV")}
                 onChange={handleAmenitiesChange}
               />
               TV
@@ -117,19 +120,18 @@ export function NewRoom() {
               <input
                 type="checkbox"
                 name="amenities"
-                value="ac"
-                checked={room.facilities.includes("ac")}
+                value="Kitchen"
+                checked={room.facilities.includes("Kitchen")}
                 onChange={handleAmenitiesChange}
               />
               AC
             </label>
-
             <label>
               <input
                 type="checkbox"
                 name="amenities"
-                value="fridge"
-                checked={room.facilities.includes("fridge")}
+                value="Free parking"
+                checked={room.facilities.includes("Free parking")}
                 onChange={handleAmenitiesChange}
               />
               Mini Fridge
@@ -138,8 +140,8 @@ export function NewRoom() {
               <input
                 type="checkbox"
                 name="amenities"
-                value="bathtub"
-                checked={room.facilities.includes("bathtub")}
+                value="Air conditioning"
+                checked={room.facilities.includes("Air conditioning")}
                 onChange={handleAmenitiesChange}
               />
               Bathtub
@@ -148,8 +150,8 @@ export function NewRoom() {
               <input
                 type="checkbox"
                 name="amenities"
-                value="sauna"
-                checked={room.facilities.includes("sauna")}
+                value="Bathtub"
+                checked={room.facilities.includes("Bathtub")}
                 onChange={handleAmenitiesChange}
               />
               Sauna
@@ -158,21 +160,11 @@ export function NewRoom() {
               <input
                 type="checkbox"
                 name="amenities"
-                value="roomService"
-                checked={room.facilities.includes("roomService")}
+                value="Coffee set"
+                checked={room.facilities.includes("Coffee set")}
                 onChange={handleAmenitiesChange}
               />
               Room Service
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="amenities"
-                value="butler"
-                checked={room.facilities.includes("butler")}
-                onChange={handleAmenitiesChange}
-              />
-              Butler
             </label>
           </Amenities>
           <h3>3. Pricing and Discount</h3>
@@ -223,7 +215,7 @@ export function NewRoom() {
           </div> */}
 
           <Floor className="floor">
-            <h3>5. Floor Choice</h3>
+            <h3>4. Floor Choice</h3>
             <FloorWrapper className="floorWrapper">
               <FloorCell className="FloorCell">
                 <label htmlFor="floor">Floor</label>

@@ -9,12 +9,13 @@ import { useEffect, useContext } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { getOneUser } from "../slices/userSlice";
 import { LoginContext } from "../store/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 function Aside(props) {
   const asideDisplay = props.visible ? "flex" : "none";
   const dispatch = useAppDispatch();
   const { state } = useContext(LoginContext);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (state.authenticated) {
@@ -66,7 +67,9 @@ function Aside(props) {
       <div className="lateralUser">
         <div id="UserPhoto"></div>
         <div id="UserName">{user.id ? <h3>{user.fullName}</h3> : ""}</div>
-        <button id="UserEditButton">Edit profile</button>
+        <button id="UserEditButton" onClick={() => navigate("/users/edit")}>
+          Edit profile
+        </button>
       </div>
     </LeftMainContainer>
   );

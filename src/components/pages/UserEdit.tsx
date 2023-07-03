@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { createUser } from "../../slices/userSlice";
+import React from "react";
+import { useState, useContext, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { LoginContext } from "../../store/LoginContext";
+import { getOneUser, updateUser } from "../../slices/userSlice";
 import {
   Wrapper,
   NewUserForm,
@@ -9,46 +11,56 @@ import {
   Select,
   SubmitButton,
 } from "../styles/NewUser.Styles";
+import { UserType } from "../../@types/users";
 
-export function NewUser() {
-  const initialObjet = {
-    fullName: "",
-    email: "",
-    number: "",
-    jobTitle: "",
-    joinDate: "",
-    estatus: "",
-    password: "",
-  };
-  const [user, setUser] = useState(initialObjet);
-  const dispatch = useDispatch();
+export function UserEdit() {
+  const { state } = useContext(LoginContext);
+  const dispatch = useAppDispatch();
+  let userId = "";
 
-  const handleUserChange = (event) => {
+  useEffect(() => {
+    userId = localStorage.getItem("userId");
+    if (state.authenticated) {
+      console.log(userId);
+    }
+  }, [dispatch, state.authenticated]);
+
+  const UserFromDb = useAppSelector((state) => state.users.user);
+  const [user, setUser] = useState(UserFromDb);
+
+  useEffect(() => {
+    userId = localStorage.getItem("userId");
+    dispatch(getOneUser(userId))
+      .unwrap()
+      .then((user) => setUser(user));
+  }, [dispatch]);
+
+  const handleUserChange = (event: any) => {
     const name = event.target.name;
     let value = event.target.value;
     if (name === "estatus") value = event.target.value === "true";
     setUser((prev) => ({ ...prev, [name]: value }));
   };
 
-  const joinDate = new Date().toISOString();
-
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    const newUser = {
+    const updatedUser: UserType = {
       ...user,
-      joinDate: joinDate,
     };
 
-    dispatch(createUser(newUser));
-    setUser(initialObjet);
+    dispatch(updateUser({ body: updatedUser, id: updatedUser.id }));
   };
+
+  if (!user.id) {
+    return <h3>Loading...</h3>;
+  }
 
   return (
     <Wrapper className="Wrapper">
       <NewUserForm action="" className="UserForm" onSubmit={handleSubmit}>
         <InputWrapper className="UserFullname">
-          <h3>1. New Employee Full Name</h3>
+          <h3>1. Employee Full Name</h3>
 
           <Input
             data-cy="NewUserFullname"
@@ -61,7 +73,7 @@ export function NewUser() {
           />
         </InputWrapper>
         <InputWrapper className="UserEmail">
-          <h3>2. New Employee Email</h3>
+          <h3>2. Employee Email</h3>
 
           <Input
             data-cy="NewUserEmail"
@@ -73,7 +85,7 @@ export function NewUser() {
           />
         </InputWrapper>
         <InputWrapper className="UserPhoneNumber">
-          <h3>3. New Employee Phone Number</h3>
+          <h3>3. Employee Phone Number</h3>
 
           <Input
             data-cy="NewUserPhoneNumber"
@@ -85,7 +97,7 @@ export function NewUser() {
           />
         </InputWrapper>
         <InputWrapper className="UserJobTitle">
-          <h3>4. New Employee Job Title</h3>
+          <h3>4. Employee Job Title</h3>
           <Input
             data-cy="NewUserJobTitle"
             type="text"
@@ -95,39 +107,10 @@ export function NewUser() {
             onChange={handleUserChange}
           />
         </InputWrapper>
-
-        <InputWrapper className="UserJobTitle">
-          <h3>5. New Employee Password</h3>
-          <Input
-            data-cy="NewUserJobTitle"
-            type="password"
-            id="password"
-            name="password"
-            value={user.password}
-            onChange={handleUserChange}
-          />
-        </InputWrapper>
-        <InputWrapper className="UserStatus">
-          <h3>6. User Status</h3>
-          <Select
-            data-cy="NewUserStatus"
-            name="estatus"
-            id="estatus"
-            value={user.estatus}
-            onChange={handleUserChange}
-          >
-            <option value="" hidden>
-              Choose
-            </option>
-            <option value="true">Active</option>
-            <option value="false">Inactive</option>
-          </Select>
-        </InputWrapper>
         <SubmitButton
           data-cy="SubmitButton"
           data-testid="NewUserButtonTest"
           type="submit"
-          onClick={handleSubmit}
         >
           Submit
         </SubmitButton>
