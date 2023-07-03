@@ -87,7 +87,7 @@ export const deleteUser = createAsyncThunk(
 );
 
 export const updateUser = createAsyncThunk(
-  "room/updateRoom",
+  "users/updateUsers",
   async ({ body, id }: UpdateUser) => {
     const token = localStorage.getItem("token");
     const userToString = JSON.stringify(body);
@@ -100,6 +100,7 @@ export const updateUser = createAsyncThunk(
     };
 
     const data = await apiFetch(params);
+    console.log("this is data", data);
     return data;
   }
 );
@@ -129,9 +130,8 @@ const userSlice = createSlice({
     });
 
     builder.addCase(updateUser.fulfilled, (state, action) => {
-      state.users = state.users.map((user) =>
-        user.id === action.payload.id ? action.payload : user
-      );
+      state.user = action.payload;
+      console.log(action.payload);
       console.log("updateUser.fulfilled", state.users);
     });
 

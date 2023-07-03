@@ -21,6 +21,7 @@ import { NewRoom } from "./components/pages/NewRoom";
 import { NewBooking } from "./components/pages/NewBooking";
 import { NewUser } from "./components/pages/NewUser";
 import { UserProfile } from "./components/pages/UserProfile";
+import { UserEdit } from "./components/pages/UserEdit";
 import { Wrapper } from "./components/Wrapper";
 
 export function App() {
@@ -80,7 +81,7 @@ export function App() {
             <Route
               element={
                 <Wrapper>
-                  <NewBooking />
+                  <NewRoom />
                 </Wrapper>
               }
               path="/rooms/newroom"
@@ -108,6 +109,14 @@ export function App() {
                 </Wrapper>
               }
               path="/users/:id"
+            />
+            <Route
+              element={
+                <Wrapper>
+                  <UserEdit />
+                </Wrapper>
+              }
+              path="/users/edit"
             />
             <Route
               element={
