@@ -77,8 +77,8 @@ export const deleteRoom = createAsyncThunk(
         token: token,
         id: id,
       };
-      const data = await apiFetch(params);
-      console.log(data);
+      await apiFetch(params);
+
       return id;
     } catch (error) {
       console.error(error);
@@ -115,26 +115,21 @@ const roomSlice = createSlice({
     builder
       .addCase(getAllRooms.fulfilled, (state, action) => {
         state.rooms = action.payload;
-        console.log("getAllRooms.fulfilled", state.rooms);
       })
       .addCase(getOneRoom.fulfilled, (state, action) => {
-        console.log("This is the action payload in RoomSlice", action.payload);
         state.room = action.payload;
       })
       .addCase(createRoom.fulfilled, (state, action) => {
         state.rooms = [...state.rooms, action.payload];
-        console.log("createRoom.fulfilled", state.rooms);
       })
       .addCase(deleteRoom.fulfilled, (state, action) => {
         const id = action.payload;
         state.rooms = state.rooms.filter((room) => room.id !== id);
-        console.log("deleteRoom.fulfilled", state.rooms);
       })
       .addCase(updateRoom.fulfilled, (state, action) => {
         state.rooms = state.rooms.map((room) =>
           room.id === action.payload.id ? action.payload : room
         );
-        console.log("updateRoom.fulfilled", state.rooms);
       })
 
       .addMatcher(

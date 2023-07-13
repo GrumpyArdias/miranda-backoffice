@@ -14,11 +14,12 @@ import {
   BedWrapper,
 } from "./styles/BookingTable.styles";
 import Cat from "../images/cat3.jpg";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { v4 as uuid } from "uuid";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import { deleteBooking } from "../slices/bookingsSlice";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
 import { useAppDispatch } from "../hooks/hooks";
 import React from "react";
 import { BookingType, BookingProps } from "../@types/bookings";
@@ -91,11 +92,8 @@ function BookingTable(props: BookingProps) {
   };
 
   const handleDelete = (booking: BookingType) => {
-    console.log(booking);
     dispatch(deleteBooking(booking));
   };
-
-  console.log(rowDataArray);
 
   return (
     <div>
@@ -176,7 +174,7 @@ function BookingTable(props: BookingProps) {
                       {handleStatusSwitch(data.status)}
                     </StatusWrapper>
                     <IconWrapper>
-                      <DeleteForeverIcon
+                      <RemoveCircleOutlineIcon
                         data-cy="deleteButton"
                         style={{ color: "red" }}
                         onClick={() => handleDelete(data)}

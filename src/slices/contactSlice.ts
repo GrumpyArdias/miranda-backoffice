@@ -54,6 +54,7 @@ export const createComment = createAsyncThunk(
         option: "comments",
         method: "POST",
         token: token,
+        body: commentToString,
       };
       const data = await apiFetch(params);
       return data;
@@ -74,8 +75,8 @@ export const deleteComment = createAsyncThunk(
         token: token,
         id: id,
       };
-      const data = await apiFetch(params);
-      return data;
+      await apiFetch(params);
+      return id;
     } catch (e) {
       console.log(e);
     }
@@ -109,18 +110,11 @@ const contactSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllComments.fulfilled, (state, action) => {
-      console.log("getAllComments.fulfilled", action.payload);
       state.comments = action.payload;
     });
 
-    builder.addCase(getOneComment.fulfilled, (state, action) => {
-      const { id }: CommentType = action.payload;
-      state.coment = state.comments.find((booking) => booking.id === id);
-      console.log("getOneBook.fulfilled", state.coment.id);
-    });
-    builder.addCase(createComment.fulfilled, (state, action) => {
-      state.comments = [...state.comments, action.payload];
-    });
+    builder.addCase(getOneComment.fulfilled, (state, action) => {});
+    builder.addCase(createComment.fulfilled, (state, action) => {});
     builder.addCase(deleteComment.fulfilled, (state, action) => {
       state.comments = state.comments.filter(
         (comment) => comment.id !== action.payload

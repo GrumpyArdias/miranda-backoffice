@@ -19,7 +19,6 @@ function Bookings() {
     (state) => state.bookings.bookings
   );
   const [rowDataArray, setRowDataArray] = useState([]);
-  console.log("This is bookings in Bookings:", bookings);
 
   useEffect(() => {
     dispatch(getAllBookings())

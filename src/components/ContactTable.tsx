@@ -7,11 +7,11 @@ import {
   IconWrapper,
 } from "./styles/ContactTable.styles";
 import { v4 as uuid } from "uuid";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useAppDispatch } from "../hooks/hooks";
 import { deleteComment } from "../slices/contactSlice";
 import React from "react";
 import { CommentProps, CommentType } from "../@types/contacts";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 function ContactTable(props: CommentProps) {
   const headerArray = props.headerArray;
@@ -92,7 +92,7 @@ function ContactTable(props: CommentProps) {
                     {handleStatusSwitch(data.action)}
                   </StatusWrapper>
                   <IconWrapper>
-                    <DeleteForeverIcon
+                    <RemoveCircleOutlineIcon
                       style={{ color: "red" }}
                       onClick={() => handleDelete(data)}
                     />

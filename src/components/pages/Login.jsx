@@ -18,7 +18,6 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("esto es el handleLogin");
     const { token, userId } = await apiLoginFetch(mail, pass);
 
     if (token) {

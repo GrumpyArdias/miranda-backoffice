@@ -9,13 +9,14 @@ export const ContactTableStyle = styled.table`
     tr {
       padding: 8px;
       text-align: center;
+      transition: all 0.3s;
 
       td {
         padding: 8px;
         text-align: center;
       }
       &:hover {
-        scale: 1.05;
+        scale: 1.02;
         box-shadow: rgba(0, 0, 0, 0.08) 0px 20px 30px;
       }
     }

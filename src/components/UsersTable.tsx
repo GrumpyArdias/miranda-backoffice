@@ -11,11 +11,13 @@ import {
 } from "./styles/UserTable.style";
 import { v4 as uuid } from "uuid";
 import Cat from "../images/cat3.jpg";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+
 import { deleteUser } from "../slices/userSlice";
 import React from "react";
 import { UserProps, UserType } from "../@types/users";
 import { useAppDispatch } from "../hooks/hooks";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+
 function UserTable(props: UserProps) {
   const dispatch = useAppDispatch();
   const headerArray = props.headerArray;
@@ -91,7 +93,7 @@ function UserTable(props: UserProps) {
                     {handleStatusSwitch(data.estatus)}
                   </StatusWrapper>
                   <IconWrapper>
-                    <DeleteForeverIcon
+                    <RemoveCircleOutlineIcon
                       data-cy="deleteButtonUser"
                       style={{ color: "red" }}
                       onClick={() => handleDelete(data)}

@@ -15,9 +15,9 @@ export async function apiFetch(params: fetchParam) {
   };
 
   let url = params.id
-    ? `http://localhost:3001/api/${params.option}/${params.id}`
-    : `http://localhost:3001/api/${params.option}`;
-  //
+    ? `${process.env.REACT_APP_API_URL}/api/${params.option}/${params.id}`
+    : `${process.env.REACT_APP_API_URL}/api/${params.option}`;
+
   const res = await fetch(url, {
     method: params.method,
     headers: headers,
@@ -41,7 +41,7 @@ export async function apiLoginFetch(email: string, password: string) {
     "Content-Type": "application/json",
   };
   try {
-    const res = await fetch(`http://localhost:3001/login`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify(data),

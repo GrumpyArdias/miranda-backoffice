@@ -19,7 +19,6 @@ function Aside(props) {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (state.authenticated) {
-      console.log(userId);
       dispatch(getOneUser(userId));
     }
   }, [dispatch, state.authenticated]);
