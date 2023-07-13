@@ -27,7 +27,6 @@ export function NewBooking() {
   const dispatch = useAppDispatch();
 
   const date = new Date().toISOString();
-  console.log("this is date", date);
 
   const handleBookingChange = (e: any) => {
     const { name, value } = e.target;

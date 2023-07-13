@@ -19,8 +19,6 @@ function Rooms() {
   const navigate = useNavigate();
   const [rowDataArray, setRowDataArray] = useState(rooms);
 
-  console.log("this is rooms", rooms);
-
   useEffect(() => {
     dispatch(getAllRooms());
   }, [dispatch]);
@@ -28,7 +26,6 @@ function Rooms() {
   useEffect(() => {
     setRowDataArray(rooms);
   }, [rooms]);
-
 
   const headerArray = [
     "Room",
@@ -90,7 +87,6 @@ function Rooms() {
           <div
             className="Rooms-menu-cell"
             onClick={() => {
-              console.log("test");
               HandleRoomFilter("booked");
             }}
           >

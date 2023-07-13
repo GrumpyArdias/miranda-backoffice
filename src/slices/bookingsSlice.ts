@@ -58,7 +58,6 @@ export const createBookings = createAsyncThunk(
       };
 
       const data = await apiFetch(params);
-      console.log("this is the data in the bookingSlice", data);
       return data;
     } catch (error) {}
   }

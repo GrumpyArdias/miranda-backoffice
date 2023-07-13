@@ -18,13 +18,6 @@ export function UserEdit() {
   const dispatch = useAppDispatch();
   let userId = "";
 
-  useEffect(() => {
-    userId = localStorage.getItem("userId");
-    if (state.authenticated) {
-      console.log(userId);
-    }
-  }, [dispatch, state.authenticated]);
-
   const UserFromDb = useAppSelector((state) => state.users.user);
   const [user, setUser] = useState(UserFromDb);
 

@@ -58,7 +58,6 @@ export const createUser = createAsyncThunk(
       };
 
       const data = await apiFetch(params);
-      console.log("this is the data", data);
       return data;
     } catch (error) {
       console.error(error);
@@ -100,7 +99,6 @@ export const updateUser = createAsyncThunk(
     };
 
     const data = await apiFetch(params);
-    console.log("this is data", data);
     return data;
   }
 );
@@ -112,7 +110,6 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
       state.users = action.payload;
-      console.log("getAllUsers.fulfilled", state.users);
     });
 
     builder.addCase(getOneUser.fulfilled, (state, action) => {
@@ -121,18 +118,14 @@ const userSlice = createSlice({
 
     builder.addCase(createUser.fulfilled, (state, action) => {
       state.users = [...state.users, action.payload];
-      console.log("createUser.fulfilled", state.users);
     });
 
     builder.addCase(deleteUser.fulfilled, (state, action) => {
       state.users = state.users.filter((user) => user.id !== action.payload);
-      console.log("deleteUser.fulfilled", state.users);
     });
 
     builder.addCase(updateUser.fulfilled, (state, action) => {
       state.user = action.payload;
-      console.log(action.payload);
-      console.log("updateUser.fulfilled", state.users);
     });
 
     builder.addMatcher(
