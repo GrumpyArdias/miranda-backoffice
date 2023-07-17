@@ -51,7 +51,7 @@ function Login() {
           <input
             type="email"
             data-cy="email"
-            placeholder="a@a.com"
+            placeholder="admin@admin.com"
             value={mail}
             onChange={(e) => {
               setMail(e.target.value);

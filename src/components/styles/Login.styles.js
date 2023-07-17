@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const MiniContainer = styled.div`
-  max-width: 10%;
+  max-width: 100%;
   padding: 0px 10px;
   margin: 10px auto;
   background-color: #ad9d82;
