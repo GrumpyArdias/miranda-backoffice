@@ -38,4 +38,4 @@ The application may require some configuration to connect to the necessary backe
 
 If you have any questions, suggestions, or feedback regarding the Hotel Miranda BackOffice, please feel free to contact us at info@marioherrero.com
 
-Thank you for using the Hotel Miranda BackOffice!
+Thank you for using the Hotel Miranda BackOffice!   
